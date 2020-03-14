@@ -7,6 +7,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+/**
+ * Implementation of HeroDao interface
+ * @author Boris Jadus
+ */
 @Repository
 public class HeroDaoImpl implements HeroDao {
 
@@ -27,5 +31,14 @@ public class HeroDaoImpl implements HeroDao {
     public void delete(Hero hero) throws IllegalArgumentException{
         entityManager.remove(findById(hero.getId()));
     }
-    
+
+    @Override
+    public List<Hero> findAll() {
+        return entityManager.createQuery("select h from Hero h", Hero.class).getResultList();
+    }
+
+    @Override
+    public void update(Hero hero) {
+        entityManager.merge(hero);
+    }
 }

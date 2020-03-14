@@ -1,22 +1,31 @@
 package cz.fi.muni.PA165.persistence.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-@Entity
+/**
+ * Class representing DnD Hero character
+ * @author Boris Jadus
+ */
+@Entity(name = "Hero")
+@Table(name = "hero")
 public class Hero {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
+    @Column(name = "level")
+    @Min(1)
     private int level;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private Set<Role> roles = new HashSet<Role>();
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Group group;
 
     public Hero() {
@@ -47,7 +56,7 @@ public class Hero {
     }
 
     public Set<Role> getRoles() {
-        return roles;
+        return Collections.unmodifiableSet(roles);
     }
 
     public void setRoles(Set<Role> roles) {
