@@ -11,6 +11,17 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>1.4.198</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.persistence</groupId>
+                <artifactId>persistence-api</artifactId>
+                <version>1.0</version>
+            </dependency>
             <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
             <dependency>
                 <groupId>org.springframework.data</groupId>
@@ -49,9 +60,24 @@
                 <artifactId>spring-context</artifactId>
                 <version>5.2.4.RELEASE</version>
             </dependency>
-         </dependencies>
-    </dependencyManagement>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>5.4.10.Final</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>2.0.1.Final</version>
+            </dependency>
+        </dependencies>
 
+    </dependencyManagement>
+    <properties>
+        <maven.compiler.source>1.11</maven.compiler.source>
+        <maven.compiler.target>1.11</maven.compiler.target>
+    </properties>
     <modules>
         <module>dnd-persistence</module>
     </modules>
