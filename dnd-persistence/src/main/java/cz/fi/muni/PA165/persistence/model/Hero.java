@@ -81,12 +81,12 @@ public class Hero {
 
     public void joinGroup(Group group){
         this.group = group;
-        //group.addHero(this);
+        group.addHero(this);
     }
 
     public void leaveGroup(Group group){
         this.group = null;
-        //group.removeHero(this)
+        group.removeHero(this);
     }
 
     @Override
