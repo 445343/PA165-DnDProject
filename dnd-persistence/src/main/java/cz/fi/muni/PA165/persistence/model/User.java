@@ -1,7 +1,9 @@
 package cz.fi.muni.PA165.persistence.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Class representing DnD User
@@ -23,6 +25,10 @@ public class User {
 
     @Column(name = "isAdmin", nullable = false)
     private boolean isAdmin;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id")
+    private Set<Hero> heroes = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -56,6 +62,14 @@ public class User {
         isAdmin = admin;
     }
 
+    public Set<Hero> getHeroes() {
+        return heroes;
+    }
+
+    public void setHeroes(Set<Hero> heroes) {
+        this.heroes = heroes;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -64,12 +78,13 @@ public class User {
         return isAdmin == user.isAdmin &&
                 Objects.equals(id, user.id) &&
                 Objects.equals(userName, user.userName) &&
-                Objects.equals(passwordHash, user.passwordHash);
+                Objects.equals(passwordHash, user.passwordHash) &&
+                Objects.equals(heroes, user.heroes);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userName, passwordHash, isAdmin);
+        return Objects.hash(id, userName, passwordHash, isAdmin, heroes);
     }
 
     @Override
@@ -79,6 +94,7 @@ public class User {
                 ", userName='" + userName + '\'' +
                 ", passwordHash='" + passwordHash + '\'' +
                 ", isAdmin=" + isAdmin +
+                ", heroes=" + heroes +
                 '}';
     }
 }
