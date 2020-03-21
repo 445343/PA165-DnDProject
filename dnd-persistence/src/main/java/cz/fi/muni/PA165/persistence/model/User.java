@@ -71,6 +71,14 @@ public class User {
         this.heroes = heroes;
     }
 
+    public void addHero(Hero hero) {
+        this.heroes.add(hero);
+    }
+
+    public void removeHero(Hero hero) {
+        this.heroes.remove(hero);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
