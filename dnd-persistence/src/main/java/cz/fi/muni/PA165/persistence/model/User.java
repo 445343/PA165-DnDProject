@@ -1,6 +1,7 @@
 package cz.fi.muni.PA165.persistence.model;
 
 import javax.persistence.*;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -17,13 +18,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "userName", nullable = false)
+    @Column(name = "user_name", nullable = false)
     private String userName;
 
-    @Column(name = "passwordHash", nullable = false)
+    @Column(name = "password_hash", nullable = false)
     private String passwordHash;
 
-    @Column(name = "isAdmin", nullable = false)
+    @Column(name = "is_admin")
     private boolean isAdmin;
 
     @OneToMany(fetch = FetchType.LAZY)
@@ -63,7 +64,7 @@ public class User {
     }
 
     public Set<Hero> getHeroes() {
-        return heroes;
+        return Collections.unmodifiableSet(heroes);
     }
 
     public void setHeroes(Set<Hero> heroes) {
