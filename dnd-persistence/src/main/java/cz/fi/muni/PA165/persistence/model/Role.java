@@ -3,6 +3,10 @@ package cz.fi.muni.PA165.persistence.model;
 import javax.persistence.*;
 import java.util.Objects;
 
+/**
+ * Class representing Role of DnD Character
+ * @author Alena Bednarikova
+ */
 @Entity(name = "Role")
 @Table(name = "role")
 public class Role {

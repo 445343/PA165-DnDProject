@@ -8,6 +8,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+/**
+ * Role DAO Implementation
+ * @author Alena Bednarikova
+ */
 @Repository
 public class RoleDaoImpl implements RoleDao {
 
