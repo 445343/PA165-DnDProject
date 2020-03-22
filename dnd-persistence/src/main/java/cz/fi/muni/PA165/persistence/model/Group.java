@@ -9,7 +9,7 @@ import java.util.*;
  * @author Jan Válka
  */
 @Entity(name = "Group")
-@Table(name = "group")
+@Table(name = "dnd_group")
 public class Group {
 
     @Id
