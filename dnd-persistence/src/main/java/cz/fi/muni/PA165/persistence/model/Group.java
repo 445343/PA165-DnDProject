@@ -20,7 +20,6 @@ public class Group {
     @Column(name = "mission", nullable = true)
     private String mission;
     @Column(name = "gold")
-    @Min(0)
     private int gold;
 
     @OneToMany(fetch = FetchType.LAZY)

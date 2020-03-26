@@ -21,7 +21,6 @@ public class Hero {
     @Column(name = "name", nullable = false)
     private String name;
     @Column(name = "level")
-    @Min(1)
     private int level;
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Role> roles = new HashSet<Role>();
