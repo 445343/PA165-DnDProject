@@ -11,13 +11,39 @@ import java.util.List;
  */
 
 public interface UserDao {
+    /**
+     * Finds user by given ID
+     *
+     * @param id id of user
+     * @return user with given id
+     */
     User findById(Long id);
 
+    /**
+     * Create user in DB
+     *
+     * @param user user to create
+     */
     void create(User user);
 
+    /**
+     * Deletes user from DB
+     *
+     * @param user user to delete
+     */
     void delete(User user);
 
+    /**
+     * Finds all stored users
+     *
+     * @return List of all users
+     */
     List<User> findAll();
 
+    /**
+     * Updates user in DB
+     *
+     * @param user user to update
+     */
     void update(User user);
 }
