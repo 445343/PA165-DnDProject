@@ -1,16 +1,15 @@
 package cz.fi.muni.PA165.persistence.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import java.util.*;
 
 /**
- * Class representing DnD group of heroes
+ * Class representing DnD troop of heroes
  * @author Jan Válka
  */
-@Entity(name = "Group")
-@Table(name = "dnd_group")
-public class Group {
+@Entity(name = "Troop")
+@Table(name = "troop")
+public class Troop {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -25,7 +24,7 @@ public class Group {
     @OneToMany(fetch = FetchType.LAZY)
     private Set<Hero> heroes = new HashSet<Hero>();
 
-    public Group(){
+    public Troop(){
     }
     public Long getId() {
         return this.id;
@@ -73,13 +72,13 @@ public class Group {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Group)) return false;
-        Group group = (Group) o;
-        return getGold() == group.getGold() &&
-                Objects.equals(getId(), group.getId()) &&
-                getName().equals(group.getName()) &&
-                Objects.equals(getHeroes(), group.getHeroes()) &&
-                Objects.equals(getMission(), group.getMission());
+        if (!(o instanceof Troop)) return false;
+        Troop troop = (Troop) o;
+        return getGold() == troop.getGold() &&
+                Objects.equals(getId(), troop.getId()) &&
+                getName().equals(troop.getName()) &&
+                Objects.equals(getHeroes(), troop.getHeroes()) &&
+                Objects.equals(getMission(), troop.getMission());
     }
 
     @Override
@@ -89,7 +88,7 @@ public class Group {
 
     @Override
     public String toString() {
-        return "Group{" +
+        return "Troop{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", mission='" + mission +'\'' +

@@ -1,7 +1,6 @@
 package cz.fi.muni.PA165.persistence.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -25,7 +24,7 @@ public class Hero {
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Role> roles = new HashSet<Role>();
     @ManyToOne(fetch = FetchType.LAZY)
-    private Group group;
+    private Troop troop;
 
     public Hero() {
     }
@@ -70,22 +69,22 @@ public class Hero {
         this.roles.remove(role);
     }
 
-    public Group getGroup() {
-        return group;
+    public Troop getTroop() {
+        return troop;
     }
 
-    public void setGroup(Group group) {
-        this.group = group;
+    public void setTroop(Troop troop) {
+        this.troop = troop;
     }
 
-    public void joinGroup(Group group){
-        this.group = group;
-        group.addHero(this);
+    public void joinTroop(Troop troop){
+        this.troop = troop;
+        troop.addHero(this);
     }
 
-    public void leaveGroup(Group group){
-        this.group = null;
-        group.removeHero(this);
+    public void leaveTroop(Troop troop){
+        this.troop = null;
+        troop.removeHero(this);
     }
 
     @Override
@@ -97,12 +96,12 @@ public class Hero {
                 Objects.equals(getId(), hero.getId()) &&
                 getName().equals(hero.getName()) &&
                 Objects.equals(getRoles(), hero.getRoles()) &&
-                Objects.equals(getGroup(), hero.getGroup());
+                Objects.equals(getTroop(), hero.getTroop());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getLevel(), getRoles(), getGroup());
+        return Objects.hash(getId(), getName(), getLevel(), getRoles(), getTroop());
     }
 
     @Override
@@ -112,7 +111,7 @@ public class Hero {
                 ", name='" + name + '\'' +
                 ", level=" + level +
                 ", roles=" + roles +
-                ", group=" + group +
+                ", troop=" + troop +
                 '}';
     }
 }
