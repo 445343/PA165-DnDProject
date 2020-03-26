@@ -89,14 +89,6 @@ public class GroupDaoTest extends AbstractTestNGSpringContextTests {
         Assert.assertTrue(em.contains(group1));
     }
 
-    /*
-    @Test(expectedExceptions = PersistenceException.class)
-    public void createWithNegativeAmountOfGold(){
-        group1.setGold(-20);
-        groupDao.create(group1);
-    }
-    */
-
     @Test
     public void delete() {
         em.persist(group1);
@@ -116,7 +108,7 @@ public class GroupDaoTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void update(){
+    public void update() {
         em.persist(group1);
         group2.setId(group1.getId());
         group2.setName("updated group");
