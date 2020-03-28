@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import static javax.persistence.CascadeType.*;
+
 /**
  * Class representing DnD Hero character
  * @author Boris Jadus
@@ -21,9 +23,9 @@ public class Hero {
     private String name;
     @Column(name = "level")
     private int level;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {PERSIST, MERGE, REMOVE, REFRESH, DETACH})
     private Set<Role> roles = new HashSet<Role>();
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {PERSIST, MERGE, REMOVE, REFRESH, DETACH})
     private Troop troop;
 
     public Hero() {
