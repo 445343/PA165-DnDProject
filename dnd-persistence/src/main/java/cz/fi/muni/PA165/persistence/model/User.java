@@ -28,7 +28,7 @@ public class User {
     private boolean isAdmin;
 
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "hero_id")
     private Set<Hero> heroes = new HashSet<>();
 
     public Long getId() {
