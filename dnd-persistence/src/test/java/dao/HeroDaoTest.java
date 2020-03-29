@@ -40,10 +40,12 @@ public class HeroDaoTest extends AbstractTestNGSpringContextTests {
         troop.setMission("mission1");
         troop.setName("troop");
         troop.setGold(50);
+        em.persist(troop);
 
         Role role = new Role();
         role.setName("role");
         role.setDescription("description");
+        em.persist(role);
 
         hero1 = new Hero();
         hero1.setName("hero1");

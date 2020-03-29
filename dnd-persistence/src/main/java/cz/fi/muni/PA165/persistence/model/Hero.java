@@ -23,9 +23,9 @@ public class Hero {
     private String name;
     @Column(name = "level")
     private int level;
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {PERSIST, MERGE, REMOVE, REFRESH, DETACH})
+    @ManyToMany(fetch = FetchType.LAZY)
     private Set<Role> roles = new HashSet<Role>();
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {PERSIST, MERGE, REMOVE, REFRESH, DETACH})
+    @ManyToOne(fetch = FetchType.LAZY)
     private Troop troop;
 
     public Hero() {
