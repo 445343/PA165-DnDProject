@@ -24,8 +24,10 @@ public class Hero {
     @Column(name = "level")
     private int level;
     @ManyToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "role_id")
     private Set<Role> roles = new HashSet<Role>();
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "troop_id")
     private Troop troop;
 
     public Hero() {

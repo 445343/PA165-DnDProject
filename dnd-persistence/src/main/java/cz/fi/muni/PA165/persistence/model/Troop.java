@@ -22,6 +22,7 @@ public class Troop {
     private int gold;
 
     @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "troop_id")
     private Set<Hero> heroes = new HashSet<Hero>();
 
     public Troop(){
