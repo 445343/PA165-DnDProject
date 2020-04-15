@@ -20,7 +20,7 @@ public interface UserDao {
     User findById(Long id);
 
     /**
-     * Create user in DB
+     * Create user in DBacie
      *
      * @param user user to create
      */
