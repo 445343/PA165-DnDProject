@@ -1,6 +1,7 @@
 package cz.fi.muni.PA165.persistence.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -9,7 +10,7 @@ import java.util.*;
  */
 @Entity(name = "Troop")
 @Table(name = "troop")
-public class Troop {
+public class Troop implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

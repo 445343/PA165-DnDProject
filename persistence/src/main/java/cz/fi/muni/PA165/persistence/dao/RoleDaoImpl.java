@@ -35,7 +35,7 @@ public class RoleDaoImpl implements RoleDao {
 
     @Override
     public List<Role> findAll() {
-        return entityManager.createQuery("select role from Role role", Role.class).getResultList();
+        return entityManager.createQuery("SELECT role FROM Role role", Role.class).getResultList();
     }
 
     @Override

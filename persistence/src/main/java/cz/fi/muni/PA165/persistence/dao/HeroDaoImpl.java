@@ -34,7 +34,7 @@ public class HeroDaoImpl implements HeroDao {
 
     @Override
     public List<Hero> findAll() {
-        return entityManager.createQuery("select h from Hero h", Hero.class).getResultList();
+        return entityManager.createQuery("SELECT h FROM Hero h", Hero.class).getResultList();
     }
 
     @Override

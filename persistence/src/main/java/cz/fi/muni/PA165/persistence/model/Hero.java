@@ -1,6 +1,7 @@
 package cz.fi.muni.PA165.persistence.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -14,7 +15,7 @@ import static javax.persistence.CascadeType.*;
  */
 @Entity(name = "Hero")
 @Table(name = "hero")
-public class Hero {
+public class Hero implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
