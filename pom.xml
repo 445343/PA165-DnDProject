@@ -80,7 +80,9 @@
         <maven.compiler.target>1.11</maven.compiler.target>
     </properties>
     <modules>
-        <module>dnd-persistence</module>
+        <module>persistence</module>
+        <module>service</module>
+        <module>api</module>
     </modules>
 
 
