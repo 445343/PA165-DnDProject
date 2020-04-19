@@ -25,6 +25,11 @@
     </build>
 
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.modelmapper/modelmapper -->
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+        </dependency>
         <dependency>
             <groupId>cz.fi.muni.pa165</groupId>
             <artifactId>persistence</artifactId>
