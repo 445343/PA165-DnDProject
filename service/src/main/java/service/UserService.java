@@ -19,8 +19,9 @@ public interface UserService {
     /**
      * Create new user
      * @param user to be created
+     * @param password for hashing
      */
-    void createUser(User user);
+    void createUser(User user, String password);
 
     /**
      * Delete user with given id
@@ -39,4 +40,18 @@ public interface UserService {
      * @return all users
      */
     List<User> findAllUsers();
+
+    /**
+     * Adds hero to user
+     * @param userId - id of the user
+     * @param heroId - id of the hero
+     */
+    void addHeroToUser(Long userId, Long heroId);
+
+    /**
+     * Removes hero to user
+     * @param userId - id of the user
+     * @param heroId - id of the hero
+     */
+    void removeHeroFromUser(Long userId, Long heroId);
 }

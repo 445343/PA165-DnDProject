@@ -42,4 +42,18 @@ public interface UserFacade {
      * @return all users
      */
     List<UserDTO> findAllUsers();
+
+    /**
+     * Adds hero to user
+     * @param userId - id of the user
+     * @param heroId - id of the hero
+     */
+    void addHeroToUser(Long userId, Long heroId);
+
+    /**
+     * Removes hero to user
+     * @param userId - id of the user
+     * @param heroId - id of the hero
+     */
+    void removeHeroFromUser(Long userId, Long heroId);
 }
