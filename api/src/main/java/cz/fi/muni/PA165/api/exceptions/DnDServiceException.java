@@ -1,4 +1,4 @@
-package exceptions;
+package cz.fi.muni.PA165.api.exceptions;
 
 /**
  * Exception thrown by service layer

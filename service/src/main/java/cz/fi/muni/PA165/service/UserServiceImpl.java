@@ -1,10 +1,10 @@
-package service;
+package cz.fi.muni.PA165.service;
 
 import cz.fi.muni.PA165.persistence.dao.HeroDao;
 import cz.fi.muni.PA165.persistence.dao.UserDao;
 import cz.fi.muni.PA165.persistence.model.Hero;
 import cz.fi.muni.PA165.persistence.model.User;
-import exceptions.DnDServiceException;
+import cz.fi.muni.PA165.api.exceptions.DnDServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

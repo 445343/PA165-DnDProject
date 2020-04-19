@@ -1,20 +1,20 @@
-package dto.user;
+package cz.fi.muni.PA165.api.dto.user;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import cz.fi.muni.PA165.api.dto.hero.HeroDTO;
+
 import java.util.Objects;
+import java.util.Set;
 
 /**
- * Encapsulates information for user update
+ * Encapsulates information about user
  * @author Boris Jadus
  */
-public class UserUpdateDTO {
+public class UserDTO {
 
-    @NotNull(message = "Id can not be null")
     private Long id;
-    @NotEmpty(message = "User name cannot be null")
     private String userName;
     private boolean isAdmin;
+    private Set<HeroDTO> heroes;
 
     public Long getId() {
         return id;
@@ -40,24 +40,33 @@ public class UserUpdateDTO {
         isAdmin = admin;
     }
 
+    public Set<HeroDTO> getHeroes() {
+        return heroes;
+    }
+
+    public void setHeroes(Set<HeroDTO> heroes) {
+        this.heroes = heroes;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof UserUpdateDTO)) return false;
-        UserUpdateDTO that = (UserUpdateDTO) o;
-        return isAdmin() == that.isAdmin() &&
-                Objects.equals(getId(), that.getId()) &&
-                Objects.equals(getUserName(), that.getUserName());
+        if (!(o instanceof UserDTO)) return false;
+        UserDTO userDTO = (UserDTO) o;
+        return isAdmin() == userDTO.isAdmin() &&
+                Objects.equals(getId(), userDTO.getId()) &&
+                Objects.equals(getUserName(), userDTO.getUserName()) &&
+                Objects.equals(getHeroes(), userDTO.getHeroes());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getUserName(), isAdmin());
+        return Objects.hash(getId(), getUserName(), isAdmin(), getHeroes());
     }
 
     @Override
     public String toString() {
-        return "UserUpdateDTO{" +
+        return "UserDTO{" +
                 "id=" + id +
                 ", userName='" + userName + '\'' +
                 ", isAdmin=" + isAdmin +

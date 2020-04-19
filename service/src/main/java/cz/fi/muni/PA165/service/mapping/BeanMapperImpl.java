@@ -1,4 +1,4 @@
-package mapping;
+package cz.fi.muni.PA165.service.mapping;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package dto.user;
+package cz.fi.muni.PA165.api.dto.user;
 
 import javax.validation.constraints.NotEmpty;
 import java.util.Objects;

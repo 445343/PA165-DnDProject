@@ -1,6 +1,6 @@
 package dao;
 
-import cz.fi.muni.PA165.persistence.DAOconfig;
+import cz.fi.muni.PA165.persistence.dao.DAOconfig;
 import cz.fi.muni.PA165.persistence.dao.RoleDao;
 import cz.fi.muni.PA165.persistence.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;

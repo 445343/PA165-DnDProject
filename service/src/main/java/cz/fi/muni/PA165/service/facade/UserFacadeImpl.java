@@ -1,20 +1,21 @@
-package facade;
+package cz.fi.muni.PA165.service.facade;
 
+import cz.fi.muni.PA165.api.facade.UserFacade;
 import cz.fi.muni.PA165.persistence.model.User;
-import dto.user.UserCreateDTO;
-import dto.user.UserDTO;
-import dto.user.UserUpdateDTO;
-import mapping.BeanMapper;
+import cz.fi.muni.PA165.api.dto.user.UserCreateDTO;
+import cz.fi.muni.PA165.api.dto.user.UserDTO;
+import cz.fi.muni.PA165.api.dto.user.UserUpdateDTO;
+import cz.fi.muni.PA165.service.mapping.BeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
-import service.UserService;
+import cz.fi.muni.PA165.service.UserService;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
 @Transactional
-@ComponentScan(basePackages = "mapping")
-public class UserFacadeImpl implements UserFacade{
+@ComponentScan(basePackages = "cz.fi.muni.PA165.service.mapping")
+public class UserFacadeImpl implements UserFacade {
 
     private UserService userService;
     private BeanMapper beanMapper;

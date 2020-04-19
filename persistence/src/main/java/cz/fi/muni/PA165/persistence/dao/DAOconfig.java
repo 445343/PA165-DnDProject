@@ -1,4 +1,4 @@
-package cz.fi.muni.PA165.persistence;
+package cz.fi.muni.PA165.persistence.dao;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

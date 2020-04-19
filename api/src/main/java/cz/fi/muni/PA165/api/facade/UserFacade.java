@@ -1,27 +1,29 @@
-package service;
+package cz.fi.muni.PA165.api.facade;
 
-import cz.fi.muni.PA165.persistence.model.User;
+import cz.fi.muni.PA165.api.dto.user.UserDTO;
+import cz.fi.muni.PA165.api.dto.user.UserCreateDTO;
+import cz.fi.muni.PA165.api.dto.user.UserUpdateDTO;
 
 import java.util.List;
 
 /**
- * Service for User
+ * Interface for User facade
  * @author Boris Jadus
  */
-public interface UserService {
+public interface UserFacade {
+
     /**
      * Find user by id
      * @param id of user
      * @return user with corresponding id
      */
-    User findById(Long id);
+    UserDTO findById(Long id);
 
     /**
      * Create new user
      * @param user to be created
-     * @param password for hashing
      */
-    void createUser(User user, String password);
+    void createUser(UserCreateDTO user);
 
     /**
      * Delete user with given id
@@ -33,13 +35,13 @@ public interface UserService {
      * Update user
      * @param user to be updated
      */
-    void updateUser(User user);
+    void updateUser(UserUpdateDTO user);
 
     /**
      * Find all users
      * @return all users
      */
-    List<User> findAllUsers();
+    List<UserDTO> findAllUsers();
 
     /**
      * Adds hero to user

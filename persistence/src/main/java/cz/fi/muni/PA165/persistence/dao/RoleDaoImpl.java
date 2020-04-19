@@ -1,6 +1,5 @@
 package cz.fi.muni.PA165.persistence.dao;
 
-import cz.fi.muni.PA165.persistence.model.Hero;
 import cz.fi.muni.PA165.persistence.model.Role;
 import org.springframework.stereotype.Repository;
 

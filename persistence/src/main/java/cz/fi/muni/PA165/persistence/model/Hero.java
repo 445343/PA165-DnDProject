@@ -7,8 +7,6 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import static javax.persistence.CascadeType.*;
-
 /**
  * Class representing DnD Hero character
  * @author Boris Jadus

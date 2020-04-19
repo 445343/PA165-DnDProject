@@ -1,20 +1,20 @@
-package dto.user;
+package cz.fi.muni.PA165.api.dto.user;
 
-import dto.hero.HeroDTO;
-
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
-import java.util.Set;
 
 /**
- * Encapsulates information about user
+ * Encapsulates information for user update
  * @author Boris Jadus
  */
-public class UserDTO {
+public class UserUpdateDTO {
 
+    @NotNull(message = "Id can not be null")
     private Long id;
+    @NotEmpty(message = "User name cannot be null")
     private String userName;
     private boolean isAdmin;
-    private Set<HeroDTO> heroes;
 
     public Long getId() {
         return id;
@@ -40,33 +40,24 @@ public class UserDTO {
         isAdmin = admin;
     }
 
-    public Set<HeroDTO> getHeroes() {
-        return heroes;
-    }
-
-    public void setHeroes(Set<HeroDTO> heroes) {
-        this.heroes = heroes;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof UserDTO)) return false;
-        UserDTO userDTO = (UserDTO) o;
-        return isAdmin() == userDTO.isAdmin() &&
-                Objects.equals(getId(), userDTO.getId()) &&
-                Objects.equals(getUserName(), userDTO.getUserName()) &&
-                Objects.equals(getHeroes(), userDTO.getHeroes());
+        if (!(o instanceof UserUpdateDTO)) return false;
+        UserUpdateDTO that = (UserUpdateDTO) o;
+        return isAdmin() == that.isAdmin() &&
+                Objects.equals(getId(), that.getId()) &&
+                Objects.equals(getUserName(), that.getUserName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getUserName(), isAdmin(), getHeroes());
+        return Objects.hash(getId(), getUserName(), isAdmin());
     }
 
     @Override
     public String toString() {
-        return "UserDTO{" +
+        return "UserUpdateDTO{" +
                 "id=" + id +
                 ", userName='" + userName + '\'' +
                 ", isAdmin=" + isAdmin +

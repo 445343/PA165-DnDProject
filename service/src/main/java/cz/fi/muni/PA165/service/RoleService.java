@@ -1,4 +1,4 @@
-package service;
+package cz.fi.muni.PA165.service;
 
 import cz.fi.muni.PA165.persistence.model.Role;
 

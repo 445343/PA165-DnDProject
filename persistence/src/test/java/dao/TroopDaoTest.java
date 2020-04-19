@@ -1,6 +1,6 @@
 package dao;
 
-import cz.fi.muni.PA165.persistence.DAOconfig;
+import cz.fi.muni.PA165.persistence.dao.DAOconfig;
 import cz.fi.muni.PA165.persistence.dao.TroopDao;
 import cz.fi.muni.PA165.persistence.model.Hero;
 import cz.fi.muni.PA165.persistence.model.Troop;
