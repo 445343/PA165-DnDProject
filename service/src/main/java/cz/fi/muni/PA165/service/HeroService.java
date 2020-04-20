@@ -46,4 +46,38 @@ public interface HeroService {
      * @return all heroes
      */
     List<Hero> findAllHeroes();
+
+
+    /**
+     * Adds role to hero
+     *
+     * @param heroId - id of the hero
+     * @param roleId - id of the role
+     */
+    void addRole(Long heroId, Long roleId);
+
+    /**
+     * Removes role from hero
+     *
+     * @param heroId - id of the hero
+     * @param roleId - id of the role
+     */
+    void removeRole(Long heroId, Long roleId);
+
+    /**
+     * Adds hero to troop
+     *
+     * @param heroId  - id of the hero
+     * @param troopId - id of the troop
+     */
+
+    void joinTroop(Long heroId, Long troopId);
+
+    /**
+     * Removes hero from troop
+     *
+     * @param heroId  - id of the hero
+     * @param troopId - id of the troop
+     */
+    void leaveTroop(Long heroId, Long troopId);
 }
