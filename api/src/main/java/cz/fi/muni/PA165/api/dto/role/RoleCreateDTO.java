@@ -1,27 +1,19 @@
 package cz.fi.muni.PA165.api.dto.role;
 
+import javax.validation.constraints.NotEmpty;
 import java.util.Objects;
 
 /**
- * Encapsulates information about role
+ * Encapsulates information needed for role creation
  *
  * @author Jan Válka
  */
-public class RoleDTO {
+public class RoleCreateDTO {
 
-    private Long id;
-
+    @NotEmpty(message = "Name can not be empty")
     private String name;
 
     private String description;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -43,22 +35,20 @@ public class RoleDTO {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof RoleDTO)) return false;
-        RoleDTO roleDTO = (RoleDTO) o;
-        return getId().equals(roleDTO.getId()) &&
-                getName().equals(roleDTO.getName()) &&
-                Objects.equals(getDescription(), roleDTO.getDescription());
+        RoleCreateDTO roleCreateDTO = (RoleCreateDTO) o;
+        return getName().equals(roleCreateDTO.getName()) &&
+                Objects.equals(getDescription(), roleCreateDTO.getDescription());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getDescription());
+        return Objects.hash(getName(), getDescription());
     }
 
     @Override
     public String toString() {
-        return "RoleDTO{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+        return "RoleCreateDTO{"+
+                "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 '}';
     }
