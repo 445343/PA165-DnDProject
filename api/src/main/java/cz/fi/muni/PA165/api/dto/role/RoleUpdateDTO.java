@@ -1,16 +1,18 @@
 package cz.fi.muni.PA165.api.dto.role;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 /**
- * Encapsulates information about role
+ * Encapsulates information for role update
  *
  * @author Jan Válka
  */
-public class RoleDTO {
-
+public class RoleUpdateDTO {
+    @NotNull(message = "Id can not be null")
     private Long id;
-
+    @NotEmpty(message = "Name can not be empty")
     private String name;
 
     private String description;
@@ -42,11 +44,11 @@ public class RoleDTO {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof RoleDTO)) return false;
-        RoleDTO roleDTO = (RoleDTO) o;
-        return getId().equals(roleDTO.getId()) &&
-                getName().equals(roleDTO.getName()) &&
-                Objects.equals(getDescription(), roleDTO.getDescription());
+        if (!(o instanceof RoleUpdateDTO)) return false;
+        RoleUpdateDTO roleUpdateDTO = (RoleUpdateDTO) o;
+        return getId().equals(roleUpdateDTO.getId()) &&
+                getName().equals(roleUpdateDTO.getName()) &&
+                Objects.equals(getDescription(), roleUpdateDTO.getDescription());
     }
 
     @Override
@@ -56,7 +58,7 @@ public class RoleDTO {
 
     @Override
     public String toString() {
-        return "RoleDTO{" +
+        return "RoleUpdateDTO{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
