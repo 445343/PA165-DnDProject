@@ -1,15 +1,20 @@
 package cz.fi.muni.PA165.service;
 
 import cz.fi.muni.PA165.api.exceptions.DnDServiceException;
-import cz.fi.muni.PA165.persistence.dao.HeroDao;
-import cz.fi.muni.PA165.persistence.dao.RoleDao;
 import cz.fi.muni.PA165.persistence.dao.TroopDao;
-import cz.fi.muni.PA165.persistence.model.Hero;
 import cz.fi.muni.PA165.persistence.model.Troop;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Implementation of TroopService Interface
+ *
+ * @author Alena Bednarikova
+ */
+
+@Service
 public class TroopServiceImpl implements TroopService {
 
     private TroopDao troopDao;
