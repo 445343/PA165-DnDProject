@@ -18,7 +18,7 @@ public class TroopDTO {
     private String name;
     private String mission;
     private int gold;
-    private Set<HeroDTO> heroes = new HashSet<HeroDTO>();
+    private Set<HeroDTO> heroes;
 
     public Long getId() {
         return this.id;
@@ -56,6 +56,9 @@ public class TroopDTO {
         return heroes;
     }
 
+    public void setHeroes(Set<HeroDTO> heroes) {
+        this.heroes = heroes;
+    }
 
     @Override
     public boolean equals(Object o) {
