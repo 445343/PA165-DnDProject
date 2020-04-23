@@ -70,6 +70,7 @@ public class UserDTO {
                 "id=" + id +
                 ", userName='" + userName + '\'' +
                 ", isAdmin=" + isAdmin +
+                ", heroes=" + heroes +
                 '}';
     }
 }

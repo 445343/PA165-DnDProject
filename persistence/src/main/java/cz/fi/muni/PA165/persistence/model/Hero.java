@@ -96,15 +96,13 @@ public class Hero implements Serializable {
         if (!(o instanceof Hero)) return false;
         Hero hero = (Hero) o;
         return getLevel() == hero.getLevel() &&
-                Objects.equals(getId(), hero.getId()) &&
                 getName().equals(hero.getName()) &&
-                Objects.equals(getRoles(), hero.getRoles()) &&
-                Objects.equals(getTroop(), hero.getTroop());
+                Objects.equals(getRoles(), hero.getRoles());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getLevel(), getRoles(), getTroop());
+        return Objects.hash(getName(), getLevel(), getRoles());
     }
 
     @Override
@@ -114,7 +112,6 @@ public class Hero implements Serializable {
                 ", name='" + name + '\'' +
                 ", level=" + level +
                 ", roles=" + roles +
-                ", troop=" + troop +
                 '}';
     }
 }

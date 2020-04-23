@@ -64,7 +64,6 @@ public class Troop implements Serializable {
 
     public void addHero(Hero hero){
         this.heroes.add(hero);
-
     }
 
     public void removeHero(Hero hero){

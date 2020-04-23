@@ -17,7 +17,6 @@ public class HeroDTO {
     private String name;
     private int level;
     private Set<RoleDTO> roles;
-    private TroopDTO troop;
 
     public Long getId() {
         return id;
@@ -51,14 +50,6 @@ public class HeroDTO {
         this.roles = roles;
     }
 
-    public TroopDTO getTroop() {
-        return troop;
-    }
-
-    public void setTroop(TroopDTO troop) {
-        this.troop = troop;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -67,13 +58,12 @@ public class HeroDTO {
         return getLevel() == heroDTO.getLevel() &&
                 Objects.equals(getId(), heroDTO.getId()) &&
                 Objects.equals(getName(), heroDTO.getName()) &&
-                Objects.equals(getRoles(), heroDTO.getRoles()) &&
-                Objects.equals(getTroop(), heroDTO.getTroop());
+                Objects.equals(getRoles(), heroDTO.getRoles());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getLevel(), getRoles(), getTroop());
+        return Objects.hash(getId(), getName(), getLevel(), getRoles());
     }
 
     @Override
@@ -83,7 +73,6 @@ public class HeroDTO {
                 ", name='" + name + '\'' +
                 ", level=" + level +
                 ", roles=" + roles +
-                ", troop=" + troop +
                 '}';
     }
 }
