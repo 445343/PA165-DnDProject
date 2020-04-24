@@ -87,22 +87,6 @@ public class HeroServiceTest {
         then(heroDao).should().create(hero);
     }
 
-    /*
-    @Test(expectedExceptions = DnDServiceException.class)
-    public void createHeroNoName(){
-        heroTest.setName(null);
-        heroService.createHero(heroTest);
-    }
-     */
-
-
-    /*
-    @Test(expectedExceptions = DnDServiceException.class)
-    public void createHeroWrongLvl(){
-        heroTest.setLevel(-1);
-        heroService.createHero(heroTest);
-    }
-    */
 
     @Test
     public void deleteHero(){
@@ -124,21 +108,6 @@ public class HeroServiceTest {
         then(heroDao).should().update(hero);
     }
 
-    /*
-    @Test(expectedExceptions = DnDServiceException.class)
-    public void updateHeroNullName(){
-        hero.setName(null);
-        heroService.updateHero(hero);
-        then(heroDao).should().update(hero);
-    }
-
-    @Test(expectedExceptions = DnDServiceException.class)
-    public void updateHeroWrongLvl(){
-        hero.setLevel(-1);
-        heroService.updateHero(hero);
-        then(heroDao).should().update(hero);
-    }
-    */
 
     @Test
     public void findAllHeroes(){
