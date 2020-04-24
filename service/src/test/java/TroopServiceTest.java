@@ -62,12 +62,6 @@ public class TroopServiceTest {
         then(troopDao).should().create(troop1);
     }
 
-    @Test(expectedExceptions = NullPointerException.class)
-    public void createTroopFromNull() {
-        willThrow(new NullPointerException()).given(troopDao).create(null);
-        troopService.createTroop(null);
-    }
-
     @Test
     public void deleteTroop() {
         given(troopDao.findById(troop1.getId())).willReturn(troop1);
@@ -79,12 +73,6 @@ public class TroopServiceTest {
     public void updateTroop() {
         troopService.updateTroop(troop1);
         then(troopDao).should().update(troop1);
-    }
-
-    @Test(expectedExceptions = NullPointerException.class)
-    public void updateTroopWithNull() {
-        willThrow(new NullPointerException()).given(troopDao).update(null);
-        troopService.updateTroop(null);
     }
 
     @Test
