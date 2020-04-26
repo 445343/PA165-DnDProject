@@ -16,7 +16,7 @@ public class TroopUpdateDTO {
     private Long id;
     @NotEmpty(message = "Name can not be empty")
     private String name;
-    @Min(0)
+    @Min(value = 0, message = "Gold can not be negative number")
     private int gold;
 
     private String mission;

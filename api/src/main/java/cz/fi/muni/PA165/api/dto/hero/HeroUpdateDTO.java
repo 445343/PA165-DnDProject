@@ -16,7 +16,7 @@ public class HeroUpdateDTO {
     private Long id;
     @NotEmpty(message = "Name can not be empty")
     private String name;
-    @Min(1)
+    @Min(value = 1, message = "Level must be greater than 0")
     private int level;
 
     public Long getId() {

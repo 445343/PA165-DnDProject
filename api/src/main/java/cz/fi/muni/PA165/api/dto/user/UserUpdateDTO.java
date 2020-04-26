@@ -12,7 +12,7 @@ public class UserUpdateDTO {
 
     @NotNull(message = "Id can not be null")
     private Long id;
-    @NotEmpty(message = "User name cannot be null")
+    @NotEmpty(message = "User name can not be null")
     private String userName;
     private boolean isAdmin;
 

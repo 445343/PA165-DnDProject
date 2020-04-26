@@ -16,7 +16,7 @@ public class TroopCreateDTO {
 
     private String mission;
 
-    @Min(0)
+    @Min(value = 0, message = "Gold can not be negative number")
     private int gold;
 
     public String getName() {

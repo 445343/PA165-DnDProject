@@ -2,8 +2,6 @@ package cz.fi.muni.PA165.api.dto.troop;
 
 import cz.fi.muni.PA165.api.dto.hero.HeroDTO;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 

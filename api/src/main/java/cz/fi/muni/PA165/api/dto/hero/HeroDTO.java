@@ -1,7 +1,6 @@
 package cz.fi.muni.PA165.api.dto.hero;
 
 import cz.fi.muni.PA165.api.dto.role.RoleDTO;
-import cz.fi.muni.PA165.api.dto.troop.TroopDTO;
 
 import java.util.Objects;
 import java.util.Set;
