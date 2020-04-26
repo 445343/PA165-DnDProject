@@ -78,6 +78,7 @@ public class UserServiceTest {
 
     @Test
     public void updateUser(){
+        given(userDao.findById(user1.getId())).willReturn(user1);
         userService.updateUser(user1);
         then(userDao).should().update(user1);
     }
