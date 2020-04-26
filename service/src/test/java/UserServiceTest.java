@@ -51,7 +51,6 @@ public class UserServiceTest {
         user1 = new User();
         user1.setId(1L);
         user1.setUserName("UserName");
-        user1.setPasswordHash("fdslfkjsdgjfj565sdsdf");
         user1.setAdmin(true);
         user1.addHero(hero);
     }
@@ -72,8 +71,15 @@ public class UserServiceTest {
 
     @Test
     public void createUser(){
-        userService.createUser(user1, "dkfhsjdkhkdfh554dsfdf");
+        userService.createUser(user1, "User1Password");
         then(userDao).should().create(user1);
+    }
+
+    @Test
+    public void createUserHashPassword() {
+        userService.createUser(user1, "User");
+        String hash = user1.getPasswordHash();
+        assertEquals("B5 12 D9 7E 7C BF 97 C2 73 E4 DB 07 3B BB 54 7A A6 5A 84 58 92 27 F8 F3 D9 E4 A7 2B 93 72 A2 4D ", hash);
     }
 
     @Test
@@ -99,7 +105,6 @@ public class UserServiceTest {
     public void findAllUsers(){
         User user2 = new User();
         user2.setUserName("user2");
-        user2.setPasswordHash("mxclklkslksd2121sfdg21xchjs");
         user2.setAdmin(false);
         given(userDao.findAll()).willReturn(List.of(user1, user2));
         List<User> users = userService.findAllUsers();
