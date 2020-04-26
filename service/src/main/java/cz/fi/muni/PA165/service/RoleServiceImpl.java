@@ -26,7 +26,7 @@ public class RoleServiceImpl implements RoleService{
     public Role findById(Long id){
         Role role = roleDao.findById(id);
         if (role == null)
-            throw new DnDServiceException("Role with " + id + "not found");
+            throw new DnDServiceException("Role with id: " + id + "not found");
         return role;
     }
 

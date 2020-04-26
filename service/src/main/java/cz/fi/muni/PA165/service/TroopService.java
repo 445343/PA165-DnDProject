@@ -1,6 +1,7 @@
 package cz.fi.muni.PA165.service;
 
 import cz.fi.muni.PA165.persistence.model.Troop;
+import cz.fi.muni.PA165.api.exceptions.DnDServiceException;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ public interface TroopService {
      * Find Troop by id
      *
      * @param id of Troop
+     * @throws DnDServiceException if troop is not found.
      * @return Troop with corresponding id
      */
     Troop findById(Long id);

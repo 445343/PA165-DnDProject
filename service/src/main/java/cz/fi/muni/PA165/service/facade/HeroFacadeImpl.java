@@ -32,7 +32,6 @@ public class HeroFacadeImpl implements HeroFacade {
         this.beanMapper = beanMapper;
     }
 
-
     @Override
     public HeroDTO findById(Long id) {
         Hero hero = heroService.findById(id);

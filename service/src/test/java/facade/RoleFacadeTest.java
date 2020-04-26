@@ -21,6 +21,11 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 import static org.testng.Assert.assertEquals;
 
+/**
+ * Tests for RoleFacade
+ *
+ * @author Boris Jadus
+ */
 public class RoleFacadeTest {
 
     private RoleFacade roleFacade;

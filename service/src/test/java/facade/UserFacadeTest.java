@@ -50,7 +50,6 @@ public class UserFacadeTest {
         user.setPasswordHash("fdslfkjsdgjfj565sdsdf");
         user.setAdmin(true);
 
-
         userDTO = new UserDTO();
         userDTO.setId(user.getId());
         userDTO.setUserName(user.getUserName());
@@ -126,5 +125,4 @@ public class UserFacadeTest {
         userFacade.removeHeroFromUser(user.getId(), hero.getId());
         then(userService).should().removeHeroFromUser(user.getId(), hero.getId());
     }
-
 }

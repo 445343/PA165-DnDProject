@@ -90,6 +90,11 @@ public class UserServiceTest {
         then(userDao).should().delete(user1);
     }
 
+    @Test(expectedExceptions = DnDServiceException.class)
+    public void deleteUserWithWrongId(){
+        userService.deleteUser(100L);
+    }
+
     @Test
     public void findAllUsers(){
         User user2 = new User();
@@ -121,33 +126,36 @@ public class UserServiceTest {
         assertEquals(heroes.size(), 2);
         assertTrue(heroes.contains(hero));
         assertTrue(heroes.contains(hero2));
-
     }
+
+    @Test(expectedExceptions = DnDServiceException.class)
+    public void addHeroWhenHeroIdIsWrong(){
+        given(userDao.findById(user1.getId())).willReturn(user1);
+        userService.addHeroToUser(hero.getId(), 54L);
+    }
+
+    @Test(expectedExceptions = DnDServiceException.class)
+    public void addHeroWhenUserIdIsWrong(){
+        given(heroDao.findById(hero.getId())).willReturn(hero);
+        userService.addHeroToUser(70L, hero.getId());
+    }
+
     @Test
     public void removeHero(){
         given(userDao.findById(user1.getId())).willReturn(user1);
         given(heroDao.findById(hero.getId())).willReturn(hero);
         userService.removeHeroFromUser(user1.getId(), hero.getId());
-        assertEquals(user1.getHeroes().size(), 0);
     }
 
     @Test(expectedExceptions = DnDServiceException.class)
     public void removeHeroWhenHeroIdIsWrong(){
         given(userDao.findById(user1.getId())).willReturn(user1);
         userService.removeHeroFromUser(hero.getId(), 54L);
-        assertEquals(user1.getHeroes().size(), 0);
     }
 
     @Test(expectedExceptions = DnDServiceException.class)
     public void removeHeroWhenUserIdIsWrong(){
         given(heroDao.findById(hero.getId())).willReturn(hero);
         userService.removeHeroFromUser(70L, hero.getId());
-        assertEquals(user1.getHeroes().size(), 0);
-    }
-
-    @Test(expectedExceptions = DnDServiceException.class)
-    public void removeHeroWhenUserIdAndHeroIdIsWrong(){
-        userService.removeHeroFromUser(45L, 61L);
-        assertEquals(user1.getHeroes().size(), 0);
     }
 }

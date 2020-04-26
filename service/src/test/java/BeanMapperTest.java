@@ -14,6 +14,10 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 
+/**
+ * Test for bean mapper
+ * @author Boris Jadus
+ */
 public class BeanMapperTest {
 
     private BeanMapper beanMapper;

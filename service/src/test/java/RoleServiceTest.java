@@ -16,6 +16,10 @@ import static org.mockito.BDDMockito.then;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+/**
+ * Tests for RoleService
+ * @author Boris Jadus
+ */
 public class RoleServiceTest {
 
     private RoleService roleService;
@@ -61,6 +65,11 @@ public class RoleServiceTest {
         given(roleDao.findById(role1.getId())).willReturn(role1);
         roleService.deleteRole(role1.getId());
         then(roleDao).should().delete(role1);
+    }
+
+    @Test(expectedExceptions = DnDServiceException.class)
+    public void deleteRoleWithBadId(){
+        roleService.deleteRole(100L);
     }
 
     @Test

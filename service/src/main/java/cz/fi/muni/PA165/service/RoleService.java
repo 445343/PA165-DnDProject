@@ -1,6 +1,7 @@
 package cz.fi.muni.PA165.service;
 
 import cz.fi.muni.PA165.persistence.model.Role;
+import cz.fi.muni.PA165.api.exceptions.DnDServiceException;
 
 import java.util.List;
 /**
@@ -11,6 +12,7 @@ public interface RoleService {
     /**
      * Find role by id
      * @param id of Role
+     * @throws DnDServiceException if role is not found.
      * @return role with corresponding id
      */
     Role findById(Long id);

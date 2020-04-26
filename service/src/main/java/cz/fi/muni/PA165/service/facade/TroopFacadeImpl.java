@@ -1,6 +1,5 @@
 package cz.fi.muni.PA165.service.facade;
 
-
 import cz.fi.muni.PA165.api.dto.troop.TroopCreateDTO;
 import cz.fi.muni.PA165.api.dto.troop.TroopDTO;
 import cz.fi.muni.PA165.api.dto.troop.TroopUpdateDTO;

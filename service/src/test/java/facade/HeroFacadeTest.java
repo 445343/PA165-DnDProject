@@ -77,7 +77,6 @@ public class HeroFacadeTest {
         role.setId(1L);
         role.setName("TestRole");
         role.setDescription("Some testing string");
-
     }
 
     @Test
@@ -107,7 +106,6 @@ public class HeroFacadeTest {
         given(beanMapper.mapTo(heroUpdateDTO, Hero.class)).willReturn(hero);
         heroFacade.updateHero(heroUpdateDTO);
         then(heroService).should().updateHero(hero);
-
     }
 
     @Test
@@ -146,5 +144,4 @@ public class HeroFacadeTest {
         heroFacade.leaveTroop(hero.getId(), troop.getId());
         then(heroService).should().leaveTroop(hero.getId(), troop.getId());
     }
-
 }

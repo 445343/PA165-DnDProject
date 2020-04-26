@@ -1,6 +1,7 @@
 package cz.fi.muni.PA165.service;
 
 import cz.fi.muni.PA165.persistence.model.User;
+import cz.fi.muni.PA165.api.exceptions.DnDServiceException;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ public interface UserService {
     /**
      * Find user by id
      * @param id of user
+     * @throws DnDServiceException if user is not found.
      * @return user with corresponding id
      */
     User findById(Long id);
@@ -20,6 +22,7 @@ public interface UserService {
      * Create new user
      * @param user to be created
      * @param password for hashing
+     * @throws DnDServiceException if hashing of password fails.
      */
     void createUser(User user, String password);
 
@@ -45,6 +48,7 @@ public interface UserService {
      * Adds hero to user
      * @param userId - id of the user
      * @param heroId - id of the hero
+     * @throws DnDServiceException if user or hero is not found.
      */
     void addHeroToUser(Long userId, Long heroId);
 
@@ -52,6 +56,9 @@ public interface UserService {
      * Removes hero to user
      * @param userId - id of the user
      * @param heroId - id of the hero
+     * @throws DnDServiceException if user or hero is not found.
      */
     void removeHeroFromUser(Long userId, Long heroId);
+
+
 }
