@@ -53,7 +53,7 @@ public class TroopServiceImpl implements TroopService {
         List<Hero> heroesToRemove = new ArrayList<>(troop.getHeroes());
         for (int i = 0; i < heroesToRemove.size(); i++) {
             Hero currHero = heroesToRemove.get(i);
-            currHero.leaveTroop(troop);
+            currHero.leaveTroop();
         }
         troopDao.delete(troop);
 

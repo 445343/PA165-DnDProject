@@ -141,7 +141,7 @@ public class HeroFacadeTest {
 
     @Test
     public void leaveTroop(){
-        heroFacade.leaveTroop(hero.getId(), troop.getId());
-        then(heroService).should().leaveTroop(hero.getId(), troop.getId());
+        heroFacade.leaveTroop(hero.getId());
+        then(heroService).should().leaveTroop(hero.getId());
     }
 }

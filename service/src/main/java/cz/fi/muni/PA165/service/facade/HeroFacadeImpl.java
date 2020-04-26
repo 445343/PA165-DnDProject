@@ -77,7 +77,7 @@ public class HeroFacadeImpl implements HeroFacade {
     }
 
     @Override
-    public void leaveTroop(Long heroId, Long troopId) {
-        heroService.leaveTroop(heroId, troopId);
+    public void leaveTroop(Long heroId) {
+        heroService.leaveTroop(heroId);
     }
 }
