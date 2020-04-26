@@ -72,12 +72,6 @@ public class TroopFacadeTest {
     }
 
     @Test
-    public void deleteTroop() {
-        troopFacade.deleteTroop(20L);
-        then(troopService).should().deleteTroop(20L);
-    }
-
-    @Test
     public void disbandTroop() {
         troopFacade.disbandTroop(20L);
         then(troopService).should().disbandTroop(20L);

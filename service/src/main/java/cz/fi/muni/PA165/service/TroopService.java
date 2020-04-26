@@ -27,17 +27,11 @@ public interface TroopService {
     void createTroop(Troop troop);
 
     /**
-     * Delete Troop with given id
-     *
-     * @param id of Troop to be deleted
-     */
-    void deleteTroop(Long id);
-
-    /**
      * Disband Troop with given id
      * All heroes leave that troop, then troop gets deleted
      *
      * @param id of Troop to be disbanded
+     * @throws DnDServiceException if troop is not found.
      */
     void disbandTroop(Long id);
 

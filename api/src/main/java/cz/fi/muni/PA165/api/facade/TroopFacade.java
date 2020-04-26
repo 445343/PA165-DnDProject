@@ -28,14 +28,6 @@ public interface TroopFacade {
     void createTroop(TroopCreateDTO troop);
 
     /**
-     * Delete Troop with given id
-     *
-     * @param id of Troop to be deleted
-     */
-    void deleteTroop(Long id);
-
-
-    /**
      * Disband Troop with given id
      * All heroes leave that troop, then troop gets deleted
      *

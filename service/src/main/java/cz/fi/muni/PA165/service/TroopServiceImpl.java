@@ -42,12 +42,6 @@ public class TroopServiceImpl implements TroopService {
     }
 
     @Override
-    public void deleteTroop(Long id) {
-        Troop troop = findById(id);
-        troopDao.delete(troop);
-    }
-
-    @Override
     public void disbandTroop(Long id) {
         Troop troop = findById(id);
         List<Hero> heroesToRemove = new ArrayList<>(troop.getHeroes());

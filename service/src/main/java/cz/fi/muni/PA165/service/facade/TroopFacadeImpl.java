@@ -44,11 +44,6 @@ public class TroopFacadeImpl implements TroopFacade {
     }
 
     @Override
-    public void deleteTroop(Long id) {
-        troopService.deleteTroop(id);
-    }
-
-    @Override
     public void disbandTroop(Long id) { troopService.disbandTroop(id); }
 
     @Override

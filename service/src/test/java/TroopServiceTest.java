@@ -29,7 +29,6 @@ public class TroopServiceTest {
     @Mock
     private TroopDao troopDao;
 
-
     private Troop troop1;
 
     @BeforeMethod
@@ -65,20 +64,7 @@ public class TroopServiceTest {
     }
 
     @Test
-    public void deleteTroop() {
-        given(troopDao.findById(troop1.getId())).willReturn(troop1);
-        troopService.deleteTroop(troop1.getId());
-        then(troopDao).should().delete(troop1);
-    }
-
-    @Test(expectedExceptions = DnDServiceException.class)
-    public void deleteTroopWithBadId(){
-        troopService.deleteTroop(100L);
-    }
-
-    @Test
     public void disbandTroop() {
-
         given(troopDao.findById(troop1.getId())).willReturn(troop1);
 
         Hero hero1 = new Hero();
@@ -105,11 +91,12 @@ public class TroopServiceTest {
         assertEquals(troop1.getHeroes().size(), 0);
         List<Troop> troops = troopService.findAllTroops();
         assertEquals(troops.size(), 0);
-
     }
 
-
-
+    @Test(expectedExceptions = DnDServiceException.class)
+    public void disbandTroopWithBadId(){
+        troopService.disbandTroop(100L);
+    }
 
     @Test
     public void updateTroop() {
