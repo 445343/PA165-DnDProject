@@ -10,11 +10,8 @@ import java.util.*;
  */
 @Entity(name = "Troop")
 @Table(name = "troop")
-public class Troop implements Serializable {
+public class Troop extends AbstractEntity<Long>  {
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long id;
     @Column(name = "name", nullable = false)
     private String name;
     @Column(name = "mission", nullable = true)
@@ -28,12 +25,15 @@ public class Troop implements Serializable {
 
     public Troop(){
     }
+
     public Long getId() {
-        return this.id;
+        return super.getId();
     }
+
     public void setId(Long id) {
-        this.id = id;
+        super.setId(id);
     }
+
     public String getName(){
         return this.name;
     }
@@ -90,7 +90,7 @@ public class Troop implements Serializable {
     @Override
     public String toString() {
         return "Troop{" +
-                "id=" + id +
+                "id=" + super.getId() +
                 ", name='" + name + '\'' +
                 ", mission='" + mission +'\'' +
                 ", gold=" + gold +

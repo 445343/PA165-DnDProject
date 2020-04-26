@@ -10,10 +10,7 @@ import java.util.Objects;
  */
 @Entity(name = "Role")
 @Table(name = "role")
-public class Role implements Serializable {
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long id;
+public class Role extends AbstractEntity<Long> {
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -22,11 +19,11 @@ public class Role implements Serializable {
     private String description;
 
     public Long getId() {
-        return id;
+        return super.getId();
     }
 
     public void setId(Long id) {
-        this.id = id;
+        super.setId(id);
     }
 
     public String getName() {
@@ -63,7 +60,7 @@ public class Role implements Serializable {
     @Override
     public String toString() {
         return "Role{" +
-                "id=" + id +
+                "id=" + super.getId() +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 '}';

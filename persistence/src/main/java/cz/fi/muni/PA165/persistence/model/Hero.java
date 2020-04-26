@@ -13,11 +13,8 @@ import java.util.Set;
  */
 @Entity(name = "Hero")
 @Table(name = "hero")
-public class Hero implements Serializable {
+public class Hero extends AbstractEntity<Long> {
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long id;
     @Column(name = "name", nullable = false)
     private String name;
     @Column(name = "level")
@@ -33,11 +30,11 @@ public class Hero implements Serializable {
     }
 
     public Long getId() {
-        return id;
+        return super.getId();
     }
 
     public void setId(Long id) {
-        this.id = id;
+        super.setId(id);
     }
 
     public String getName() {
@@ -108,7 +105,7 @@ public class Hero implements Serializable {
     @Override
     public String toString() {
         return "Hero{" +
-                "id=" + id +
+                "id=" + super.getId() +
                 ", name='" + name + '\'' +
                 ", level=" + level +
                 ", roles=" + roles +

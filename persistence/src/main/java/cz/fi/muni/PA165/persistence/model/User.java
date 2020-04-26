@@ -14,10 +14,7 @@ import java.util.Set;
  */
 @Entity(name = "User")
 @Table(name = "user")
-public class User implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class User extends AbstractEntity<Long> {
 
     @Column(name = "user_name", nullable = false)
     private String userName;
@@ -33,11 +30,11 @@ public class User implements Serializable {
     private Set<Hero> heroes = new HashSet<>();
 
     public Long getId() {
-        return id;
+        return super.getId();
     }
 
     public void setId(Long id) {
-        this.id = id;
+        super.setId(id);
     }
 
     public String getUserName() {
@@ -86,7 +83,6 @@ public class User implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
         return isAdmin == user.isAdmin &&
-                Objects.equals(id, user.id) &&
                 Objects.equals(userName, user.userName) &&
                 Objects.equals(passwordHash, user.passwordHash) &&
                 Objects.equals(heroes, user.heroes);
@@ -94,13 +90,13 @@ public class User implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userName, passwordHash, isAdmin, heroes);
+        return Objects.hash(userName, passwordHash, isAdmin, heroes);
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "id=" + super.getId() +
                 ", userName='" + userName + '\'' +
                 ", passwordHash='" + passwordHash + '\'' +
                 ", isAdmin=" + isAdmin +
