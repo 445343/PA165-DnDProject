@@ -28,7 +28,7 @@ public class TroopServiceImpl implements TroopService {
     public Troop findById(Long id) {
         Troop troop = troopDao.findById(id);
         if (troop == null)
-            throw new DnDServiceException("Troop with " + id + "not found");
+            throw new DnDServiceException("Troop with id: " + id + "not found");
         return troop;
     }
 
@@ -39,7 +39,7 @@ public class TroopServiceImpl implements TroopService {
 
     @Override
     public void deleteTroop(Long id) {
-        Troop troop = troopDao.findById(id);
+        Troop troop = findById(id);
         troopDao.delete(troop);
     }
 

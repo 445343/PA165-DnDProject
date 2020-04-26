@@ -69,6 +69,11 @@ public class TroopServiceTest {
         then(troopDao).should().delete(troop1);
     }
 
+    @Test(expectedExceptions = DnDServiceException.class)
+    public void deleteTroopWithBadId(){
+        troopService.deleteTroop(100L);
+    }
+
     @Test
     public void updateTroop() {
         troopService.updateTroop(troop1);

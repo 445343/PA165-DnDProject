@@ -19,8 +19,7 @@ import java.util.Set;
 
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.*;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 /**
  * Tests for Hero service
@@ -40,7 +39,6 @@ public class HeroServiceTest {
     private RoleDao roleDao;
     @Mock
     private TroopDao troopDao;
-
 
     @BeforeMethod
     public void init(){
@@ -87,7 +85,6 @@ public class HeroServiceTest {
         then(heroDao).should().create(hero);
     }
 
-
     @Test
     public void deleteHero(){
         given(heroDao.findById(hero.getId())).willReturn(hero);
@@ -98,7 +95,6 @@ public class HeroServiceTest {
     @Test(expectedExceptions = DnDServiceException.class)
     public void deleteHeroBadId(){
         heroService.deleteHero(566L);
-        then(heroDao).should().delete(hero);
     }
 
     @Test
@@ -107,7 +103,6 @@ public class HeroServiceTest {
         heroService.updateHero(hero);
         then(heroDao).should().update(hero);
     }
-
 
     @Test
     public void findAllHeroes(){
@@ -126,7 +121,6 @@ public class HeroServiceTest {
 
     @Test
     public void addRole(){
-
         given(heroDao.findById(hero.getId())).willReturn(hero);
         Set<Role> allRoles = hero.getRoles();
         assertEquals(allRoles.size(), 1);
@@ -142,8 +136,22 @@ public class HeroServiceTest {
         assertEquals(allRoles.size(), 2);
         assertTrue(allRoles.contains(role));
         assertTrue(allRoles.contains(newRole));
-
     }
+
+    @Test(expectedExceptions = DnDServiceException.class)
+    public void addRoleWrongHeroId(){
+        given(roleDao.findById(role.getId())).willReturn(role);
+        heroService.addRole(3L, role.getId());
+        assertEquals(hero.getRoles().size(), 0);
+    }
+
+    @Test(expectedExceptions = DnDServiceException.class)
+    public void addRoleWrongRoleId(){
+        given(heroDao.findById(hero.getId())).willReturn(hero);
+        heroService.addRole(hero.getId(), 42L);
+        assertEquals(hero.getRoles().size(), 0);
+    }
+
     @Test
     public void removeRole(){
         given(heroDao.findById(hero.getId())).willReturn(hero);
@@ -166,17 +174,25 @@ public class HeroServiceTest {
         assertEquals(hero.getRoles().size(), 0);
     }
 
-    @Test(expectedExceptions = DnDServiceException.class)
-    public void removeRoleWrongBoth(){
-        heroService.removeRole(545L, 42L);
-        assertEquals(hero.getRoles().size(), 0);
-    }
-
     @Test
     public void joinTroop(){
         given(heroDao.findById(hero.getId())).willReturn(hero);
         given(troopDao.findById(troop.getId())).willReturn(troop);
         heroService.joinTroop(hero.getId(), troop.getId());
+        assertEquals(hero.getTroop(), troop);
+    }
+
+    @Test(expectedExceptions = DnDServiceException.class)
+    public void joinTroopWithWrongHeroId(){
+        given(troopDao.findById(troop.getId())).willReturn(troop);
+        heroService.joinTroop(42L, troop.getId());
+        assertEquals(hero.getTroop(), troop);
+    }
+
+    @Test(expectedExceptions = DnDServiceException.class)
+    public void joinTroopWithWrongTroopId(){
+        given(heroDao.findById(hero.getId())).willReturn(hero);
+        heroService.joinTroop(hero.getId(), 42L);
         assertEquals(hero.getTroop(), troop);
     }
 
@@ -194,7 +210,20 @@ public class HeroServiceTest {
         given(heroDao.findById(hero.getId())).willReturn(hero);
         given(troopDao.findById(troop.getId())).willReturn(troop);
         heroService.leaveTroop(hero.getId(), troop.getId());
-        assertEquals(hero.getTroop(),null);
+        assertNull(hero.getTroop());
     }
 
+    @Test(expectedExceptions = DnDServiceException.class)
+    public void leaveTroopWithWrongHeroId(){
+        given(troopDao.findById(troop.getId())).willReturn(troop);
+        heroService.leaveTroop(42L, troop.getId());
+        assertEquals(hero.getTroop(), troop);
+    }
+
+    @Test(expectedExceptions = DnDServiceException.class)
+    public void leaveTroopWithWrongTroopId(){
+        given(heroDao.findById(hero.getId())).willReturn(hero);
+        heroService.leaveTroop(hero.getId(), 42L);
+        assertEquals(hero.getTroop(), troop);
+    }
 }

@@ -1,6 +1,7 @@
 package cz.fi.muni.PA165.service;
 
 import cz.fi.muni.PA165.persistence.model.Hero;
+import cz.fi.muni.PA165.api.exceptions.DnDServiceException;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ public interface HeroService {
      * Find Hero by id
      *
      * @param id of Hero
+     * @throws DnDServiceException if hero is not found.
      * @return Hero with corresponding id
      */
     Hero findById(Long id);
@@ -30,6 +32,7 @@ public interface HeroService {
      * Delete Hero with given id
      *
      * @param id of Hero to be deleted
+     * @throws DnDServiceException if hero is not found.
      */
     void deleteHero(Long id);
 
@@ -53,6 +56,7 @@ public interface HeroService {
      *
      * @param heroId - id of the hero
      * @param roleId - id of the role
+     * @throws DnDServiceException if hero or role is not found.
      */
     void addRole(Long heroId, Long roleId);
 
@@ -61,6 +65,7 @@ public interface HeroService {
      *
      * @param heroId - id of the hero
      * @param roleId - id of the role
+     * @throws DnDServiceException if hero or role is not found.
      */
     void removeRole(Long heroId, Long roleId);
 
@@ -69,8 +74,8 @@ public interface HeroService {
      *
      * @param heroId  - id of the hero
      * @param troopId - id of the troop
+     * @throws DnDServiceException if hero is already in another troop or troop was not found.
      */
-
     void joinTroop(Long heroId, Long troopId);
 
     /**

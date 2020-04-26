@@ -35,7 +35,7 @@ public class HeroServiceImpl implements HeroService {
     public Hero findById(Long id) {
         Hero hero = heroDao.findById(id);
         if (hero == null)
-            throw new DnDServiceException("Hero with " + id + "not found");
+            throw new DnDServiceException("Hero with id: " + id + "not found");
         return hero;
     }
 
@@ -93,14 +93,14 @@ public class HeroServiceImpl implements HeroService {
     private Role findRoleById(Long id) {
         Role role = roleDao.findById(id);
         if (role == null)
-            throw new DnDServiceException("Role with " + id + "not found");
+            throw new DnDServiceException("Role with id: " + id + "not found");
         return role;
     }
 
     private Troop findTroopById(Long id) {
         Troop troop = troopDao.findById(id);
         if (troop == null)
-            throw new DnDServiceException("Troop with " + id + "not found");
+            throw new DnDServiceException("Troop with id: " + id + "not found");
         return troop;
     }
 }

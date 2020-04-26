@@ -13,7 +13,7 @@ import java.util.Objects;
 public class HeroCreateDTO {
     @NotEmpty(message = "Name can not be empty")
     private String name;
-    @Min(1)
+    @Min(value = 1, message = "Level must be greater than 0")
     private int level;
 
     public String getName() {

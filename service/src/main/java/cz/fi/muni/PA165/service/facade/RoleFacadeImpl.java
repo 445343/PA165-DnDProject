@@ -58,6 +58,5 @@ public class RoleFacadeImpl implements RoleFacade {
     public List<RoleDTO> findAllRoles(){
         List<Role> allRoles = roleService.findAllRoles();
         return beanMapper.mapTo(allRoles, RoleDTO.class);
-
     }
 }

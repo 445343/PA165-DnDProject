@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService{
     public User findById(Long id) {
         User user = userDao.findById(id);
         if (user == null)
-            throw new DnDServiceException("User with " + id + "not found");
+            throw new DnDServiceException("User with id: " + id + "not found");
         return user;
     }
 
@@ -91,8 +91,7 @@ public class UserServiceImpl implements UserService{
     private Hero findHeroById(Long id){
         Hero hero = heroDao.findById(id);
         if (hero == null)
-            throw new DnDServiceException("Hero with " + id + "not found");
+            throw new DnDServiceException("Hero with id: " + id + "not found");
         return hero;
     }
-
 }

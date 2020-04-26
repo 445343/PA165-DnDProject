@@ -13,6 +13,11 @@ import cz.fi.muni.PA165.service.UserService;
 import javax.transaction.Transactional;
 import java.util.List;
 
+/**
+ * Implementation of UserFacade interface
+ *
+ * @author Boris Jadus
+ */
 @Transactional
 @ComponentScan(basePackages = "cz.fi.muni.PA165.service.mapping")
 public class UserFacadeImpl implements UserFacade {
