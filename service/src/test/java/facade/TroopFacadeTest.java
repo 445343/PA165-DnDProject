@@ -78,6 +78,12 @@ public class TroopFacadeTest {
     }
 
     @Test
+    public void disbandTroop() {
+        troopFacade.disbandTroop(20L);
+        then(troopService).should().disbandTroop(20L);
+    }
+
+    @Test
     public void updateTroop() {
         given(beanMapper.mapTo(any(TroopUpdateDTO.class), eq(Troop.class))).willReturn(troop);
         troopFacade.updateTroop(new TroopUpdateDTO());

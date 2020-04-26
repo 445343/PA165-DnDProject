@@ -1,5 +1,7 @@
 import cz.fi.muni.PA165.api.exceptions.DnDServiceException;
+import cz.fi.muni.PA165.persistence.dao.HeroDao;
 import cz.fi.muni.PA165.persistence.dao.TroopDao;
+import cz.fi.muni.PA165.persistence.model.Hero;
 import cz.fi.muni.PA165.persistence.model.Troop;
 import cz.fi.muni.PA165.service.TroopService;
 import cz.fi.muni.PA165.service.TroopServiceImpl;
@@ -12,8 +14,7 @@ import java.util.List;
 
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.*;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 /**
  * Tests for TroopService
@@ -27,6 +28,7 @@ public class TroopServiceTest {
 
     @Mock
     private TroopDao troopDao;
+
 
     private Troop troop1;
 
@@ -73,6 +75,41 @@ public class TroopServiceTest {
     public void deleteTroopWithBadId(){
         troopService.deleteTroop(100L);
     }
+
+    @Test
+    public void disbandTroop() {
+
+        given(troopDao.findById(troop1.getId())).willReturn(troop1);
+
+        Hero hero1 = new Hero();
+        hero1.setId(1L);
+        hero1.setLevel(1);
+        hero1.setName("hero1");
+
+        Hero hero2 = new Hero();
+        hero2.setId(2L);
+        hero2.setLevel(1);
+        hero2.setName("hero2");
+
+        hero1.setTroop(troop1);
+        hero2.setTroop(troop1);
+
+        assertEquals(hero1.getTroop(), troop1);
+        assertEquals(hero2.getTroop(), troop1);
+        troop1.addHero(hero1);
+        troop1.addHero(hero2);
+
+        troopService.disbandTroop(troop1.getId());
+        assertNull(hero1.getTroop());
+        assertNull(hero2.getTroop());
+        assertEquals(troop1.getHeroes().size(), 0);
+        List<Troop> troops = troopService.findAllTroops();
+        assertEquals(troops.size(), 0);
+
+    }
+
+
+
 
     @Test
     public void updateTroop() {

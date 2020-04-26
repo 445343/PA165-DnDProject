@@ -49,6 +49,9 @@ public class TroopFacadeImpl implements TroopFacade {
     }
 
     @Override
+    public void disbandTroop(Long id) { troopService.disbandTroop(id); }
+
+    @Override
     public void updateTroop(TroopUpdateDTO troop) {
         Troop troopToUpdate = beanMapper.mapTo(troop, Troop.class);
         troopService.updateTroop(troopToUpdate);
