@@ -180,20 +180,14 @@ public class HeroServiceTest {
         assertEquals(hero.getTroop(), troop);
     }
 
-    /*
     @Test(expectedExceptions = DnDServiceException.class)
     public void joinTroopWhileInATroop(){
-        Troop newTroop = new Troop();
-        newTroop.setId(2L);
-        newTroop.setName("Another troop");
-        newTroop.setGold(56454);
-        given(heroDao.findById(heroTest.getId())).willReturn(heroTest);
-        given(troopDao.findById(newTroop.getId())).willReturn(newTroop);
+        hero.setTroop(new Troop());
+        given(heroDao.findById(anyLong())).willReturn(hero);
+        given(troopDao.findById(anyLong())).willReturn(troop);
 
-        heroService.joinTroop(heroTest.getId(), newTroop.getId());
-
+        heroService.joinTroop(hero.getId(), troop.getId());
     }
-    */
 
     @Test
     public void leaveTroop(){

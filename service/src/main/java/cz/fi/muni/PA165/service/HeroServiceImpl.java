@@ -78,6 +78,8 @@ public class HeroServiceImpl implements HeroService {
     public void joinTroop(Long heroId, Long troopId) {
         Hero hero = findById(heroId);
         Troop troop = findTroopById(troopId);
+        if (hero.getTroop() != null)
+            throw new DnDServiceException("Hero is already part of another troop.");
         hero.joinTroop(troop);
     }
 
