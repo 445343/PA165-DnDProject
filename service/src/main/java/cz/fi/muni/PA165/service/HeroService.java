@@ -82,7 +82,6 @@ public interface HeroService {
      * Removes hero from troop
      *
      * @param heroId  - id of the hero
-     * @param troopId - id of the troop
      */
-    void leaveTroop(Long heroId, Long troopId);
+    void leaveTroop(Long heroId);
 }

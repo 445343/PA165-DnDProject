@@ -34,6 +34,15 @@ public interface TroopFacade {
      */
     void deleteTroop(Long id);
 
+
+    /**
+     * Disband Troop with given id
+     * All heroes leave that troop, then troop gets deleted
+     *
+     * @param id of Troop to be disbanded
+     */
+    void disbandTroop(Long id);
+
     /**
      * Update troop
      *

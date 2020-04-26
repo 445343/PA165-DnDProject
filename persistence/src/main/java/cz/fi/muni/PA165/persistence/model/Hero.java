@@ -82,9 +82,9 @@ public class Hero extends AbstractEntity<Long> {
         troop.addHero(this);
     }
 
-    public void leaveTroop(Troop troop){
+    public void leaveTroop(){
+        this.troop.removeHero(this);
         this.troop = null;
-        troop.removeHero(this);
     }
 
     @Override

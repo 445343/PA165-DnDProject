@@ -207,23 +207,17 @@ public class HeroServiceTest {
 
     @Test
     public void leaveTroop(){
+        hero.setTroop(new Troop());
         given(heroDao.findById(hero.getId())).willReturn(hero);
-        given(troopDao.findById(troop.getId())).willReturn(troop);
-        heroService.leaveTroop(hero.getId(), troop.getId());
+        heroService.leaveTroop(hero.getId());
         assertNull(hero.getTroop());
     }
 
     @Test(expectedExceptions = DnDServiceException.class)
     public void leaveTroopWithWrongHeroId(){
         given(troopDao.findById(troop.getId())).willReturn(troop);
-        heroService.leaveTroop(42L, troop.getId());
+        heroService.leaveTroop(42L);
         assertEquals(hero.getTroop(), troop);
     }
 
-    @Test(expectedExceptions = DnDServiceException.class)
-    public void leaveTroopWithWrongTroopId(){
-        given(heroDao.findById(hero.getId())).willReturn(hero);
-        heroService.leaveTroop(hero.getId(), 42L);
-        assertEquals(hero.getTroop(), troop);
-    }
 }

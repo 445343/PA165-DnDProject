@@ -84,10 +84,9 @@ public class HeroServiceImpl implements HeroService {
     }
 
     @Override
-    public void leaveTroop(Long heroId, Long troopId) {
+    public void leaveTroop(Long heroId) {
         Hero hero = findById(heroId);
-        Troop troop = findTroopById(troopId);
-        hero.leaveTroop(troop);
+        hero.leaveTroop();
     }
 
     private Role findRoleById(Long id) {
