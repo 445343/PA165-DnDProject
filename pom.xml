@@ -78,6 +78,12 @@
                 <artifactId>modelmapper</artifactId>
                 <version>2.3.2</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>4.3.11.RELEASE</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <properties>
@@ -88,6 +94,7 @@
         <module>persistence</module>
         <module>service</module>
         <module>api</module>
+        <module>rest</module>
     </modules>
 
 </project>
