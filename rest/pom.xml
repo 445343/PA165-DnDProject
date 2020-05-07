@@ -7,6 +7,7 @@
         <groupId>cz.fi.muni.pa165</groupId>
         <version>1.0.0</version>
     </parent>
+    <packaging>war</packaging>
     <modelVersion>4.0.0</modelVersion>
     <build>
         <plugins>
@@ -18,6 +19,26 @@
                     <target>11</target>
                 </configuration>
                 <version>3.8.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.cargo</groupId>
+                <artifactId>cargo-maven2-plugin</artifactId>
+                <version>1.7.0</version>
+                <configuration>
+                    <container>
+                        <containerId>tomcat9x</containerId>
+                    </container>
+                    <deployables>
+                        <deployable>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>${project.artifactId}</artifactId>
+                            <type>war</type>
+                            <properties>
+                                <context>pa165</context>
+                            </properties>
+                        </deployable>
+                    </deployables>
+                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -47,7 +68,11 @@
             <artifactId>spring-hateoas</artifactId>
             <version>0.25.2.RELEASE</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-api</artifactId>
+            <version>9.0.13</version>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
         <dependency>
             <groupId>javax.servlet</groupId>
