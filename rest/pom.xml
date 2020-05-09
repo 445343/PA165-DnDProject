@@ -11,31 +11,10 @@
     <modelVersion>4.0.0</modelVersion>
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>11</source>
-                    <target>11</target>
-                </configuration>
-                <version>3.8.1</version>
-            </plugin>
+            <!--  embedded tomcat 8 -->
             <plugin>
                 <groupId>org.codehaus.cargo</groupId>
                 <artifactId>cargo-maven2-plugin</artifactId>
-                <version>1.7.0</version>
-                <configuration>
-                    <deployables>
-                        <deployable>
-                            <groupId>${project.groupId}</groupId>
-                            <artifactId>${project.artifactId}</artifactId>
-                            <type>war</type>
-                            <properties>
-                                <context>pa165</context>
-                            </properties>
-                        </deployable>
-                    </deployables>
-                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -68,13 +47,13 @@
         <dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-api</artifactId>
-            <version>9.0.12</version>
+            <version>10.0.0-M1</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>3.0.1</version>
+            <version>4.0.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
