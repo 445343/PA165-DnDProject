@@ -3,6 +3,7 @@ package cz.fi.muni.PA165.service.mapping;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
@@ -11,7 +12,7 @@ import java.util.*;
  * @author Boris Jadus
  */
 
-@Component
+@Service
 public class BeanMapperImpl implements BeanMapper{
     private ModelMapper modelMapper;
 

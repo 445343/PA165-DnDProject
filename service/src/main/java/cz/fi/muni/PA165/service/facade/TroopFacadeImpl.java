@@ -9,6 +9,7 @@ import cz.fi.muni.PA165.service.TroopService;
 import cz.fi.muni.PA165.service.mapping.BeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -18,9 +19,8 @@ import java.util.List;
  *
  * @author Alena Bednarikova
  */
-
+@Service
 @Transactional
-@ComponentScan(basePackages = "cz.fi.muni.PA165.service.mapping")
 public class TroopFacadeImpl implements TroopFacade {
     private TroopService troopService;
     private BeanMapper beanMapper;
@@ -29,6 +29,7 @@ public class TroopFacadeImpl implements TroopFacade {
     public TroopFacadeImpl(TroopService troopService, BeanMapper beanMapper) {
         this.troopService = troopService;
         this.beanMapper = beanMapper;
+
     }
 
     @Override

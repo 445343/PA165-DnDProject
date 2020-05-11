@@ -9,6 +9,7 @@ import cz.fi.muni.PA165.service.HeroService;
 import cz.fi.muni.PA165.service.mapping.BeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -18,9 +19,8 @@ import java.util.List;
  *
  * @author Michal Caniga
  */
-
+@Service
 @Transactional
-@ComponentScan(basePackages = "cz.fi.muni.PA165.service.mapping")
 public class HeroFacadeImpl implements HeroFacade {
 
     private HeroService heroService;
