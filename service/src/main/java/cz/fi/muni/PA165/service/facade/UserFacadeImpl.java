@@ -9,6 +9,7 @@ import cz.fi.muni.PA165.service.mapping.BeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import cz.fi.muni.PA165.service.UserService;
+import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -18,8 +19,8 @@ import java.util.List;
  *
  * @author Boris Jadus
  */
+@Service
 @Transactional
-@ComponentScan(basePackages = "cz.fi.muni.PA165.service.mapping")
 public class UserFacadeImpl implements UserFacade {
 
     private UserService userService;

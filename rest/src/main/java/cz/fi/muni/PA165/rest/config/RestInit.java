@@ -11,10 +11,9 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 public class RestInit extends AbstractAnnotationConfigDispatcherServletInitializer {
 
-
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[] {};
+        return new Class[] {RestConfig.class};
     }
 
     @Override
@@ -29,7 +28,10 @@ public class RestInit extends AbstractAnnotationConfigDispatcherServletInitializ
 
     @Override
     protected Filter[] getServletFilters() {
-        CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter("utf-8",true);
+        CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
+        encodingFilter.setEncoding("utf-8");
+        encodingFilter.setForceEncoding(true);
+
         ShallowEtagHeaderFilter shallowEtagHeaderFilter = new ShallowEtagHeaderFilter();
         return new Filter[]{encodingFilter, shallowEtagHeaderFilter};
     }
