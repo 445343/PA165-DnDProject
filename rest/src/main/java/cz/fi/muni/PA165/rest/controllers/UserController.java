@@ -62,7 +62,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> createUser(@RequestBody @Valid UserCreateDTO userCreateDTO){
+    public ResponseEntity<Void> registerNewUser(@RequestBody @Valid UserCreateDTO userCreateDTO){
         try{
             userFacade.createUser(userCreateDTO);
             return new ResponseEntity<>(HttpStatus.CREATED);
@@ -111,6 +111,37 @@ public class UserController {
         try{
             userFacade.removeHeroFromUser(userId, heroId);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }catch (DnDServiceException ex){
+            throw new DnDServiceException("");
+        }
+    }
+
+    @GetMapping("/login/{name}/password/{pass}")
+    public ResponseEntity<Resource<UserDTO>> login(@PathVariable String name, @PathVariable String pass){
+        try {
+            UserDTO userDTO = userFacade.login(name, pass);
+            return new ResponseEntity<>(userResourceAssembler.toResource(userDTO), HttpStatus.OK);
+        }catch (DnDServiceException ex){
+            throw new DnDServiceException("");
+        }
+    }
+
+    @RolesAllowed("ROLE_USER")
+    @GetMapping("/logout")
+    public ResponseEntity<Void> logout(){
+        try {
+            userFacade.logout();
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }catch (DnDServiceException ex){
+            throw new DnDServiceException("");
+        }
+    }
+
+    @GetMapping("/current")
+    public ResponseEntity<Resource<UserDTO>> getCurrentUser(){
+        try{
+            UserDTO userDTO = userFacade.getCurrentUser();
+            return new ResponseEntity<>(userResourceAssembler.toResource(userDTO), HttpStatus.OK);
         }catch (DnDServiceException ex){
             throw new DnDServiceException("");
         }
