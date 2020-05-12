@@ -53,9 +53,9 @@ public class RoleController {
 
     @RolesAllowed("ROLE_USER")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Resource<RoleDTO> getById(@PathVariable Long id){
+    public ResponseEntity<Resource<RoleDTO>> getById(@PathVariable Long id){
         try {
-            return roleResourceAssembler.toResource(roleFacade.findById(id));
+            return new ResponseEntity<>(roleResourceAssembler.toResource(roleFacade.findById(id)), HttpStatus.OK);
         }catch (DnDServiceException ex){
             throw new DnDServiceException("");
         }

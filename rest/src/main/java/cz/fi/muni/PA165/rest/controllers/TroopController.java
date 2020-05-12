@@ -76,9 +76,9 @@ public class TroopController {
      */
     @RolesAllowed("ROLE_USER")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Resource<TroopDTO> getById(@PathVariable Long id){
+    public ResponseEntity<Resource<TroopDTO>> getById(@PathVariable Long id){
         try{
-            return troopResourceAssembler.toResource(troopFacade.findById(id));
+            return new ResponseEntity<>(troopResourceAssembler.toResource(troopFacade.findById(id)), HttpStatus.OK);
         }catch (DnDServiceException ex){
             throw new DnDServiceException("");
         }

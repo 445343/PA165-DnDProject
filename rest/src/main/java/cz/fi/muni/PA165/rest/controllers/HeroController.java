@@ -54,9 +54,9 @@ public class HeroController {
 
     @RolesAllowed("ROLE_USER")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Resource<HeroDTO> getById(@PathVariable Long id){
+    public ResponseEntity<Resource<HeroDTO>> getById(@PathVariable Long id){
         try {
-            return heroResourceAssembler.toResource(heroFacade.findById(id));
+            return new ResponseEntity<>(heroResourceAssembler.toResource(heroFacade.findById(id)), HttpStatus.OK);
         }catch (DnDServiceException ex){
             throw new DnDServiceException("");
         }

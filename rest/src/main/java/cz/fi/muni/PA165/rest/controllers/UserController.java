@@ -53,9 +53,9 @@ public class UserController {
 
     @RolesAllowed("ROLE_ADMIN")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Resource<UserDTO> getById(@PathVariable Long id){
+    public ResponseEntity<Resource<UserDTO>> getById(@PathVariable Long id){
         try{
-            return userResourceAssembler.toResource(userFacade.findById(id));
+            return new ResponseEntity<>(userResourceAssembler.toResource(userFacade.findById(id)), HttpStatus.OK);
         }catch (DnDServiceException ex){
             throw new DnDServiceException("");
         }
