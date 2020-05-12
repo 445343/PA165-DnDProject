@@ -91,6 +91,7 @@ public class UserServiceTest {
 
     @Test
     public void deleteUser(){
+        user1.setAdmin(false);
         given(userDao.findById(user1.getId())).willReturn(user1);
         userService.deleteUser(user1.getId());
         then(userDao).should().delete(user1);

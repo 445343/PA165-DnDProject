@@ -65,6 +65,8 @@ public class UserServiceImpl implements UserService{
     @Override
     public void deleteUser(Long id) {
         User user = findById(id);
+        if (user.isAdmin())
+            throw new DnDServiceException("Admin can not be deleted.");
         userDao.delete(user);
     }
 
