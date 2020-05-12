@@ -22,7 +22,7 @@ import java.util.List;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/rest/users")
 public class UserController {
 
     private UserFacade userFacade;

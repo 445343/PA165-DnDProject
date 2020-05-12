@@ -29,7 +29,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
  * @author Jan Válka
  */
 @RestController
-@RequestMapping("/troops")
+@RequestMapping("/rest/troops")
 public class TroopController {
 
     private TroopFacade troopFacade;
