@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,7 @@ public class UserController {
         this.userResourceAssembler = userResourceAssembler;
     }
 
+    @RolesAllowed("ROLE_ADMIN")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Resources<Resource<UserDTO>>> getAll(){
        try{
@@ -49,6 +51,7 @@ public class UserController {
        }
     }
 
+    @RolesAllowed("ROLE_ADMIN")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Resource<UserDTO> getById(@PathVariable Long id){
         try{
@@ -68,6 +71,7 @@ public class UserController {
         }
     }
 
+    @RolesAllowed("ROLE_ADMIN")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id){
         try{
@@ -77,7 +81,7 @@ public class UserController {
             throw new DnDServiceException("");
         }
     }
-
+    @RolesAllowed("ROLE_ADMIN")
     @PutMapping
     public ResponseEntity<Void> updateUser(@RequestBody @Valid UserUpdateDTO userUpdateDTO){
         try{
@@ -88,6 +92,7 @@ public class UserController {
         }
     }
 
+    @RolesAllowed("ROLE_USER")
     @PutMapping("{userId}/heroes/{heroId}/add")
     public ResponseEntity<Void> addHeroToUser(@PathVariable Long userId,
                                               @PathVariable Long heroId){
@@ -99,6 +104,7 @@ public class UserController {
         }
     }
 
+    @RolesAllowed("ROLE_USER")
     @PutMapping("{userId}/heroes/{heroId}/remove")
     public ResponseEntity<Void> removeHeroFromUser(@PathVariable Long userId,
                                                    @PathVariable Long heroId){

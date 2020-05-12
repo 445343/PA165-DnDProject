@@ -89,6 +89,12 @@
             <artifactId>tomcat-api</artifactId>
             <version>9.0.13</version>
         </dependency>
+
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>jsr250-api</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>cz.fi.muni.pa165</groupId>
             <artifactId>service</artifactId>

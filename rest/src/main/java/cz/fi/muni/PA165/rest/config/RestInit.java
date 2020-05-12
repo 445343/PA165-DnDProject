@@ -13,7 +13,7 @@ public class RestInit extends AbstractAnnotationConfigDispatcherServletInitializ
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[] {RestConfig.class};
+        return new Class[] {RestConfig.class, SecurityConfig.class};
     }
 
     @Override

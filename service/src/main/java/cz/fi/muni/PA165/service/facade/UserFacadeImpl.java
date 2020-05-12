@@ -70,4 +70,20 @@ public class UserFacadeImpl implements UserFacade {
     public void removeHeroFromUser(Long userId, Long heroId) {
         userService.removeHeroFromUser(userId, heroId);
     }
+
+    @Override
+    public void logout() {
+        userService.logout();
+    }
+
+    @Override
+    public UserDTO login(String name, String password) {
+        User user = userService.login(name, password);
+        return beanMapper.mapTo(user, UserDTO.class);
+    }
+
+    @Override
+    public UserDTO getCurrentUser() {
+        return beanMapper.mapTo(userService.getCurrentUser(), UserDTO.class);
+    }
 }

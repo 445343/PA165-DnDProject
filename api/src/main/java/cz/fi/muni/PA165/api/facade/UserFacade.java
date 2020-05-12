@@ -56,4 +56,23 @@ public interface UserFacade {
      * @param heroId - id of the hero
      */
     void removeHeroFromUser(Long userId, Long heroId);
+
+    /**
+     * Logout current user
+     */
+    void logout();
+
+    /**
+     * login user
+     * @param name of user
+     * @param password of user
+     * @return logged in user
+     */
+    UserDTO login(String name, String password);
+
+    /**
+     * Get currently logged in user
+     * @return logged in user
+     */
+    UserDTO getCurrentUser();
 }
