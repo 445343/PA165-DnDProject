@@ -69,9 +69,9 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void create(){
-        userDao.create(user1);
-        Assert.assertNotNull(user1.getId());
-        Assert.assertTrue(em.contains(user1));
+        userDao.create(user2);
+        Assert.assertNotNull(user2.getId());
+        Assert.assertTrue(em.contains(user2));
     }
 
     @Test(expectedExceptions = PersistenceException.class)

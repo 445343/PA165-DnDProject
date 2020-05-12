@@ -21,7 +21,7 @@ public interface RoleService {
      * Create new role
      * @param role to be created
      */
-    void createRole(Role role);
+    Long createRole(Role role);
 
     /**
      * Delete role with given id

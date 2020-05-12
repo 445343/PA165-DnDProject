@@ -25,7 +25,7 @@ public interface TroopFacade {
      *
      * @param troop to be created
      */
-    void createTroop(TroopCreateDTO troop);
+    Long createTroop(TroopCreateDTO troop);
 
     /**
      * Disband Troop with given id

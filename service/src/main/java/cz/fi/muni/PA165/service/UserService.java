@@ -24,7 +24,7 @@ public interface UserService {
      * @param password for hashing
      * @throws DnDServiceException if hashing of password fails.
      */
-    void createUser(User user, String password);
+    Long createUser(User user, String password);
 
     /**
      * Delete user with given id

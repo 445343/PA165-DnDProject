@@ -16,14 +16,14 @@ public interface HeroDao {
      * @param id id of hero
      * @return hero with given id
      */
-    public Hero findById(Long id);
+    Hero findById(Long id);
 
     /**
      * Create hero in DB
      *
      * @param hero hero to create
      */
-    public void create(Hero hero);
+    Long create(Hero hero);
 
 
     /**
@@ -31,19 +31,19 @@ public interface HeroDao {
      *
      * @param hero hero to delete
      */
-    public void delete(Hero hero);
+    void delete(Hero hero);
 
     /**
      * Finds all stored heroes
      *
      * @return List of all heroes
      */
-    public List<Hero> findAll();
+    List<Hero> findAll();
 
     /**
      * Updates hero in DB
      *
      * @param hero hero to update
      */
-    public void update(Hero hero);
+    void update(Hero hero);
 }

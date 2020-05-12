@@ -26,7 +26,7 @@ public interface HeroFacade {
      *
      * @param hero to be created
      */
-    void createHero(HeroCreateDTO hero);
+    Long createHero(HeroCreateDTO hero);
 
     /**
      * Delete hero with given id

@@ -23,8 +23,10 @@ public class HeroDaoImpl implements HeroDao {
     }
 
     @Override
-    public void create(Hero hero) {
+    public Long create(Hero hero) {
         entityManager.persist(hero);
+        entityManager.flush();
+        return hero.getId();
     }
 
     @Override

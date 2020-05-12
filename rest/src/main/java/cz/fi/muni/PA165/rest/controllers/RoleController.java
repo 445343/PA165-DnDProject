@@ -63,10 +63,9 @@ public class RoleController {
 
     @RolesAllowed("ROLE_ADMIN")
     @PostMapping
-    public ResponseEntity<Void> createRole(@RequestBody @Valid RoleCreateDTO roleCreateDTO){
+    public ResponseEntity<Long> createRole(@RequestBody @Valid RoleCreateDTO roleCreateDTO){
         try{
-            roleFacade.createRole(roleCreateDTO);
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            return new ResponseEntity<>(roleFacade.createRole(roleCreateDTO), HttpStatus.CREATED);
         }catch (DnDServiceException ex){
             throw new DnDServiceException("");
         }

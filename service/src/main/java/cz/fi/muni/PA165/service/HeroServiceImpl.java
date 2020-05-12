@@ -40,8 +40,8 @@ public class HeroServiceImpl implements HeroService {
     }
 
     @Override
-    public void createHero(Hero hero) {
-        heroDao.create(hero);
+    public Long createHero(Hero hero) {
+        return heroDao.create(hero);
     }
 
     @Override

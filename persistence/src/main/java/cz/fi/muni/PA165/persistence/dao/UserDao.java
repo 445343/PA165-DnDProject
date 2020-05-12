@@ -24,7 +24,7 @@ public interface UserDao {
      *
      * @param user user to create
      */
-    void create(User user);
+    Long create(User user);
 
     /**
      * Deletes user from DB

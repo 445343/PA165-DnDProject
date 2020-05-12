@@ -24,7 +24,7 @@ public interface TroopService {
      *
      * @param troop to be created
      */
-    void createTroop(Troop troop);
+    Long createTroop(Troop troop);
 
     /**
      * Disband Troop with given id

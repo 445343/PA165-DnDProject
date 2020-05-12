@@ -43,9 +43,9 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void createUser(User user, String password){
+    public Long createUser(User user, String password){
         user.setPasswordHash(hashPassword(password));
-        userDao.create(user);
+        return userDao.create(user);
     }
 
     private String hashPassword(String password){

@@ -16,33 +16,33 @@ public interface RoleDao {
      * @param id id of role
      * @return role with given id
      */
-    public Role findById(Long id);
+    Role findById(Long id);
 
     /**
      * Create role in DB
      *
      * @param role role to create
      */
-    public void create(Role role);
+    Long create(Role role);
 
     /**
      * Deletes role from DB
      *
      * @param role role to delete
      */
-    public void delete(Role role);
+    void delete(Role role);
 
     /**
      * Finds all stored roles
      *
      * @return List of all roles
      */
-    public List<Role> findAll();
+    List<Role> findAll();
 
     /**
      * Updates role in DB
      *
      * @param role role to update
      */
-    public void update(Role role);
+    void update(Role role);
 }

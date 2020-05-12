@@ -17,33 +17,33 @@ public interface TroopDao {
      * @param id id of troop
      * @return troop with given id
      */
-    public Troop findById(Long id);
+    Troop findById(Long id);
 
     /**
      * Create troop in DB
      *
      * @param troop troop to create
      */
-    public void create(Troop troop);
+    Long create(Troop troop);
 
     /**
      * Deletes troop from DB
      *
      * @param troop troop to delete
      */
-    public void delete(Troop troop);
+     void delete(Troop troop);
 
     /**
      * Finds all stored troops
      *
      * @return List of all troops
      */
-    public List<Troop> findAll();
+    List<Troop> findAll();
 
     /**
      * Updates troop in DB
      *
      * @param troop troop to update
      */
-    public void update(Troop troop);
+    void update(Troop troop);
 }

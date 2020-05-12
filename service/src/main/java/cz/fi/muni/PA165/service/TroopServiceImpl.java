@@ -37,8 +37,8 @@ public class TroopServiceImpl implements TroopService {
     }
 
     @Override
-    public void createTroop(Troop troop) {
-        troopDao.create(troop);
+    public Long createTroop(Troop troop) {
+        return troopDao.create(troop);
     }
 
     @Override

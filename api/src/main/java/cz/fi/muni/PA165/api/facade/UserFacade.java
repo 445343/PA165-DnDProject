@@ -23,7 +23,7 @@ public interface UserFacade {
      * Create new user
      * @param user to be created
      */
-    void createUser(UserCreateDTO user);
+    Long createUser(UserCreateDTO user);
 
     /**
      * Delete user with given id

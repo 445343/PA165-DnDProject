@@ -39,9 +39,9 @@ public class HeroFacadeImpl implements HeroFacade {
     }
 
     @Override
-    public void createHero(HeroCreateDTO hero) {
+    public Long createHero(HeroCreateDTO hero) {
         Hero heroForCreation = beanMapper.mapTo(hero, Hero.class);
-        heroService.createHero(heroForCreation);
+        return heroService.createHero(heroForCreation);
     }
 
     @Override

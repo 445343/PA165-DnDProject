@@ -71,9 +71,9 @@ public class TroopDaoTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void create() {
-        troopDao.create(troop1);
-        Assert.assertNotNull(troop1.getId());
-        Assert.assertTrue(em.contains(troop1));
+        troopDao.create(troop2);
+        Assert.assertNotNull(troop2.getId());
+        Assert.assertTrue(em.contains(troop2));
     }
 
     @Test(expectedExceptions = PersistenceException.class)
@@ -85,8 +85,8 @@ public class TroopDaoTest extends AbstractTestNGSpringContextTests {
     @Test
     public void createWithoutMission() {
         troop1.setMission(null);
-        troopDao.create(troop1);
-        Assert.assertTrue(em.contains(troop1));
+        troopDao.create(troop2);
+        Assert.assertTrue(em.contains(troop2));
     }
 
     @Test

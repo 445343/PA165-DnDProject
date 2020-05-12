@@ -31,8 +31,8 @@ public class RoleServiceImpl implements RoleService{
     }
 
     @Override
-    public void createRole(Role role){
-        roleDao.create(role);
+    public Long createRole(Role role){
+        return roleDao.create(role);
     }
 
     @Override

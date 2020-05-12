@@ -26,7 +26,7 @@ public interface HeroService {
      *
      * @param Hero to be created
      */
-    void createHero(Hero Hero);
+    Long createHero(Hero Hero);
 
     /**
      * Delete Hero with given id

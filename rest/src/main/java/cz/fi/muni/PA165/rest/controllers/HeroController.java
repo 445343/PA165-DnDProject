@@ -64,10 +64,9 @@ public class HeroController {
 
     @RolesAllowed("ROLE_USER")
     @PostMapping
-    public ResponseEntity<Void> createHero(@RequestBody @Valid HeroCreateDTO heroCreateDTO){
+    public ResponseEntity<Long> createHero(@RequestBody @Valid HeroCreateDTO heroCreateDTO){
         try{
-            heroFacade.createHero(heroCreateDTO);
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            return new ResponseEntity<>(heroFacade.createHero(heroCreateDTO), HttpStatus.CREATED);
         }catch (DnDServiceException ex){
             throw new DnDServiceException("");
         }

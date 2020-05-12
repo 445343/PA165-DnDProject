@@ -37,8 +37,10 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void create(User user) {
+    public Long create(User user) {
         entityManager.persist(user);
+        entityManager.flush();
+        return user.getId();
     }
 
     @Override

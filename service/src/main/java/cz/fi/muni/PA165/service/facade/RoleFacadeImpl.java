@@ -39,9 +39,9 @@ public class RoleFacadeImpl implements RoleFacade {
     }
 
     @Override
-    public void createRole(RoleCreateDTO role){
+    public Long createRole(RoleCreateDTO role){
         Role newRole = beanMapper.mapTo(role, Role.class);
-        roleService.createRole(newRole);
+        return roleService.createRole(newRole);
     }
 
     @Override

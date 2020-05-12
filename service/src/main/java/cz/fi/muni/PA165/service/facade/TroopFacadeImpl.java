@@ -39,9 +39,9 @@ public class TroopFacadeImpl implements TroopFacade {
     }
 
     @Override
-    public void createTroop(TroopCreateDTO troop) {
+    public Long createTroop(TroopCreateDTO troop) {
         Troop troopToCreate = beanMapper.mapTo(troop, Troop.class);
-        troopService.createTroop(troopToCreate);
+        return troopService.createTroop(troopToCreate);
     }
 
     @Override

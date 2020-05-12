@@ -23,8 +23,10 @@ public class TroopDaoImpl implements TroopDao {
     }
 
     @Override
-    public void create(Troop troop){
+    public Long create(Troop troop){
         em.persist(troop);
+        em.flush();
+        return troop.getId();
     }
     @Override
     public void delete(Troop troop) throws IllegalArgumentException{

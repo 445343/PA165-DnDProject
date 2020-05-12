@@ -95,10 +95,9 @@ public class TroopController {
      */
     @RolesAllowed("ROLE_ADMIN")
     @PostMapping()
-    public ResponseEntity<Void> createTroop(@RequestBody @Valid TroopCreateDTO troopCreateDTO){
+    public ResponseEntity<Long> createTroop(@RequestBody @Valid TroopCreateDTO troopCreateDTO){
         try{
-            troopFacade.createTroop(troopCreateDTO);
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            return new ResponseEntity<>(troopFacade.createTroop(troopCreateDTO), HttpStatus.CREATED);
         }catch (DnDServiceException ex){
             throw new DnDServiceException("");
         }

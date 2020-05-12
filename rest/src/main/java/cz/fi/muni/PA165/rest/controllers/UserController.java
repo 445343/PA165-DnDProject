@@ -62,10 +62,9 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> registerNewUser(@RequestBody @Valid UserCreateDTO userCreateDTO){
+    public ResponseEntity<Long> registerNewUser(@RequestBody @Valid UserCreateDTO userCreateDTO){
         try{
-            userFacade.createUser(userCreateDTO);
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            return new ResponseEntity<>(userFacade.createUser(userCreateDTO), HttpStatus.CREATED);
         }catch (DnDServiceException ex){
             throw new DnDServiceException("");
         }
