@@ -15,6 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +48,7 @@ public class TroopController {
      * @return resource with list of troops
      * @throws DnDServiceException
      */
+    @RolesAllowed("ROLE_USER")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Resources<Resource<TroopDTO>>> getAll(){
         try{
@@ -72,6 +74,7 @@ public class TroopController {
      * @return Resource<TroopDTO>
      * @throws DnDServiceException
      */
+    @RolesAllowed("ROLE_USER")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Resource<TroopDTO> getById(@PathVariable Long id){
         try{
@@ -90,6 +93,7 @@ public class TroopController {
      * @param troopCreateDTO TroopCreateDTO with required fields for creation
      * @throws DnDServiceException
      */
+    @RolesAllowed("ROLE_USER")
     @PostMapping(value = "/create")
     public ResponseEntity<Void> createTroop(@RequestBody @Valid TroopCreateDTO troopCreateDTO){
         try{
@@ -109,6 +113,7 @@ public class TroopController {
      * @param troopUpdateDTO troop to be updated
      * @throws DnDServiceException
      */
+    @RolesAllowed("ROLE_USER")
     @PutMapping(value = "/update")
     public ResponseEntity<Void> updateTroop(@RequestBody @Valid TroopUpdateDTO troopUpdateDTO){
         try{
@@ -126,6 +131,7 @@ public class TroopController {
      * @param id identifier of troop
      * @throws DnDServiceException
      */
+    @RolesAllowed("ROLE_USER")
     @DeleteMapping(value = "/{id}/delete")
     public ResponseEntity<Void> disbandTroop(@PathVariable Long id){
         try{
