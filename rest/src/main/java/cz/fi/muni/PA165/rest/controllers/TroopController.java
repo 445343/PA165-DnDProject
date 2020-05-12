@@ -93,8 +93,8 @@ public class TroopController {
      * @param troopCreateDTO TroopCreateDTO with required fields for creation
      * @throws DnDServiceException
      */
-    @RolesAllowed("ROLE_USER")
-    @PostMapping(value = "/create")
+    @RolesAllowed("ROLE_ADMIN")
+    @PostMapping()
     public ResponseEntity<Void> createTroop(@RequestBody @Valid TroopCreateDTO troopCreateDTO){
         try{
             troopFacade.createTroop(troopCreateDTO);
@@ -113,8 +113,8 @@ public class TroopController {
      * @param troopUpdateDTO troop to be updated
      * @throws DnDServiceException
      */
-    @RolesAllowed("ROLE_USER")
-    @PutMapping(value = "/update")
+    @RolesAllowed("ROLE_ADMIN")
+    @PutMapping()
     public ResponseEntity<Void> updateTroop(@RequestBody @Valid TroopUpdateDTO troopUpdateDTO){
         try{
             troopFacade.updateTroop(troopUpdateDTO);
@@ -131,8 +131,8 @@ public class TroopController {
      * @param id identifier of troop
      * @throws DnDServiceException
      */
-    @RolesAllowed("ROLE_USER")
-    @DeleteMapping(value = "/{id}/delete")
+    @RolesAllowed("ROLE_ADMIN")
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> disbandTroop(@PathVariable Long id){
         try{
             troopFacade.disbandTroop(id);

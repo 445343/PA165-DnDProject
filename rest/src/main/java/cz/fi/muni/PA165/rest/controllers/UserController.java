@@ -92,7 +92,7 @@ public class UserController {
         }
     }
 
-    @RolesAllowed("ROLE_USER")
+    @RolesAllowed("ROLE_ADMIN")
     @PutMapping("{userId}/heroes/{heroId}/add")
     public ResponseEntity<Void> addHeroToUser(@PathVariable Long userId,
                                               @PathVariable Long heroId){
@@ -104,7 +104,7 @@ public class UserController {
         }
     }
 
-    @RolesAllowed("ROLE_USER")
+    @RolesAllowed("ROLE_ADMIN")
     @PutMapping("{userId}/heroes/{heroId}/remove")
     public ResponseEntity<Void> removeHeroFromUser(@PathVariable Long userId,
                                                    @PathVariable Long heroId){
@@ -137,6 +137,7 @@ public class UserController {
         }
     }
 
+    @RolesAllowed("ROLE_USER")
     @GetMapping("/current")
     public ResponseEntity<Resource<UserDTO>> getCurrentUser(){
         try{
