@@ -20,7 +20,7 @@ public interface UserDao {
     User findById(Long id);
 
     /**
-     * Create user in DBacie
+     * Create user in DB
      *
      * @param user user to create
      */
@@ -46,4 +46,11 @@ public interface UserDao {
      * @param user user to update
      */
     void update(User user);
+
+    /**
+     * Finds user with given name
+     * @param name of wanted user
+     * @return user with given name
+     */
+    User findByName(String name);
 }

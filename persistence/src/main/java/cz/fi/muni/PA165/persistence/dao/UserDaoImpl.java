@@ -5,6 +5,7 @@ import cz.fi.muni.PA165.persistence.model.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
@@ -22,6 +23,17 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User findById(Long id) {
         return entityManager.find(User.class, id);
+    }
+
+    @Override
+    public User findByName(String name) {
+        try{
+            return entityManager
+                    .createQuery("SELECT u FROM User u WHERE u.userName = :name", User.class)
+                    .setParameter("name", name).getSingleResult();
+        } catch (NoResultException ex){
+            return null;
+        }
     }
 
     @Override

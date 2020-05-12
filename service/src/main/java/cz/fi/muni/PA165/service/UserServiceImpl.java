@@ -6,10 +6,16 @@ import cz.fi.muni.PA165.persistence.model.Hero;
 import cz.fi.muni.PA165.persistence.model.User;
 import cz.fi.muni.PA165.api.exceptions.DnDServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -91,7 +97,56 @@ public class UserServiceImpl implements UserService{
     private Hero findHeroById(Long id){
         Hero hero = heroDao.findById(id);
         if (hero == null)
-            throw new DnDServiceException("Hero with id: " + id + "not found");
+            throw new DnDServiceException("Hero with id: " + id + " not found");
         return hero;
+    }
+
+    @Override
+    public User getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null)
+            return null;
+        return findByName(authentication.getName());
+    }
+
+    @Override
+    public void logout() {
+        SecurityContextHolder.clearContext();
+    }
+
+    @Override
+    public User login(String name, String password) {
+        User user = findByName(name);
+        passwordCheck(user.getPasswordHash(), password);
+        setSecurityContext(user.getUserName(), user.getPasswordHash(), user.isAdmin());
+        return user;
+    }
+
+    private void setSecurityContext(String name, String password, boolean isAdmin){
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+        if (isAdmin)
+            authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+
+        org.springframework.security.core.userdetails.User springUser
+                = new org.springframework.security.core.userdetails.User(name, password, authorities);
+
+        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(
+                springUser.getUsername(),
+                springUser.getPassword(),
+                springUser.getAuthorities()));
+    }
+
+    private void passwordCheck(String passwordHash, String password){
+        String hash = hashPassword(password);
+        if (!hash.equals(passwordHash))
+            throw new DnDServiceException("Wrong password/login combination");
+    }
+
+    private User findByName(String name){
+        User u = userDao.findByName(name);
+        if (u == null)
+            throw new DnDServiceException("User with name: "+ name +", not found");
+        return u;
     }
 }

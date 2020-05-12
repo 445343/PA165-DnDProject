@@ -60,5 +60,23 @@ public interface UserService {
      */
     void removeHeroFromUser(Long userId, Long heroId);
 
+    /**
+     * Returns logged in user
+     * @return current user
+     */
+    User getCurrentUser();
+
+    /**
+     * Logout current user
+     */
+    void logout();
+
+    /**
+     *  Authenticates and logs in user
+     * @param name - name of the user
+     * @param password - password of the user
+     * @return logged in user
+     */
+    User login(String name, String password);
 
 }
