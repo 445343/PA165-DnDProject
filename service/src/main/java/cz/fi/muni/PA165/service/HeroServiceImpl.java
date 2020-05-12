@@ -3,13 +3,18 @@ package cz.fi.muni.PA165.service;
 import cz.fi.muni.PA165.persistence.dao.HeroDao;
 import cz.fi.muni.PA165.persistence.dao.RoleDao;
 import cz.fi.muni.PA165.persistence.dao.TroopDao;
+import cz.fi.muni.PA165.persistence.dao.UserDao;
 import cz.fi.muni.PA165.persistence.model.Hero;
 import cz.fi.muni.PA165.api.exceptions.DnDServiceException;
 import cz.fi.muni.PA165.persistence.model.Role;
 import cz.fi.muni.PA165.persistence.model.Troop;
+import cz.fi.muni.PA165.persistence.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,12 +28,14 @@ public class HeroServiceImpl implements HeroService {
     private HeroDao heroDao;
     private RoleDao roleDao;
     private TroopDao troopDao;
+    private UserDao userDao;
 
     @Autowired
-    public HeroServiceImpl(HeroDao heroDao, RoleDao roleDao, TroopDao troopDao) {
+    public HeroServiceImpl(HeroDao heroDao, RoleDao roleDao, TroopDao troopDao, UserDao userDao) {
         this.heroDao = heroDao;
         this.roleDao = roleDao;
         this.troopDao = troopDao;
+        this.userDao = userDao;
     }
 
     @Override
@@ -57,7 +64,10 @@ public class HeroServiceImpl implements HeroService {
 
     @Override
     public List<Hero> findAllHeroes() {
-        return heroDao.findAll();
+        User user = getCurrentUser();
+        if (user.isAdmin())
+            return heroDao.findAll();
+        return new ArrayList<>(user.getHeroes());
     }
 
     @Override
@@ -102,4 +112,15 @@ public class HeroServiceImpl implements HeroService {
             throw new DnDServiceException("Troop with id: " + id + "not found");
         return troop;
     }
+
+    private User getCurrentUser(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null)
+            throw new DnDServiceException("You need to be logged in");
+        User user = userDao.findByName(authentication.getName());
+        if (user == null)
+            throw new DnDServiceException("User not found");
+        return user;
+    }
+
 }

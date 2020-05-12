@@ -2,13 +2,18 @@ import cz.fi.muni.PA165.api.exceptions.DnDServiceException;
 import cz.fi.muni.PA165.persistence.dao.HeroDao;
 import cz.fi.muni.PA165.persistence.dao.RoleDao;
 import cz.fi.muni.PA165.persistence.dao.TroopDao;
+import cz.fi.muni.PA165.persistence.dao.UserDao;
 import cz.fi.muni.PA165.persistence.model.Hero;
 import cz.fi.muni.PA165.persistence.model.Role;
 import cz.fi.muni.PA165.persistence.model.Troop;
+import cz.fi.muni.PA165.persistence.model.User;
 import cz.fi.muni.PA165.service.HeroService;
 import cz.fi.muni.PA165.service.HeroServiceImpl;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -39,11 +44,13 @@ public class HeroServiceTest {
     private RoleDao roleDao;
     @Mock
     private TroopDao troopDao;
+    @Mock
+    private UserDao userDao;
 
     @BeforeMethod
     public void init(){
         MockitoAnnotations.initMocks(this);
-        heroService = new HeroServiceImpl(heroDao, roleDao, troopDao);
+        heroService = new HeroServiceImpl(heroDao, roleDao, troopDao, userDao);
 
         hero = new Hero();
         hero.setId(1L);
@@ -106,6 +113,8 @@ public class HeroServiceTest {
 
     @Test
     public void findAllHeroes(){
+        mockSecurityContext();
+
         Hero newHero = new Hero();
         newHero.setId(2L);
         newHero.setLevel(1);
@@ -220,4 +229,15 @@ public class HeroServiceTest {
         assertEquals(hero.getTroop(), troop);
     }
 
+    private void mockSecurityContext(){
+        User user = new User();
+        user.setUserName("admin");
+        user.setAdmin(true);
+        Authentication authentication = mock(Authentication.class);
+        SecurityContext securityContext = mock(SecurityContext.class);
+        when(securityContext.getAuthentication()).thenReturn(authentication);
+        SecurityContextHolder.setContext(securityContext);
+        when(SecurityContextHolder.getContext().getAuthentication().getName()).thenReturn(user.getUserName());
+        when(userDao.findByName("admin")).thenReturn(user);
+    }
 }
