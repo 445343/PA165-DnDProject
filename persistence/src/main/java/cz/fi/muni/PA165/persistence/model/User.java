@@ -16,7 +16,7 @@ import java.util.Set;
 @Table(name = "user")
 public class User extends AbstractEntity<Long> {
 
-    @Column(name = "user_name", nullable = false)
+    @Column(name = "user_name", nullable = false, unique = true)
     private String userName;
 
     @Column(name = "password_hash", nullable = false)
