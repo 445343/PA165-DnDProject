@@ -130,6 +130,7 @@
         <module>service</module>
         <module>api</module>
         <module>rest</module>
+        <module>mvc</module>
     </modules>
 
 </project>
