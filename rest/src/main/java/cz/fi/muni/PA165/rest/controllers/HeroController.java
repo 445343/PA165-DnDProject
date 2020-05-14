@@ -3,9 +3,9 @@ package cz.fi.muni.PA165.rest.controllers;
 import cz.fi.muni.PA165.api.dto.hero.HeroCreateDTO;
 import cz.fi.muni.PA165.api.dto.hero.HeroDTO;
 import cz.fi.muni.PA165.api.dto.hero.HeroUpdateDTO;
-import cz.fi.muni.PA165.api.exceptions.DnDServiceException;
 import cz.fi.muni.PA165.api.facade.HeroFacade;
 import cz.fi.muni.PA165.rest.assemblers.HeroResourceAssembler;
+import cz.fi.muni.PA165.rest.exceptions.ExceptionSorter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
@@ -47,8 +47,8 @@ public class HeroController {
             Resources<Resource<HeroDTO>> resultResources = new Resources<>(heroesResource);
             resultResources.add(linkTo(HeroController.class).withSelfRel().withType("GET"));
             return new ResponseEntity<>(resultResources, HttpStatus.OK);
-        }catch (DnDServiceException ex){
-            throw new DnDServiceException("");
+        }catch (Exception ex){
+            throw ExceptionSorter.throwException(ex);
         }
     }
 
@@ -57,8 +57,8 @@ public class HeroController {
     public ResponseEntity<Resource<HeroDTO>> getById(@PathVariable Long id){
         try {
             return new ResponseEntity<>(heroResourceAssembler.toResource(heroFacade.findById(id)), HttpStatus.OK);
-        }catch (DnDServiceException ex){
-            throw new DnDServiceException("");
+        }catch (Exception ex){
+            throw ExceptionSorter.throwException(ex);
         }
     }
 
@@ -67,8 +67,8 @@ public class HeroController {
     public ResponseEntity<Long> createHero(@RequestBody @Valid HeroCreateDTO heroCreateDTO){
         try{
             return new ResponseEntity<>(heroFacade.createHero(heroCreateDTO), HttpStatus.CREATED);
-        }catch (DnDServiceException ex){
-            throw new DnDServiceException("");
+        }catch (Exception ex){
+            throw ExceptionSorter.throwException(ex);
         }
     }
 
@@ -78,8 +78,8 @@ public class HeroController {
         try {
             heroFacade.deleteHero(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (DnDServiceException ex){
-            throw new DnDServiceException("");
+        } catch (Exception ex){
+            throw ExceptionSorter.throwException(ex);
         }
     }
 
@@ -89,8 +89,8 @@ public class HeroController {
         try {
             heroFacade.updateHero(heroUpdateDTO);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }catch (DnDServiceException ex){
-            throw new DnDServiceException("");
+        }catch (Exception ex){
+            throw ExceptionSorter.throwException(ex);
         }
     }
 
@@ -100,8 +100,8 @@ public class HeroController {
         try {
             heroFacade.addRole(heroId, roleId);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (DnDServiceException ex){
-            throw new DnDServiceException("");
+        } catch (Exception ex){
+            throw ExceptionSorter.throwException(ex);
         }
     }
 
@@ -111,8 +111,8 @@ public class HeroController {
         try {
             heroFacade.removeRole(heroId, roleId);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (DnDServiceException ex){
-            throw new DnDServiceException("");
+        } catch (Exception ex){
+            throw ExceptionSorter.throwException(ex);
         }
     }
 
@@ -122,8 +122,8 @@ public class HeroController {
         try {
             heroFacade.joinTroop(heroId, troopId);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (DnDServiceException ex){
-            throw new DnDServiceException("");
+        } catch (Exception ex){
+            throw ExceptionSorter.throwException(ex);
         }
     }
 
@@ -133,8 +133,8 @@ public class HeroController {
         try {
             heroFacade.leaveTroop(heroId);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (DnDServiceException ex){
-            throw new DnDServiceException("");
+        } catch (Exception ex){
+            throw ExceptionSorter.throwException(ex);
         }
     }
 }

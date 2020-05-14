@@ -1,6 +1,7 @@
 package cz.fi.muni.PA165.service;
 
 import cz.fi.muni.PA165.api.exceptions.DnDServiceException;
+import cz.fi.muni.PA165.api.exceptions.ErrorStatus;
 import cz.fi.muni.PA165.persistence.dao.HeroDao;
 import cz.fi.muni.PA165.persistence.dao.TroopDao;
 import cz.fi.muni.PA165.persistence.model.Hero;
@@ -32,7 +33,7 @@ public class TroopServiceImpl implements TroopService {
     public Troop findById(Long id) {
         Troop troop = troopDao.findById(id);
         if (troop == null)
-            throw new DnDServiceException("Troop with id: " + id + "not found");
+            throw new DnDServiceException("Troop with id: " + id + "not found", ErrorStatus.RESOURCE_NOT_FOUND);
         return troop;
     }
 
