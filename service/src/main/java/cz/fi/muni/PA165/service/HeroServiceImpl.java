@@ -1,5 +1,6 @@
 package cz.fi.muni.PA165.service;
 
+import cz.fi.muni.PA165.api.exceptions.ErrorStatus;
 import cz.fi.muni.PA165.persistence.dao.HeroDao;
 import cz.fi.muni.PA165.persistence.dao.RoleDao;
 import cz.fi.muni.PA165.persistence.dao.TroopDao;
@@ -42,7 +43,7 @@ public class HeroServiceImpl implements HeroService {
     public Hero findById(Long id) {
         Hero hero = heroDao.findById(id);
         if (hero == null)
-            throw new DnDServiceException("Hero with id: " + id + "not found");
+            throw new DnDServiceException("Hero with id: " + id + "not found", ErrorStatus.RESOURCE_NOT_FOUND);
         return hero;
     }
 
@@ -89,7 +90,7 @@ public class HeroServiceImpl implements HeroService {
         Hero hero = findById(heroId);
         Troop troop = findTroopById(troopId);
         if (hero.getTroop() != null)
-            throw new DnDServiceException("Hero is already part of another troop.");
+            throw new DnDServiceException("Hero is already part of another troop.", ErrorStatus.CONFLICT);
         hero.joinTroop(troop);
     }
 
@@ -102,24 +103,24 @@ public class HeroServiceImpl implements HeroService {
     private Role findRoleById(Long id) {
         Role role = roleDao.findById(id);
         if (role == null)
-            throw new DnDServiceException("Role with id: " + id + "not found");
+            throw new DnDServiceException("Role with id: " + id + "not found", ErrorStatus.RESOURCE_NOT_FOUND);
         return role;
     }
 
     private Troop findTroopById(Long id) {
         Troop troop = troopDao.findById(id);
         if (troop == null)
-            throw new DnDServiceException("Troop with id: " + id + "not found");
+            throw new DnDServiceException("Troop with id: " + id + "not found", ErrorStatus.RESOURCE_NOT_FOUND);
         return troop;
     }
 
     private User getCurrentUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null)
-            throw new DnDServiceException("You need to be logged in");
+            throw new DnDServiceException("You need to be logged in", ErrorStatus.NOT_LOGGED_IN);
         User user = userDao.findByName(authentication.getName());
         if (user == null)
-            throw new DnDServiceException("User not found");
+            throw new DnDServiceException("User not found", ErrorStatus.RESOURCE_NOT_FOUND);
         return user;
     }
 

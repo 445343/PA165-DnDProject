@@ -6,6 +6,7 @@ import cz.fi.muni.PA165.api.dto.user.UserUpdateDTO;
 import cz.fi.muni.PA165.api.exceptions.DnDServiceException;
 import cz.fi.muni.PA165.api.facade.UserFacade;
 import cz.fi.muni.PA165.rest.assemblers.UserResourceAssembler;
+import cz.fi.muni.PA165.rest.exceptions.ExceptionSorter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
@@ -46,8 +47,8 @@ public class UserController {
            Resources<Resource<UserDTO>> resultResources = new Resources<>(usersResource);
            resultResources.add(linkTo(UserController.class).withSelfRel().withType("GET"));
            return new ResponseEntity<>(resultResources, HttpStatus.OK);
-       }catch (DnDServiceException ex){
-            throw new DnDServiceException("");
+       }catch (Exception ex){
+           throw ExceptionSorter.throwException(ex);
        }
     }
 
@@ -56,8 +57,8 @@ public class UserController {
     public ResponseEntity<Resource<UserDTO>> getById(@PathVariable Long id){
         try{
             return new ResponseEntity<>(userResourceAssembler.toResource(userFacade.findById(id)), HttpStatus.OK);
-        }catch (DnDServiceException ex){
-            throw new DnDServiceException("");
+        }catch (Exception ex){
+            throw ExceptionSorter.throwException(ex);
         }
     }
 
@@ -66,7 +67,7 @@ public class UserController {
         try{
             return new ResponseEntity<>(userFacade.createUser(userCreateDTO), HttpStatus.CREATED);
         }catch (DnDServiceException ex){
-            throw new DnDServiceException("");
+            throw ExceptionSorter.throwException(ex);
         }
     }
 
@@ -77,7 +78,7 @@ public class UserController {
             userFacade.deleteUser(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }catch (DnDServiceException ex){
-            throw new DnDServiceException("");
+            throw ExceptionSorter.throwException(ex);
         }
     }
     @RolesAllowed("ROLE_ADMIN")
@@ -87,7 +88,7 @@ public class UserController {
             userFacade.updateUser(userUpdateDTO);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }catch (DnDServiceException ex){
-            throw new DnDServiceException("");
+            throw ExceptionSorter.throwException(ex);
         }
     }
 
@@ -99,7 +100,7 @@ public class UserController {
             userFacade.addHeroToUser(userId, heroId);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }catch (DnDServiceException ex){
-            throw new DnDServiceException("");
+            throw ExceptionSorter.throwException(ex);
         }
     }
 
@@ -111,7 +112,7 @@ public class UserController {
             userFacade.removeHeroFromUser(userId, heroId);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }catch (DnDServiceException ex){
-            throw new DnDServiceException("");
+            throw ExceptionSorter.throwException(ex);
         }
     }
 
@@ -121,7 +122,7 @@ public class UserController {
             UserDTO userDTO = userFacade.login(name, pass);
             return new ResponseEntity<>(userResourceAssembler.toResource(userDTO), HttpStatus.OK);
         }catch (DnDServiceException ex){
-            throw new DnDServiceException("");
+            throw ExceptionSorter.throwException(ex);
         }
     }
 
@@ -132,7 +133,7 @@ public class UserController {
             userFacade.logout();
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }catch (DnDServiceException ex){
-            throw new DnDServiceException("");
+            throw ExceptionSorter.throwException(ex);
         }
     }
 
@@ -143,7 +144,7 @@ public class UserController {
             UserDTO userDTO = userFacade.getCurrentUser();
             return new ResponseEntity<>(userResourceAssembler.toResource(userDTO), HttpStatus.OK);
         }catch (DnDServiceException ex){
-            throw new DnDServiceException("");
+            throw ExceptionSorter.throwException(ex);
         }
     }
 }

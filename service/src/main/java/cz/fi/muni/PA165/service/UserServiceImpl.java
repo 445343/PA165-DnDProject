@@ -1,5 +1,6 @@
 package cz.fi.muni.PA165.service;
 
+import cz.fi.muni.PA165.api.exceptions.ErrorStatus;
 import cz.fi.muni.PA165.persistence.dao.HeroDao;
 import cz.fi.muni.PA165.persistence.dao.UserDao;
 import cz.fi.muni.PA165.persistence.model.Hero;
@@ -38,7 +39,7 @@ public class UserServiceImpl implements UserService{
     public User findById(Long id) {
         User user = userDao.findById(id);
         if (user == null)
-            throw new DnDServiceException("User with id: " + id + "not found");
+            throw new DnDServiceException("User with id: " + id + "not found", ErrorStatus.RESOURCE_NOT_FOUND);
         return user;
     }
 
@@ -58,7 +59,7 @@ public class UserServiceImpl implements UserService{
             }
             return sb.toString();
         } catch (NoSuchAlgorithmException ex){
-            throw new DnDServiceException("Error while hashing password.");
+            throw new DnDServiceException("Error while hashing password.", ErrorStatus.INTERNAL);
         }
     }
 
@@ -66,7 +67,7 @@ public class UserServiceImpl implements UserService{
     public void deleteUser(Long id) {
         User user = findById(id);
         if (user.isAdmin())
-            throw new DnDServiceException("Admin can not be deleted.");
+            throw new DnDServiceException("Admin can not be deleted.", ErrorStatus.CONFLICT);
         userDao.delete(user);
     }
 
@@ -99,7 +100,7 @@ public class UserServiceImpl implements UserService{
     private Hero findHeroById(Long id){
         Hero hero = heroDao.findById(id);
         if (hero == null)
-            throw new DnDServiceException("Hero with id: " + id + " not found");
+            throw new DnDServiceException("Hero with id: " + id + " not found", ErrorStatus.RESOURCE_NOT_FOUND);
         return hero;
     }
 
@@ -142,13 +143,13 @@ public class UserServiceImpl implements UserService{
     private void passwordCheck(String passwordHash, String password){
         String hash = hashPassword(password);
         if (!hash.equals(passwordHash))
-            throw new DnDServiceException("Wrong password/login combination");
+            throw new DnDServiceException("Wrong password/login combination", ErrorStatus.BAD_LOGIN);
     }
 
     private User findByName(String name){
         User u = userDao.findByName(name);
         if (u == null)
-            throw new DnDServiceException("User with name: "+ name +", not found");
+            throw new DnDServiceException("User with name: "+ name +", not found", ErrorStatus.RESOURCE_NOT_FOUND);
         return u;
     }
 }
