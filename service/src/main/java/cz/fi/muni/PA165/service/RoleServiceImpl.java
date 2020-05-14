@@ -1,5 +1,6 @@
 package cz.fi.muni.PA165.service;
 
+import cz.fi.muni.PA165.api.exceptions.ErrorStatus;
 import cz.fi.muni.PA165.persistence.dao.RoleDao;
 import cz.fi.muni.PA165.persistence.model.Role;
 import cz.fi.muni.PA165.api.exceptions.DnDServiceException;
@@ -26,7 +27,7 @@ public class RoleServiceImpl implements RoleService{
     public Role findById(Long id){
         Role role = roleDao.findById(id);
         if (role == null)
-            throw new DnDServiceException("Role with id: " + id + "not found");
+            throw new DnDServiceException("Role with id: " + id + "not found", ErrorStatus.RESOURCE_NOT_FOUND);
         return role;
     }
 

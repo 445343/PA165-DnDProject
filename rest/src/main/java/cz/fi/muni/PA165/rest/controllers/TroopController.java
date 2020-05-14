@@ -4,9 +4,9 @@ package cz.fi.muni.PA165.rest.controllers;
 import cz.fi.muni.PA165.api.dto.troop.TroopCreateDTO;
 import cz.fi.muni.PA165.api.dto.troop.TroopDTO;
 import cz.fi.muni.PA165.api.dto.troop.TroopUpdateDTO;
-import cz.fi.muni.PA165.api.exceptions.DnDServiceException;
 import cz.fi.muni.PA165.api.facade.TroopFacade;
 import cz.fi.muni.PA165.rest.assemblers.TroopResourceAssembler;
+import cz.fi.muni.PA165.rest.exceptions.ExceptionSorter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
@@ -46,7 +46,6 @@ public class TroopController {
      * http://localhost:8080/pa165/rest/troops
      *
      * @return resource with list of troops
-     * @throws DnDServiceException
      */
     @RolesAllowed("ROLE_USER")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -60,8 +59,8 @@ public class TroopController {
             Resources<Resource<TroopDTO>> resultResources = new Resources<>(troopsResource);
             resultResources.add(linkTo(TroopController.class).withSelfRel().withType("GET"));
             return new ResponseEntity<>(resultResources, HttpStatus.OK);
-        }catch (DnDServiceException ex){
-            throw new DnDServiceException("");
+        }catch (Exception ex){
+            throw ExceptionSorter.throwException(ex);
         }
     }
 
@@ -72,15 +71,14 @@ public class TroopController {
      *
      * @param id identifier of troop
      * @return Resource<TroopDTO>
-     * @throws DnDServiceException
      */
     @RolesAllowed("ROLE_USER")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Resource<TroopDTO>> getById(@PathVariable Long id){
         try{
             return new ResponseEntity<>(troopResourceAssembler.toResource(troopFacade.findById(id)), HttpStatus.OK);
-        }catch (DnDServiceException ex){
-            throw new DnDServiceException("");
+        }catch (Exception ex){
+            throw ExceptionSorter.throwException(ex);
         }
     }
 
@@ -91,15 +89,14 @@ public class TroopController {
      * http://localhost:8080/pa165/rest/troops/create
      *
      * @param troopCreateDTO TroopCreateDTO with required fields for creation
-     * @throws DnDServiceException
      */
     @RolesAllowed("ROLE_ADMIN")
     @PostMapping()
     public ResponseEntity<Long> createTroop(@RequestBody @Valid TroopCreateDTO troopCreateDTO){
         try{
             return new ResponseEntity<>(troopFacade.createTroop(troopCreateDTO), HttpStatus.CREATED);
-        }catch (DnDServiceException ex){
-            throw new DnDServiceException("");
+        }catch (Exception ex){
+            throw ExceptionSorter.throwException(ex);
         }
     }
 
@@ -110,7 +107,6 @@ public class TroopController {
      * http://localhost:8080/pa165/rest/troops/update
      *
      * @param troopUpdateDTO troop to be updated
-     * @throws DnDServiceException
      */
     @RolesAllowed("ROLE_ADMIN")
     @PutMapping()
@@ -118,8 +114,8 @@ public class TroopController {
         try{
             troopFacade.updateTroop(troopUpdateDTO);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }catch (DnDServiceException ex){
-            throw new DnDServiceException("");
+        }catch (Exception ex){
+            throw ExceptionSorter.throwException(ex);
         }
     }
 
@@ -128,7 +124,6 @@ public class TroopController {
      * http://localhost:8080/pa165/rest/troops/1/delete
      *
      * @param id identifier of troop
-     * @throws DnDServiceException
      */
     @RolesAllowed("ROLE_ADMIN")
     @DeleteMapping(value = "/{id}")
@@ -136,8 +131,8 @@ public class TroopController {
         try{
             troopFacade.disbandTroop(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }catch (DnDServiceException ex){
-            throw new DnDServiceException("");
+        }catch (Exception ex){
+            throw ExceptionSorter.throwException(ex);
         }
     }
 }

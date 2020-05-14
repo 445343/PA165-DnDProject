@@ -6,6 +6,7 @@ import cz.fi.muni.PA165.api.dto.role.RoleUpdateDTO;
 import cz.fi.muni.PA165.api.exceptions.DnDServiceException;
 import cz.fi.muni.PA165.api.facade.RoleFacade;
 import cz.fi.muni.PA165.rest.assemblers.RoleResourceAssembler;
+import cz.fi.muni.PA165.rest.exceptions.ExceptionSorter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -46,8 +47,8 @@ public class RoleController {
             Resources<Resource<RoleDTO>> resultResources = new Resources<>(rolesResource);
             resultResources.add(linkTo(RoleController.class).withSelfRel().withType("GET"));
             return new ResponseEntity<>(resultResources, HttpStatus.OK);
-        }catch (DnDServiceException ex){
-            throw new DnDServiceException("");
+        }catch (Exception ex){
+            throw ExceptionSorter.throwException(ex);
         }
     }
 
@@ -56,8 +57,8 @@ public class RoleController {
     public ResponseEntity<Resource<RoleDTO>> getById(@PathVariable Long id){
         try {
             return new ResponseEntity<>(roleResourceAssembler.toResource(roleFacade.findById(id)), HttpStatus.OK);
-        }catch (DnDServiceException ex){
-            throw new DnDServiceException("");
+        }catch (Exception ex){
+            throw ExceptionSorter.throwException(ex);
         }
     }
 
@@ -66,8 +67,8 @@ public class RoleController {
     public ResponseEntity<Long> createRole(@RequestBody @Valid RoleCreateDTO roleCreateDTO){
         try{
             return new ResponseEntity<>(roleFacade.createRole(roleCreateDTO), HttpStatus.CREATED);
-        }catch (DnDServiceException ex){
-            throw new DnDServiceException("");
+        }catch (Exception ex){
+            throw ExceptionSorter.throwException(ex);
         }
     }
 
@@ -77,8 +78,8 @@ public class RoleController {
         try {
             roleFacade.deleteRole(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (DnDServiceException ex){
-            throw new DnDServiceException("");
+        } catch (Exception ex){
+            throw ExceptionSorter.throwException(ex);
         }
     }
 
@@ -88,8 +89,8 @@ public class RoleController {
         try {
             roleFacade.updateRole(roleUpdateDTO);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }catch (DnDServiceException ex){
-            throw new DnDServiceException("");
+        }catch (Exception ex){
+            throw ExceptionSorter.throwException(ex);
         }
     }
 
