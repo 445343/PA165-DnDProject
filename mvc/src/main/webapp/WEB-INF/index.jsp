@@ -14,7 +14,7 @@
 <div class="generic-container" ng-controller="UserController as ctrl">
     <div class="panel panel-default">
         <!-- Default panel contents -->
-        <div class="panel-heading"><span class="lead">REST</span></div>
+        <div class="panel-heading"><span class="lead">MVC </span></div>
         <div class="tablecontainer">
             <table class="table table-hover">
                 <thead>

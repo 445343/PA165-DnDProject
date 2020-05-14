@@ -13,6 +13,12 @@
     <packaging>war</packaging>
 
     <dependencies>
+        <dependency>
+            <artifactId>rest</artifactId>
+            <groupId>cz.fi.muni.pa165</groupId>
+            <version>1.0.0</version>
+            <type>war</type>
+        </dependency>
         <!-- servlet, JSP, JSTL -->
         <!-- must be this instead of javaee-web for the springmvc-tests to succeed -->
         <dependency>
@@ -100,6 +106,26 @@
             <plugin>
                 <groupId>org.codehaus.cargo</groupId>
                 <artifactId>cargo-maven2-plugin</artifactId>
+                <configuration>
+                    <deployables>
+                        <deployable>
+                            <groupId>cz.fi.muni.pa165</groupId>
+                            <artifactId>mvc</artifactId>
+                            <type>war</type>
+                            <properties>
+                                <context>pa165/mvc</context>
+                            </properties>
+                        </deployable>
+                        <deployable>
+                            <groupId>cz.fi.muni.pa165</groupId>
+                            <artifactId>rest</artifactId>
+                            <type>war</type>
+                            <properties>
+                                <context>pa165/rest</context>
+                            </properties>
+                        </deployable>
+                    </deployables>
+                </configuration>
             </plugin>
 
             <plugin>
