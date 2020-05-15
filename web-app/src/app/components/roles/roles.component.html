@@ -26,3 +26,61 @@
     </table>
   </div>
 </div>
+
+
+<div class="container">
+  <div class="level is-mobile">
+    <div class="level-left">
+      <div class="level-item">
+        <a class="button" (click)="modalPopUp('create')">
+                      <span class="icon is-small">
+                        <i class="fas fa-edit"></i>
+                      </span>
+          <span>Create new role</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal -->
+<div [class.is-active]="showModal" class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <div class="box">
+      <div class="content">
+        <div *ngIf="mode == 'create'">
+        <!-- create new role -->
+        <p class="title is-5">
+          Create new role
+        </p>
+        <form (ngSubmit)="createRole()">
+          <div class="field">
+            <label class="label">Name</label>
+            <div class="control">
+              <input class="input" name="name" type="text" placeholder="Text input" id="name" required [(ngModel)]="roleCreateDTO.name" >
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Description</label>
+            <div class="control">
+              <input class="input" name="description" type="text" placeholder="Text input" id="description" required [(ngModel)]="roleCreateDTO.description" >
+            </div>
+          </div>
+          <nav class="level is-mobile">
+            <div class="level-left">
+              <div class="level-item">
+                <button type="submit" class="button is-success">Create</button>
+              </div>
+              <div class="level-item">
+                <button class="button" (click)="showModal=!showModal">Back</button>
+              </div>
+            </div>
+          </nav>
+        </form>
+      </div>
+      </div>
+      <button class="modal-close is-large" aria-label="close" (click)="showModal=!showModal"></button>
+    </div>
+  </div>
+</div>
