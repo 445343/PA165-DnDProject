@@ -1,4 +1,4 @@
-export class roleUpdateDTO {
+export class RoleUpdateDTO {
   id: number;
   name: string;
   description: string;
