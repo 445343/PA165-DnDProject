@@ -28,6 +28,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
  *
  * @author Jan Válka
  */
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/rest/troops")
 public class TroopController {

@@ -21,6 +21,7 @@ import java.util.List;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/rest/heroes")
 public class HeroController {
