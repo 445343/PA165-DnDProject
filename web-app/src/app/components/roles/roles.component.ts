@@ -45,7 +45,8 @@ export class RolesComponent implements OnInit {
 
   createRole(){
     this.roleService.createRole(this.roleCreateDTO)
-      .subscribe(data => console.log(data));
+      .subscribe(data => {this.loadRoles();
+      });
     this.roleCreateDTO = new RoleCreateDTO();
     this.showModal = false;
   }
