@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from "../../services/user/user.service";
 
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -14,6 +15,12 @@ export class NavbarComponent implements OnInit {
   }
 
   logOut(){
+    this.userService.logout().subscribe(
+      response => {
+        this.showNav = false;
+        location.reload();
+      }
+    );
 
   }
 }

@@ -9,18 +9,9 @@ import {HttpClient} from "@angular/common/http";
 export class UserService {
 
   apiURL = 'http://localhost:8080/pa165/rest/users';
-  userName = "testName";
-  loggedIn = false;
 
   constructor(private http: HttpClient) { }
 
-  getName(){
-    return this.userName;
-  }
-
-  getLoggedIn(){
-    return this.loggedIn;
-  }
 
   registerUser(user: UserCreateDTO): Observable<Object>{
     return this.http.post(`${this.apiURL}`, user);
@@ -32,4 +23,17 @@ export class UserService {
   deleteUser(id): Observable<any>{
     return this.http.delete(`${this.apiURL}/${id}`)
   }
+
+  getCurrentUser(): Observable<any>{
+    return this.http.get(`${this.apiURL}/current`)
+  }
+
+  login(name, pass): Observable<any>{
+    return this.http.get(`${this.apiURL}/login/${name}/password/${pass}`)
+
+  }
+  logout(): Observable<any>{
+    return this.http.get(`${this.apiURL}/logout`)
+  }
+
 }
