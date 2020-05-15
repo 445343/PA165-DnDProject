@@ -3,6 +3,7 @@ import {RoleService} from "../../services/role/role.service";
 import {Observable} from "rxjs";
 import {RoleDTO} from "../../dto/role/RoleDTO";
 import {RoleCreateDTO} from "../../dto/role/RoleCreateDTO";
+import {RoleUpdateDTO} from "../../dto/role/RoleUpdateDTO";
 
 
 @Component({
@@ -15,15 +16,18 @@ export class RolesComponent implements OnInit {
   tmp;
 
   roleCreateDTO: RoleCreateDTO;
+  roleUpdateDTO: RoleUpdateDTO;
 
   showModal = false;
   mode;
+  currentSelectedId;
 
   constructor(private roleService: RoleService) { }
 
   ngOnInit(): void {
     this.loadRoles();
     this.roleCreateDTO = new RoleCreateDTO();
+    this.roleUpdateDTO = new RoleUpdateDTO();
   }
 
   loadRoles(){
@@ -44,6 +48,15 @@ export class RolesComponent implements OnInit {
     this.mode = name;
   }
 
+  modalPopUpUpdate(id, name, desc){
+    this.showModal = !this.showModal;
+    this.mode = 'update';
+    this.roleUpdateDTO.id = id;
+    this.roleUpdateDTO.name = name;
+    this.roleUpdateDTO.description = desc;
+
+  }
+
   createRole(){
     this.roleService.createRole(this.roleCreateDTO)
       .subscribe(data => {this.loadRoles();
@@ -52,5 +65,12 @@ export class RolesComponent implements OnInit {
     this.showModal = false;
   }
 
-
+  updateRole(){
+    this.roleService.updateRole(this.roleUpdateDTO)
+      .subscribe(data => {
+        this.loadRoles();
+      });
+    this.roleUpdateDTO = new RoleUpdateDTO();
+    this.showModal = false;
+  }
 }

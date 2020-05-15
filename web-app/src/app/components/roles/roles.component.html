@@ -21,6 +21,12 @@
                         </span>
           <span>Delete role</span>
         </a></td>
+        <td><a class="button is-danger" (click)="modalPopUpUpdate(role.id, role.name, role.description)">
+                        <span class="icon is-small">
+                          <i class="fas fa-edit"></i>
+                        </span>
+          <span>Update role</span>
+        </a></td>
       </tr>
       </tbody>
     </table>
@@ -58,13 +64,13 @@
           <div class="field">
             <label class="label">Name</label>
             <div class="control">
-              <input class="input" name="name" type="text" placeholder="Text input" id="name" required [(ngModel)]="roleCreateDTO.name" >
+              <input class="input" name="name" type="text" id="name" required [(ngModel)]="roleCreateDTO.name" >
             </div>
           </div>
           <div class="field">
             <label class="label">Description</label>
             <div class="control">
-              <input class="input" name="description" type="text" placeholder="Text input" id="description" required [(ngModel)]="roleCreateDTO.description" >
+              <input class="input" name="description" type="text" id="description" required [(ngModel)]="roleCreateDTO.description" >
             </div>
           </div>
           <nav class="level is-mobile">
@@ -79,6 +85,36 @@
           </nav>
         </form>
       </div>
+        <div *ngIf="mode == 'update'">
+          <!-- create new role -->
+          <p class="title is-5">
+            Update role
+          </p>
+          <form (ngSubmit)="updateRole()">
+            <div class="field">
+              <label class="label">Name</label>
+              <div class="control">
+                <input class="input" name="name" type="text" placeholder="Text input" id="update-name" required [(ngModel)]="roleUpdateDTO.name" >
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Description</label>
+              <div class="control">
+                <input class="input" name="description" type="text" placeholder="Text input" id="update-description" required [(ngModel)]="roleUpdateDTO.description" >
+              </div>
+            </div>
+            <nav class="level is-mobile">
+              <div class="level-left">
+                <div class="level-item">
+                  <button type="submit" class="button is-success">Create</button>
+                </div>
+                <div class="level-item">
+                  <button class="button" (click)="showModal=!showModal">Back</button>
+                </div>
+              </div>
+            </nav>
+          </form>
+        </div>
       </div>
       <button class="modal-close is-large" aria-label="close" (click)="showModal=!showModal"></button>
     </div>
