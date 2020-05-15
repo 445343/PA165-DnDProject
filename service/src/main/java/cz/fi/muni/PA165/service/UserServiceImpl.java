@@ -2,8 +2,12 @@ package cz.fi.muni.PA165.service;
 
 import cz.fi.muni.PA165.api.exceptions.ErrorStatus;
 import cz.fi.muni.PA165.persistence.dao.HeroDao;
+import cz.fi.muni.PA165.persistence.dao.RoleDao;
+import cz.fi.muni.PA165.persistence.dao.TroopDao;
 import cz.fi.muni.PA165.persistence.dao.UserDao;
 import cz.fi.muni.PA165.persistence.model.Hero;
+import cz.fi.muni.PA165.persistence.model.Role;
+import cz.fi.muni.PA165.persistence.model.Troop;
 import cz.fi.muni.PA165.persistence.model.User;
 import cz.fi.muni.PA165.api.exceptions.DnDServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +32,15 @@ public class UserServiceImpl implements UserService{
 
     private UserDao userDao;
     private HeroDao heroDao;
+    private TroopDao troopDao;
+    private RoleDao roleDao;
 
     @Autowired
-    public UserServiceImpl(UserDao userDao, HeroDao heroDao){
+    public UserServiceImpl(UserDao userDao, HeroDao heroDao, TroopDao troopDao, RoleDao roleDao){
         this.userDao = userDao;
         this.heroDao = heroDao;
+        this.troopDao = troopDao;
+        this.roleDao = roleDao;
     }
 
     @Override
@@ -107,9 +115,8 @@ public class UserServiceImpl implements UserService{
     @Override
     public User getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println("test" + authentication);
         if (authentication == null)
-            return null;
+            throw new DnDServiceException("You are not logged in", ErrorStatus.NOT_LOGGED_IN);
         return findByName(authentication.getName());
     }
 
@@ -168,10 +175,38 @@ public class UserServiceImpl implements UserService{
         user.setPasswordHash(hashPassword("user"));
         userDao.create(user);
 
-        setSecurityContext(admin.getUserName(), admin.getPasswordHash(), true);
+        Troop troop1 = new Troop();
+        troop1.setName("Test troop 1");
+        troop1.setMission("Test mission 1");
+        troop1.setGold(500);
+        troopDao.create(troop1);
 
-        System.out.println(getCurrentUser());
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(authentication.getAuthorities());
+        Troop troop2 = new Troop();
+        troop2.setName("Test troop 2");
+        troop2.setMission("Test mission 2");
+        troop2.setGold(666);
+        troopDao.create(troop2);
+
+        Hero hero1 = new Hero();
+        hero1.setName("Hero 1");
+        hero1.setLevel(9);
+        heroDao.create(hero1);
+
+        Hero hero2 = new Hero();
+        hero2.setName("Hero 2");
+        hero2.setLevel(2);
+        heroDao.create(hero2);
+
+        Role role1 = new Role();
+        role1.setName("Test role 1");
+        role1.setDescription("Test role description 1");
+        roleDao.create(role1);
+
+        Role role2 = new Role();
+        role2.setName("Test role 2");
+        role2.setDescription("Test role description 2");
+        roleDao.create(role2);
+
+        login(admin.getUserName(), "admin");
     }
 }
