@@ -62,6 +62,7 @@ public class UserController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping
     public ResponseEntity<Long> registerNewUser(@RequestBody @Valid UserCreateDTO userCreateDTO){
         try{
