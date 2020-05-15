@@ -8,7 +8,7 @@ import {HttpClient} from "@angular/common/http";
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class RoleService {
 
   apiURL = 'http://localhost:8080/pa165/rest/roles';
 
