@@ -1,7 +1,6 @@
-export class UserCreateDTO {
+export class UserDTO {
   id: number;
   userName: string;
-  password: string;
   isAdmin: boolean;
   heroes: object;
 }
