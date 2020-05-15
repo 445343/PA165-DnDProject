@@ -23,6 +23,12 @@
                         </span>
           <span>Disband troop</span>
         </a></td>
+        <td><a class="button is-danger" (click)="modalPopUpUpdate(troop.id, troop.name, troop.mission, troop.gold)">
+                        <span class="icon is-small">
+                          <i class="fas fa-edit"></i>
+                        </span>
+          <span>Update troop</span>
+        </a></td>
       </tr>
       </tbody>
     </table>
@@ -53,7 +59,7 @@
         <div *ngIf="mode == 'create'">
           <!-- create new troop -->
           <p class="title is-5">
-            Create new role
+            Create new troop
           </p>
           <form (ngSubmit)="createTroop()">
             <div class="field">
@@ -78,6 +84,42 @@
               <div class="level-left">
                 <div class="level-item">
                   <button type="submit" class="button is-success">Create</button>
+                </div>
+                <div class="level-item">
+                  <button class="button" (click)="showModal=!showModal">Back</button>
+                </div>
+              </div>
+            </nav>
+          </form>
+        </div>
+        <div *ngIf="mode == 'update'">
+          <!-- update troop -->
+          <p class="title is-5">
+            Update troop
+          </p>
+          <form (ngSubmit)="updateTroop()">
+            <div class="field">
+              <label class="label">Name</label>
+              <div class="control">
+                <input class="input" name="name" type="text" id="update-name" required [(ngModel)]="troopUpdateDTO.name" >
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Description</label>
+              <div class="control">
+                <input class="input" name="mission" type="text" id="update-mission" required [(ngModel)]="troopUpdateDTO.mission" >
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Description</label>
+              <div class="control">
+                <input class="input" name="gold" type="text" id="update-gold" required [(ngModel)]="troopUpdateDTO.gold" >
+              </div>
+            </div>
+            <nav class="level is-mobile">
+              <div class="level-left">
+                <div class="level-item">
+                  <button type="submit" class="button is-success">Update</button>
                 </div>
                 <div class="level-item">
                   <button class="button" (click)="showModal=!showModal">Back</button>

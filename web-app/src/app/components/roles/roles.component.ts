@@ -20,7 +20,6 @@ export class RolesComponent implements OnInit {
 
   showModal = false;
   mode;
-  currentSelectedId;
 
   constructor(private roleService: RoleService) { }
 
@@ -54,7 +53,6 @@ export class RolesComponent implements OnInit {
     this.roleUpdateDTO.id = id;
     this.roleUpdateDTO.name = name;
     this.roleUpdateDTO.description = desc;
-
   }
 
   createRole(){
