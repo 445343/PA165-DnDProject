@@ -3,6 +3,8 @@ import { TestService } from '../../test.service';
 import { UserService } from '../../services/user/user.service';
 import { UserCreateDTO } from '../../dto/user/UserCreateDTO';
 import { Observable, throwError } from 'rxjs';
+import {UserDTO} from "../../dto/user/UserDTO";
+
 
 @Component({
   selector: 'app-dashboard',
@@ -15,21 +17,28 @@ export class DashboardComponent implements OnInit {
   mode; //login or register
 
   userCreateDTO: UserCreateDTO = new UserCreateDTO();
+  currUser: UserDTO = new UserDTO();
 
   test;
-  userName;
-  loggedIn;
+
   options:string[]= ["true","false"];
 
   constructor(
     private apiService: TestService,
     private userService: UserService
+
   ) { }
 
   ngOnInit(): void {
     this.getTest();
-    this.setName();
-    this.isLoggedIn();
+    this.getCurrentUser();
+  }
+  getCurrentUser(){
+    this.userService.getCurrentUser().subscribe( response => {
+      this.currUser = response;
+      console.log(this.currUser);
+    })
+
   }
   modalPopUp(name){
     this.showModal = !this.showModal;
@@ -43,12 +52,6 @@ export class DashboardComponent implements OnInit {
     })
   }
 
-  setName(){
-    this.userName = this.userService.getName();
-  }
-  isLoggedIn(){
-    this.loggedIn = this.userService.getLoggedIn();
-  }
   register(){
     console.log(this.userCreateDTO);
     this.userService.registerUser(this.userCreateDTO)
@@ -57,7 +60,11 @@ export class DashboardComponent implements OnInit {
     this.showModal = false;
   }
   login(){
-
+    this.userService.login(this.userCreateDTO.userName, this.userCreateDTO.password).subscribe(response => {
+      this.currUser = response;
+      this.showModal = false;
+      location.reload();
+    })
   }
 
 }
