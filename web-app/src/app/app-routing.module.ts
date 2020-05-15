@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { DashboardComponent }   from './dashboard/dashboard.component';
-import { TroopsComponent }       from './troops/troops.component';
-import { HeroesComponent }       from './heroes/heroes.component';
-import { UsersComponent }       from './users/users.component';
-import { RolesComponent }       from './roles/roles.component';
+import { DashboardComponent }   from './components/dashboard/dashboard.component';
+import { TroopsComponent }       from './components/troops/troops.component';
+import { HeroesComponent }       from './components/heroes/heroes.component';
+import { UsersComponent }       from './components/users/users.component';
+import { RolesComponent }       from './components/roles/roles.component';
 
 
 const routes: Routes = [

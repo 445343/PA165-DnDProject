@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { TestService } from '../test.service';
-import { UserService } from '../user.service';
-import { UserCreateDTO } from '../dto/user/UserCreateDTO';
+import { TestService } from '../../test.service';
+import { UserService } from '../../services/user/user.service';
+import { UserCreateDTO } from '../../dto/user/UserCreateDTO';
 import { Observable, throwError } from 'rxjs';
 
 @Component({

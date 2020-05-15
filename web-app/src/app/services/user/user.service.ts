@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {UserCreateDTO} from "./dto/user/UserCreateDTO";
+import {UserCreateDTO} from "../../dto/user/UserCreateDTO";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 
