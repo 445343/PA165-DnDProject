@@ -107,6 +107,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public User getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println("test" + authentication);
         if (authentication == null)
             return null;
         return findByName(authentication.getName());
@@ -151,5 +152,26 @@ public class UserServiceImpl implements UserService{
         if (u == null)
             throw new DnDServiceException("User with name: "+ name +", not found", ErrorStatus.RESOURCE_NOT_FOUND);
         return u;
+    }
+
+    @Override
+    public void createTestData() {
+        User admin = new User();
+        admin.setAdmin(true);
+        admin.setUserName("admin");
+        admin.setPasswordHash(hashPassword("admin"));
+        userDao.create(admin);
+
+        User user = new User();
+        user.setAdmin(false);
+        user.setUserName("user");
+        user.setPasswordHash(hashPassword("user"));
+        userDao.create(user);
+
+        setSecurityContext(admin.getUserName(), admin.getPasswordHash(), true);
+
+        System.out.println(getCurrentUser());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(authentication.getAuthorities());
     }
 }
