@@ -23,6 +23,7 @@ export class RolesComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadRoles();
+    this.roleCreateDTO = new RoleCreateDTO();
   }
 
   loadRoles(){
