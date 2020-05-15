@@ -33,4 +33,7 @@ export class HeroService {
   deleteHero(id): Observable<any>{
     return this.http.delete(`${this.apiURL}/${id}`);
   }
+  addRoleToHero(heroId, roleId):Observable<any>{
+    return this.http.put(`${this.apiURL}/${heroId}/roles/${roleId}/add`);
+  }
 }
