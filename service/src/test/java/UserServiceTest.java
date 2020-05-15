@@ -1,5 +1,7 @@
 import cz.fi.muni.PA165.api.exceptions.DnDServiceException;
 import cz.fi.muni.PA165.persistence.dao.HeroDao;
+import cz.fi.muni.PA165.persistence.dao.RoleDao;
+import cz.fi.muni.PA165.persistence.dao.TroopDao;
 import cz.fi.muni.PA165.persistence.dao.UserDao;
 import cz.fi.muni.PA165.persistence.model.Hero;
 import cz.fi.muni.PA165.persistence.model.User;
@@ -34,6 +36,12 @@ public class UserServiceTest {
     @Mock
     private HeroDao heroDao;
 
+    @Mock
+    private TroopDao troopDao;
+
+    @Mock
+    private RoleDao roleDao;
+
     private User user1;
 
     private Hero hero;
@@ -41,7 +49,7 @@ public class UserServiceTest {
     @BeforeMethod
     public void init(){
         MockitoAnnotations.initMocks(this);
-        userService = new UserServiceImpl(userDao, heroDao);
+        userService = new UserServiceImpl(userDao, heroDao, troopDao, roleDao);
 
         hero = new Hero();
         hero.setId(1L);

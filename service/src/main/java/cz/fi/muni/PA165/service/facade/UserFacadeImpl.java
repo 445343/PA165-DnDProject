@@ -86,4 +86,10 @@ public class UserFacadeImpl implements UserFacade {
     public UserDTO getCurrentUser() {
         return beanMapper.mapTo(userService.getCurrentUser(), UserDTO.class);
     }
+
+    @Override
+    public void createTestData() {
+        userService.createTestData();
+    }
 }
+

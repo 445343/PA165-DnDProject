@@ -36,7 +36,7 @@ public class UserController {
         this.userResourceAssembler = userResourceAssembler;
     }
 
-    //@RolesAllowed("ROLE_ADMIN")
+    @RolesAllowed("ROLE_ADMIN")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Resources<Resource<UserDTO>>> getAll(){
        try{
@@ -63,23 +63,22 @@ public class UserController {
         }
     }
 
-
     @PostMapping
     public ResponseEntity<Long> registerNewUser(@RequestBody @Valid UserCreateDTO userCreateDTO){
         try{
             return new ResponseEntity<>(userFacade.createUser(userCreateDTO), HttpStatus.CREATED);
-        }catch (DnDServiceException ex){
+        }catch (Exception ex){
             throw ExceptionSorter.throwException(ex);
         }
     }
 
-    //@RolesAllowed("ROLE_ADMIN")
+    @RolesAllowed("ROLE_ADMIN")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id){
         try{
             userFacade.deleteUser(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }catch (DnDServiceException ex){
+        }catch (Exception ex){
             throw ExceptionSorter.throwException(ex);
         }
     }
@@ -89,7 +88,7 @@ public class UserController {
         try{
             userFacade.updateUser(userUpdateDTO);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }catch (DnDServiceException ex){
+        }catch (Exception ex){
             throw ExceptionSorter.throwException(ex);
         }
     }
@@ -101,7 +100,7 @@ public class UserController {
         try{
             userFacade.addHeroToUser(userId, heroId);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }catch (DnDServiceException ex){
+        }catch (Exception ex){
             throw ExceptionSorter.throwException(ex);
         }
     }
@@ -113,7 +112,7 @@ public class UserController {
         try{
             userFacade.removeHeroFromUser(userId, heroId);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }catch (DnDServiceException ex){
+        }catch (Exception ex){
             throw ExceptionSorter.throwException(ex);
         }
     }
@@ -123,18 +122,18 @@ public class UserController {
         try {
             UserDTO userDTO = userFacade.login(name, pass);
             return new ResponseEntity<>(userResourceAssembler.toResource(userDTO), HttpStatus.OK);
-        }catch (DnDServiceException ex){
+        }catch (Exception ex){
             throw ExceptionSorter.throwException(ex);
         }
     }
 
     @RolesAllowed("ROLE_USER")
-    //@GetMapping("/logout")
+    @GetMapping("/logout")
     public ResponseEntity<Void> logout(){
         try {
             userFacade.logout();
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }catch (DnDServiceException ex){
+        }catch (Exception ex){
             throw ExceptionSorter.throwException(ex);
         }
     }
@@ -145,7 +144,17 @@ public class UserController {
         try{
             UserDTO userDTO = userFacade.getCurrentUser();
             return new ResponseEntity<>(userResourceAssembler.toResource(userDTO), HttpStatus.OK);
-        }catch (DnDServiceException ex){
+        }catch (Exception ex){
+            throw ExceptionSorter.throwException(ex);
+        }
+    }
+
+    @GetMapping("/test")
+    public ResponseEntity<Void> createTestData(){
+        try {
+            userFacade.createTestData();
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }catch (Exception ex){
             throw ExceptionSorter.throwException(ex);
         }
     }

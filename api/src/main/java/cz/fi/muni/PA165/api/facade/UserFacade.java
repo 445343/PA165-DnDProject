@@ -75,4 +75,6 @@ public interface UserFacade {
      * @return logged in user
      */
     UserDTO getCurrentUser();
+
+    void createTestData();
 }
