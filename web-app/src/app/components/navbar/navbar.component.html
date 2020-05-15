@@ -14,11 +14,6 @@
 
   <div [class.is-active]="showNav" class="navbar-menu">
     <div class="navbar-end">
-      <div class="navbar-item">
-            <span class="icon is-small">
-                <i class="fas fa-coins"></i>
-            </span>
-      </div>
 
       <div [class.is-active]="showNav" class="navbar-item has-dropdown">
         <a class="navbar-link" (click)="showNav=!showNav">
@@ -36,9 +31,9 @@
             Settings
           </a>
           <hr class="navbar-divider">
-          <div class="navbar-item">
-            Logout
-          </div>
+          <a class="navbar-item" (click)="logOut()">
+            Log out
+          </a>
         </div>
       </div>
     </div>

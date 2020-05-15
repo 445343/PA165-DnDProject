@@ -11,6 +11,9 @@ import { Observable, throwError } from 'rxjs';
 })
 export class DashboardComponent implements OnInit {
 
+  showModal = false;
+  mode; //login or register
+
   userCreateDTO: UserCreateDTO = new UserCreateDTO();
 
   test;
@@ -27,6 +30,11 @@ export class DashboardComponent implements OnInit {
     this.getTest();
     this.setName();
     this.isLoggedIn();
+  }
+  modalPopUp(name){
+    this.showModal = !this.showModal;
+    this.mode = name;
+
   }
 
   getTest(){
@@ -46,6 +54,10 @@ export class DashboardComponent implements OnInit {
     this.userService.registerUser(this.userCreateDTO)
       .subscribe(data => console.log(data));
     this.userCreateDTO = new UserCreateDTO();
+    this.showModal = false;
+  }
+  login(){
+
   }
 
 }
