@@ -25,4 +25,11 @@ export class UserService {
   registerUser(user: UserCreateDTO): Observable<Object>{
     return this.http.post(`${this.apiURL}`, user);
   }
+
+  getAllUsers(): Observable<any>{
+    return this.http.get(`${this.apiURL}`);
+  }
+  deleteUser(id): Observable<any>{
+    return this.http.delete(`${this.apiURL}/${id}`)
+  }
 }

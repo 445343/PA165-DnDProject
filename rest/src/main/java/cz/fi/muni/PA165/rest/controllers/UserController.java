@@ -36,7 +36,7 @@ public class UserController {
         this.userResourceAssembler = userResourceAssembler;
     }
 
-    @RolesAllowed("ROLE_ADMIN")
+    //@RolesAllowed("ROLE_ADMIN")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Resources<Resource<UserDTO>>> getAll(){
        try{
@@ -63,7 +63,7 @@ public class UserController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+
     @PostMapping
     public ResponseEntity<Long> registerNewUser(@RequestBody @Valid UserCreateDTO userCreateDTO){
         try{
@@ -73,7 +73,7 @@ public class UserController {
         }
     }
 
-    @RolesAllowed("ROLE_ADMIN")
+    //@RolesAllowed("ROLE_ADMIN")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id){
         try{
@@ -129,7 +129,7 @@ public class UserController {
     }
 
     @RolesAllowed("ROLE_USER")
-    @GetMapping("/logout")
+    //@GetMapping("/logout")
     public ResponseEntity<Void> logout(){
         try {
             userFacade.logout();
