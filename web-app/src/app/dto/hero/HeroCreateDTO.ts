@@ -1,4 +1,4 @@
-export class heroCreateDTO {
+export class HeroCreateDTO {
   name: string;
   level: number;
 }

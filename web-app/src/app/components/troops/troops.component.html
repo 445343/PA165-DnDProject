@@ -1,1 +1,30 @@
-<p>troops works!</p>
+<div>
+  <div class="content">
+    <p class="title">Troops</p>
+    <table class="table is-striped is-narrow is-hoverable is-fullwidth">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Mission</th>
+        <th>Gold</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let troop of troops">
+        <td>{{troop.id}}</td>
+        <td>{{troop.name}}</td>
+        <td>{{troop.mission}}</td>
+        <td>{{troop.gold}}</td>
+        <td><a class="button is-danger" (click)="deleteTroop(troop.id)">
+                        <span class="icon is-small">
+                          <i class="fas fa-trash"></i>
+                        </span>
+          <span>Disband troop</span>
+        </a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

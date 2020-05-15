@@ -1,4 +1,4 @@
-export class heroDTO {
+export class HeroDTO {
   id: number;
   name: string;
   level: number;

@@ -1,4 +1,4 @@
-export class troopDTO {
+export class TroopDTO {
   id: number;
   name: string;
   mission: string;

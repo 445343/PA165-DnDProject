@@ -1,1 +1,28 @@
-<p>roles works!</p>
+<div>
+  <div class="content">
+    <p class="title">Roles</p>
+    <table class="table is-striped is-narrow is-hoverable is-fullwidth">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let role of roles">
+        <td>{{role.id}}</td>
+        <td>{{role.name}}</td>
+        <td>{{role.description}}</td>
+        <td><a class="button is-danger" (click)="deleteRole(role.id)">
+                        <span class="icon is-small">
+                          <i class="fas fa-trash"></i>
+                        </span>
+          <span>Delete role</span>
+        </a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
