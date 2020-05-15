@@ -3,6 +3,7 @@ import {Observable} from "rxjs";
 import {TroopDTO} from "../../dto/troop/TroopDTO";
 import {TroopService} from "../../services/troop/troop.service";
 import {TroopCreateDTO} from "../../dto/troop/TroopCreateDTO";
+import {TroopUpdateDTO} from "../../dto/troop/TroopUpdateDTO";
 
 @Component({
   selector: 'app-troops',
@@ -14,6 +15,7 @@ export class TroopsComponent implements OnInit {
   tmp;
 
   troopCreateDTO: TroopCreateDTO;
+  troopUpdateDTO: TroopUpdateDTO;
 
   showModal = false;
   mode;
@@ -23,6 +25,7 @@ export class TroopsComponent implements OnInit {
   ngOnInit(): void {
     this.loadTroops();
     this.troopCreateDTO = new TroopCreateDTO();
+    this.troopUpdateDTO = new TroopUpdateDTO();
   }
 
   loadTroops(){
@@ -35,6 +38,15 @@ export class TroopsComponent implements OnInit {
   modalPopUp(name){
     this.showModal = !this.showModal;
     this.mode = name;
+  }
+
+  modalPopUpUpdate(id, name, mission, gold){
+    this.showModal = !this.showModal;
+    this.mode = 'update';
+    this.troopUpdateDTO.id = id;
+    this.troopUpdateDTO.name = name;
+    this.troopUpdateDTO.mission = mission;
+    this.troopUpdateDTO.gold = gold;
   }
 
   createTroop(){
@@ -50,4 +62,14 @@ export class TroopsComponent implements OnInit {
       this.loadTroops();
     });
   }
+
+  updateTroop(){
+    this.troopService.updateTroop(this.troopUpdateDTO)
+      .subscribe(data => {
+        this.loadTroops();
+      });
+    this.troopUpdateDTO = new TroopUpdateDTO();
+    this.showModal = false;
+  }
+
 }
