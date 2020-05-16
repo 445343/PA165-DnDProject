@@ -98,11 +98,11 @@ public class TroopServiceTest {
         troopService.disbandTroop(100L);
     }
 
-    @Test
-    public void updateTroop() {
-        troopService.updateTroop(troop1);
-        then(troopDao).should().update(troop1);
-    }
+//    @Test
+//    public void updateTroop() {
+//        troopService.updateTroop(troop1);
+//        then(troopDao).should().update(troop1);
+//    }
 
     @Test
     public void findAllTroops() {
