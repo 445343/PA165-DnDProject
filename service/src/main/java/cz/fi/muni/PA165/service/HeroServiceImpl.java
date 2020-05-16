@@ -49,7 +49,10 @@ public class HeroServiceImpl implements HeroService {
 
     @Override
     public Long createHero(Hero hero) {
-        return heroDao.create(hero);
+        User user = getCurrentUser();
+        Long id = heroDao.create(hero);
+        user.addHero(hero);
+        return id;
     }
 
     @Override
