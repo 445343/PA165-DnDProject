@@ -7,6 +7,7 @@
       <i class="fas fa-chart-line icon-alignment"></i>
       <span>Dashboard</span>
     </a></li>
+    <div *ngIf="currUser.id != null">
     <div *ngIf="isAdmin == true">
       <li><a routerLink="/users">
         <i class="fas fa-users icon-alignment"></i>
@@ -25,5 +26,6 @@
       <i class="fas fa-user-friends mr-03 icon-alignment"></i>
       <span>Troops</span>
     </a></li>
+    </div>
   </ul>
 </aside>
