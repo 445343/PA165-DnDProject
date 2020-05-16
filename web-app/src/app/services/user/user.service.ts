@@ -40,8 +40,7 @@ export class UserService {
   }
 
   insertTestData(): Observable<any>{
-    return this.http.get(`${this.apiURL}/test`).pipe(catchError(error => {
-      return this.handleError(error)}))
+    return this.http.get(`${this.apiURL}/test`);
   }
   isAdmin(): Observable<any>{
     return this.http.get(`${this.apiURL}/admin`).pipe(catchError(error => {
