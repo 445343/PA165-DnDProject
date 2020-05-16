@@ -1,7 +1,6 @@
 package cz.fi.muni.PA165.persistence.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.*;
 
 /**

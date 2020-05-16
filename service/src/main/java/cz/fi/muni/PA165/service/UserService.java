@@ -79,5 +79,9 @@ public interface UserService {
      */
     User login(String name, String password);
 
+    /**
+     * Check if current user is admin
+     * @return true if current user is admin
+     */
     boolean isAdmin();
 }

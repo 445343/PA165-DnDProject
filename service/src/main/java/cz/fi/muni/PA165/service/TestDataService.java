@@ -16,6 +16,10 @@ import org.springframework.stereotype.Service;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * Service used to populate DB with test data
+ * @author Boris Jadus
+ */
 @Service
 public class TestDataService {
 

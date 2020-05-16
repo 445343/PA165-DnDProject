@@ -49,7 +49,7 @@ public class UserServiceTest {
     @BeforeMethod
     public void init(){
         MockitoAnnotations.initMocks(this);
-        userService = new UserServiceImpl(userDao, heroDao, troopDao, roleDao);
+        userService = new UserServiceImpl(userDao, heroDao);
 
         hero = new Hero();
         hero.setId(1L);

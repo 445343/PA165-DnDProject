@@ -22,6 +22,10 @@ import java.util.List;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
+/**
+ * User rest controller
+ * @author Boris Jadus
+ */
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/rest/users")

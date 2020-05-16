@@ -105,13 +105,6 @@ public class HeroServiceTest {
         heroService.deleteHero(566L);
     }
 
-//    @Test
-//    public void updateHero(){
-//        hero.setName("New name");
-//        heroService.updateHero(hero);
-//        then(heroDao).should().update(hero);
-//    }
-
     @Test
     public void findAllHeroes(){
         mockSecurityContext();

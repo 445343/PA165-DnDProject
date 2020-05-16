@@ -8,6 +8,10 @@ import org.springframework.stereotype.Component;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
+/**
+ * Hero resource assembler
+ * @author Boris Jadus
+ */
 @Component
 public class HeroResourceAssembler implements ResourceAssembler<HeroDTO, Resource<HeroDTO>> {
 

@@ -2,8 +2,11 @@ package cz.fi.muni.PA165.rest.exceptions;
 
 import cz.fi.muni.PA165.api.exceptions.DnDServiceException;
 
+/**
+ * Exception sorter
+ * @author Boris Jadus
+ */
 public class ExceptionSorter {
-
     public static RuntimeException throwException(Exception ex){
         if (ex instanceof DnDServiceException){
             switch (((DnDServiceException) ex).getErrorStatus()){

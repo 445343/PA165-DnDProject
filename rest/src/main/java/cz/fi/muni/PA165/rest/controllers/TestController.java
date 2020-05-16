@@ -3,6 +3,10 @@ package cz.fi.muni.PA165.rest.controllers;
 import cz.fi.muni.PA165.api.facade.TestDataFacade;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Testing rest controller
+ * @author Boris Jadus
+ */
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/rest/test")
