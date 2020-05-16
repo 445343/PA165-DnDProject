@@ -86,7 +86,7 @@ export class HeroesComponent implements OnInit {
         this.loadHeroes();
       });
     this.heroCreateDTO = new HeroCreateDTO();
-    this.showCreateHeroModal = true;
+    this.showCreateHeroModal = false;
   }
 
   updateHero() {
