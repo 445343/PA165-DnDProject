@@ -256,7 +256,5 @@ public class UserServiceImpl implements UserService{
         user.addHero(hero2);
         user2.addHero(hero4);
         user2.addHero(hero3);
-
-        login(admin.getUserName(), "admin");
     }
 }
