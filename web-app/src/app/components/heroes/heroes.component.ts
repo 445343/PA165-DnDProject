@@ -132,8 +132,8 @@ export class HeroesComponent implements OnInit {
     });
   }
 
-  leaveTroop() {
-    this.heroService.leaveTroop(this.clickedHeroId).subscribe(response => {
+  leaveTroop(heroId) {
+    this.heroService.leaveTroop(heroId).subscribe(response => {
       this.loadHeroes();
     });
   }

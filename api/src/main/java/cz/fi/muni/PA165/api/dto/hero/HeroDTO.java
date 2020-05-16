@@ -16,6 +16,7 @@ public class HeroDTO {
     private String name;
     private int level;
     private Set<RoleDTO> roles;
+    private Long troopId;
 
     public Long getId() {
         return id;
@@ -47,6 +48,14 @@ public class HeroDTO {
 
     public void setRoles(Set<RoleDTO> roles) {
         this.roles = roles;
+    }
+
+    public Long getTroopId() {
+        return troopId;
+    }
+
+    public void setTroopId(Long troopId) {
+        this.troopId = troopId;
     }
 
     @Override

@@ -35,7 +35,7 @@
 
 
         <td>
-            <a *ngIf="hero.troop === null || hero.troop === undefined"
+            <a *ngIf="hero.troopId === null || hero.troopId === undefined"
                class="button is-success" (click)="joinTroopModal(hero.id)">
             <span class="icon is-small">
               <i class="fas fa-plus"></i>
@@ -43,19 +43,19 @@
               <span>Join troop</span>
             </a>
 
-           <span *ngIf="hero.troop !== null && hero.troop !== undefined">{{ hero.troop }}</span>
+           <span *ngIf="hero.troopId !== null && hero.troopId !== undefined">{{ hero.troopId }}</span>
         </td>
 
         <td>
-            <a *ngIf="hero.troop !== null && hero.troop !== undefined"
-               class="button is-danger" (click)="leaveTroop()">
+            <a *ngIf="hero.troopId !== null && hero.troopId !== undefined"
+               class="button is-danger" (click)="leaveTroop(hero.id)">
               <span class="icon is-small">
                           <i class="fas fa-trash"></i>
                         </span>
               <span>Leave Troop</span>
             </a>
 
-          <span *ngIf="hero.troop === null || hero.troop === undefined">
+          <span *ngIf="hero.troopId === null || hero.troopId === undefined">
             No troop to leave...
           </span>
         </td>
@@ -66,6 +66,7 @@
                         </span>
           <span>Delete hero</span>
         </a></td>
+
       </tr>
       </tbody>
     </table>

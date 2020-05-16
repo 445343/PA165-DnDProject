@@ -13,6 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,6 +37,9 @@ public class HeroFacadeImpl implements HeroFacade {
     @Override
     public HeroDTO findById(Long id) {
         Hero hero = heroService.findById(id);
+        HeroDTO heroDTO = beanMapper.mapTo(hero, HeroDTO.class);
+        if (hero.getTroop() != null)
+            heroDTO.setTroopId(hero.getTroop().getId());
         return beanMapper.mapTo(hero, HeroDTO.class);
     }
 
@@ -59,7 +63,15 @@ public class HeroFacadeImpl implements HeroFacade {
     @Override
     public List<HeroDTO> findAllHeroes() {
         List<Hero> heroes = heroService.findAllHeroes();
-        return beanMapper.mapTo(heroes, HeroDTO.class);
+        List<HeroDTO> heroDTOS = new ArrayList<>();
+        heroes.forEach(hero -> {
+            HeroDTO heroDTO = beanMapper.mapTo(hero, HeroDTO.class);
+            if (hero.getTroop() != null){
+                heroDTO.setTroopId(hero.getTroop().getId());
+            }
+            heroDTOS.add(heroDTO);
+        });
+        return heroDTOS;
     }
 
     @Override
