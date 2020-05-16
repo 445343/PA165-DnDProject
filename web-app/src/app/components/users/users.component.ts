@@ -12,7 +12,8 @@ import {UserUpdateDTO} from "../../dto/user/UserUpdateDTO";
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-  admin = true;
+
+  isAdmin:boolean = false;
   users: UserDTO[];
   tmp;
 
@@ -28,10 +29,17 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getAdminStatus();
     this.loadUsers();
     this.userUpdateDTO = new UserUpdateDTO();
   }
+  getAdminStatus(){
+    this.userService.isAdmin().subscribe( response => {
+      this.isAdmin = response;
+      console.log(this.isAdmin);
+    })
 
+  }
   loadUsers() {
     this.userService.getAllUsers().subscribe(response => {
       this.tmp = response;

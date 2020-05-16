@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from "../../services/user/user.service";
+import {UserDTO} from "../../dto/user/UserDTO";
 
 
 
@@ -10,11 +11,20 @@ import {UserService} from "../../services/user/user.service";
 })
 export class SidebarComponent implements OnInit {
 
-  isAdmin = true;
+  isAdmin:boolean = false;
 
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    this.getAdminStatus();
+
+  }
+
+  getAdminStatus(){
+    this.userService.isAdmin().subscribe( response => {
+      this.isAdmin = response;
+      console.log(this.isAdmin);
+    })
 
   }
 
