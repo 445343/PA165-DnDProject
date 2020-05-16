@@ -86,5 +86,10 @@ public interface HeroService {
      */
     void leaveTroop(Long heroId);
 
+    /**
+     * List all roles that are not assigned to a hero
+     * @param heroId id of hero
+     * @return List of all roles that are not assigned to a hero
+     */
     List<Role> listAllRolesNotInHero(Long heroId);
 }

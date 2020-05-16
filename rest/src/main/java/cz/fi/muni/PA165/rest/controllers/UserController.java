@@ -22,6 +22,10 @@ import java.util.List;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
+/**
+ * User rest controller
+ * @author Boris Jadus
+ */
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/rest/users")
@@ -144,16 +148,6 @@ public class UserController {
         try{
             UserDTO userDTO = userFacade.getCurrentUser();
             return new ResponseEntity<>(userResourceAssembler.toResource(userDTO), HttpStatus.OK);
-        }catch (Exception ex){
-            throw ExceptionSorter.throwException(ex);
-        }
-    }
-
-    @GetMapping("/test")
-    public ResponseEntity<Void> createTestData(){
-        try {
-            userFacade.createTestData();
-            return new ResponseEntity<>(HttpStatus.CREATED);
         }catch (Exception ex){
             throw ExceptionSorter.throwException(ex);
         }
