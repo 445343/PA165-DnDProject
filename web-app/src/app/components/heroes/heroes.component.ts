@@ -100,7 +100,7 @@ export class HeroesComponent implements OnInit {
   updateHero() {
     this.heroService.updateHero(this.heroUpdateDTO)
       .subscribe(data => {
-        this.loadRoles();
+        this.loadHeroes();
       });
     this.heroUpdateDTO = new HeroUpdateDTO();
     this.showUpdateHeroModal = false;
@@ -152,6 +152,18 @@ export class HeroesComponent implements OnInit {
     this.showShowRoleModal = true;
   }
 
+  updateHeroModal(id) {
+    this.heroUpdateDTO.id = id;
+    for (let hero of this.heroes){
+      if (hero.id == id){
+        this.heroUpdateDTO.name = hero.name;
+        this.heroUpdateDTO.level= hero.level;
+        break;
+      }
+    }
+    this.showUpdateHeroModal = true;
+  }
+
   closeAddRoleModal() {
     this.clickedHeroId = 0;
     this.showAddRoleModal = false;
@@ -168,14 +180,6 @@ export class HeroesComponent implements OnInit {
 
   closeCreateHeroModal() {
     this.showCreateHeroModal = false;
-  }
-
-  updateHeroModal() {
-    this.showCreateHeroModal = true;
-  }
-
-  closeUpdateHeroModal() {
-    this.showShowRoleModal = false;
   }
 
   joinTroopModal(id) {
