@@ -2,6 +2,7 @@ package cz.fi.muni.PA165.service;
 
 import cz.fi.muni.PA165.persistence.model.Hero;
 import cz.fi.muni.PA165.api.exceptions.DnDServiceException;
+import cz.fi.muni.PA165.persistence.model.Role;
 
 import java.util.List;
 
@@ -84,4 +85,6 @@ public interface HeroService {
      * @param heroId  - id of the hero
      */
     void leaveTroop(Long heroId);
+
+    List<Role> listAllRolesNotInHero(Long heroId);
 }

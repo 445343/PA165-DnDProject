@@ -3,6 +3,7 @@ package cz.fi.muni.PA165.api.facade;
 import cz.fi.muni.PA165.api.dto.hero.HeroCreateDTO;
 import cz.fi.muni.PA165.api.dto.hero.HeroDTO;
 import cz.fi.muni.PA165.api.dto.hero.HeroUpdateDTO;
+import cz.fi.muni.PA165.api.dto.role.RoleDTO;
 
 import java.util.List;
 
@@ -80,4 +81,6 @@ public interface HeroFacade {
      * @param heroId  - id of the hero
      */
     void leaveTroop(Long heroId);
+
+    List<RoleDTO> listAllRolesNotInHero(Long heroId);
 }
