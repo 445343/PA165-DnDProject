@@ -3,6 +3,7 @@ package cz.fi.muni.PA165.service.facade;
 import cz.fi.muni.PA165.api.dto.hero.HeroCreateDTO;
 import cz.fi.muni.PA165.api.dto.hero.HeroDTO;
 import cz.fi.muni.PA165.api.dto.hero.HeroUpdateDTO;
+import cz.fi.muni.PA165.api.dto.role.RoleDTO;
 import cz.fi.muni.PA165.api.facade.HeroFacade;
 import cz.fi.muni.PA165.persistence.model.Hero;
 import cz.fi.muni.PA165.service.HeroService;
@@ -59,6 +60,11 @@ public class HeroFacadeImpl implements HeroFacade {
     public List<HeroDTO> findAllHeroes() {
         List<Hero> heroes = heroService.findAllHeroes();
         return beanMapper.mapTo(heroes, HeroDTO.class);
+    }
+
+    @Override
+    public List<RoleDTO> listAllRolesNotInHero(Long heroId){
+        return beanMapper.mapTo(heroService.listAllRolesNotInHero(heroId), RoleDTO.class);
     }
 
     @Override

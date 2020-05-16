@@ -3,8 +3,10 @@ package cz.fi.muni.PA165.rest.controllers;
 import cz.fi.muni.PA165.api.dto.hero.HeroCreateDTO;
 import cz.fi.muni.PA165.api.dto.hero.HeroDTO;
 import cz.fi.muni.PA165.api.dto.hero.HeroUpdateDTO;
+import cz.fi.muni.PA165.api.dto.role.RoleDTO;
 import cz.fi.muni.PA165.api.facade.HeroFacade;
 import cz.fi.muni.PA165.rest.assemblers.HeroResourceAssembler;
+import cz.fi.muni.PA165.rest.assemblers.RoleResourceAssembler;
 import cz.fi.muni.PA165.rest.exceptions.ExceptionSorter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
@@ -28,11 +30,13 @@ public class HeroController {
 
     private HeroFacade heroFacade;
     private HeroResourceAssembler heroResourceAssembler;
+    private RoleResourceAssembler roleResourceAssembler;
 
     @Autowired
-    public HeroController(HeroFacade heroFacade, HeroResourceAssembler heroResourceAssembler) {
+    public HeroController(HeroFacade heroFacade, HeroResourceAssembler heroResourceAssembler, RoleResourceAssembler roleResourceAssembler) {
         this.heroFacade = heroFacade;
         this.heroResourceAssembler = heroResourceAssembler;
+        this.roleResourceAssembler = roleResourceAssembler;
     }
 
 
@@ -48,6 +52,23 @@ public class HeroController {
             Resources<Resource<HeroDTO>> resultResources = new Resources<>(heroesResource);
             resultResources.add(linkTo(HeroController.class).withSelfRel().withType("GET"));
             return new ResponseEntity<>(resultResources, HttpStatus.OK);
+        }catch (Exception ex){
+            throw ExceptionSorter.throwException(ex);
+        }
+    }
+
+    @RolesAllowed("ROLE_USER")
+    @GetMapping(value = "/{id}/roles/other")
+    public ResponseEntity<Resources<Resource<RoleDTO>>> listRolesNotInHero(@PathVariable Long id){
+        try{
+            List<RoleDTO> roles = heroFacade.listAllRolesNotInHero(id);
+            List<Resource<RoleDTO>> rolesResource = new ArrayList<>();
+            for (RoleDTO roleDTO : roles){
+                rolesResource.add(roleResourceAssembler.toResource(roleDTO));
+            }
+            Resources<Resource<RoleDTO>> resultResource = new Resources<>(rolesResource);
+            resultResource.add(linkTo(HeroController.class).withSelfRel().withType("GET"));
+            return new ResponseEntity<>(resultResource, HttpStatus.OK);
         }catch (Exception ex){
             throw ExceptionSorter.throwException(ex);
         }

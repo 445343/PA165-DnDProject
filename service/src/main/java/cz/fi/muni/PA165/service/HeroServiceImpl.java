@@ -124,4 +124,15 @@ public class HeroServiceImpl implements HeroService {
         return user;
     }
 
+    @Override
+    public List<Role> listAllRolesNotInHero(Long heroId){
+        Hero hero = findById(heroId);
+        List<Role> rolesNotInHero = new ArrayList<>();
+
+        for (Role role : roleDao.findAll()){
+            if (!hero.getRoles().contains(role))
+                rolesNotInHero.add(role);
+        }
+        return rolesNotInHero;
+    }
 }
