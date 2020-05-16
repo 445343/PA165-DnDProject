@@ -35,35 +35,30 @@
 
 
         <td>
-          <div *ngIf="hero.troop === null || hero.troop === undefined; then thenBlock else elseBlock"></div>
-          <ng-template #thenBlock>
-            <a class="button is-success" (click)="joinTroopModal(hero.id)">
+            <a *ngIf="hero.troop === null || hero.troop === undefined"
+               class="button is-success" (click)="joinTroopModal(hero.id)">
             <span class="icon is-small">
               <i class="fas fa-plus"></i>
             </span>
               <span>Join troop</span>
             </a>
-          </ng-template>
 
-          <ng-template #elseBlock>
-            {{ hero.troop }}
-          </ng-template>
+           <span *ngIf="hero.troop !== null && hero.troop !== undefined">{{ hero.troop }}</span>
         </td>
 
         <td>
-          <div *ngIf="hero.troop !== null && hero.troop !== undefined; else elseBlock; then thenBlock else elseBlock"></div>
-          <ng-template #thenBlock>
-            <a class="button is-danger" (click)="deleteHero(hero.id)">
+            <a *ngIf="hero.troop !== null && hero.troop !== undefined"
+               class="button is-danger" (click)="leaveTroop()">
               <span class="icon is-small">
                           <i class="fas fa-trash"></i>
                         </span>
               <span>Leave Troop</span>
             </a>
-          </ng-template>
 
-          <ng-template #elseBlock>
+          <span *ngIf="hero.troop === null || hero.troop === undefined">
             No troop to leave...
-          </ng-template>
+          </span>
+        </td>
 
         <td><a class="button is-danger" (click)="deleteHero(hero.id)">
                         <span class="icon is-small">
@@ -170,7 +165,6 @@
             <th>Name</th>
             <th>Mission</th>
             <th>Gold</th>
-            <th>Heroes</th>
             <th></th>
           </tr>
           </thead>
@@ -180,12 +174,6 @@
             <td>{{troop.name}}</td>
             <td>{{troop.mission}}</td>
             <td>{{troop.gold}}</td>
-            <td><a (click)="joinTroop(troop.id)" class="button is-primary">
-                    <span class="icon is-small">
-                        <i class="fas fa-eye"></i>
-                    </span>
-              <span>Show Heroes</span></a>
-            </td>
             <td><a (click)="joinTroop(troop.id)" class="button is-success">
                     <span class="icon is-small">
                         <i class="fas fa-plus"></i>
@@ -211,7 +199,7 @@
                       <span class="icon is-small">
                         <i class="fas fa-edit"></i>
                       </span>
-          <span>Create new role</span>
+          <span>Create new hero</span>
         </a>
       </div>
     </div>
@@ -232,12 +220,21 @@
           <tr>
             <th>Name</th>
             <th>Description</th>
+            <th>Remove role</th>
           </tr>
           </thead>
           <tbody>
           <tr *ngFor="let role of clickedHero.roles">
             <td>{{role.name}}</td>
             <td>{{role.description}}</td>
+            <td>
+              <a class="button iss" (click)="createHeroModal()">
+                      <span class="icon is-small">
+                        <i class="fas fa-edit"></i>
+                      </span>
+                <span>Remove role</span>
+              </a>
+            </td>
           </tr>
           </tbody>
         </table>
