@@ -11,6 +11,7 @@
         <th>Add Role</th>
         <th>Troop</th>
         <th>Leave Troop</th>
+        <th>Update Hero</th>
         <th>Delete Hero</th>
       </tr>
       </thead>
@@ -60,6 +61,12 @@
           </span>
         </td>
 
+        <td><a class="button is-primary" (click)="updateHeroModal(hero.id)">
+                        <span class="icon is-small">
+                          <i class="fas fa-edit"></i>
+                        </span>
+          <span>Update hero</span>
+        </a></td>
         <td><a class="button is-danger" (click)="deleteHero(hero.id)">
                         <span class="icon is-small">
                           <i class="fas fa-trash"></i>
@@ -245,6 +252,47 @@
     <footer class="modal-card-foot">
       <button (click)="closeShowRoleModal()" class="button">Close</button>
     </footer>
+  </div>
+</div>
+
+
+<div [class.is-active]="showUpdateHeroModal" class="modal">
+  <div (click)="showUpdateHeroModal=!showUpdateHeroModal" class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Update hero</p>
+      <button (click)="showUpdateHeroModal=!showUpdateHeroModal" class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="content">
+        <form (ngSubmit)="updateHero()">
+          <div class="field">
+            <label class="label" for="name">Name</label>
+            <div class="control">
+              <input class="input" name="name" type="text" placeholder="{{heroUpdateDTO.name}}" id="name" required
+                     [(ngModel)]="heroUpdateDTO.name">
+            </div>
+          </div>
+          <div class="field">
+            <label class="label" for="description">Level</label>
+            <div class="control">
+              <input class="input" name="level" type="number" min="1" placeholder="{{heroUpdateDTO.level}}" id="level" required
+                     [(ngModel)]="heroUpdateDTO.level">
+            </div>
+          </div>
+          <nav class="level is-mobile">
+            <div class="level-left">
+              <div class="level-item">
+                <button type="submit" class="button is-success">Update</button>
+              </div>
+              <div class="level-item">
+                <a (click)="closeCreateHeroModal()" class="button">Back</a>
+              </div>
+            </div>
+          </nav>
+        </form>
+      </div>
+    </section>
   </div>
 </div>
 
