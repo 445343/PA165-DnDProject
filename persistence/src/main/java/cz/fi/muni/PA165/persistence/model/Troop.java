@@ -19,7 +19,7 @@ public class Troop extends AbstractEntity<Long>  {
     @Column(name = "gold")
     private int gold;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "troop_id")
     private Set<Hero> heroes = new HashSet<Hero>();
 

@@ -16,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -63,6 +64,9 @@ public class HeroServiceImpl implements HeroService {
 
     @Override
     public void updateHero(Hero hero) {
+        Hero original = findById(hero.getId());
+        hero.setRoles(new HashSet<>(original.getRoles()));
+        hero.setTroop(original.getTroop());
         heroDao.update(hero);
     }
 

@@ -19,10 +19,10 @@ public class Hero extends AbstractEntity<Long> {
     private String name;
     @Column(name = "level")
     private int level;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "role_id")
     private Set<Role> roles = new HashSet<Role>();
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "troop_id")
     private Troop troop;
 
