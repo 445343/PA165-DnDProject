@@ -19,7 +19,7 @@
         <div *ngIf="currUser.id != null">
           <div [class.is-active]="showNav" class="navbar-item has-dropdown">
             <a class="navbar-link" (click)="showNav=!showNav">
-              User
+              {{currUser.userName}}
             </a>
             <div class="navbar-dropdown">
               <a class="navbar-item" (click)="logOut()">
