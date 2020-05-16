@@ -52,13 +52,4 @@ export class DashboardComponent implements OnInit {
     })
   }
 
-  insertTestData(){
-    this.userService.insertTestData()
-      .subscribe(data => {
-        console.log(data);
-        location.reload();
-      });
-
-  }
-
 }
