@@ -12,15 +12,15 @@ Wiki: https://github.com/445343/PA165-DnDProject/wiki
 
 # Running the project
 * You need two command line instances 
-    * First for server (REST) 
+    * First for server (REST)
     * Second for client
 
-* Server (second terminal):
+* Server (first terminal):
     * from root of project: `mvn clean install`
     * go to server folder: `cd rest` 
     * run server: `mvn cargo:run`
     
- * Client (first terminal):
+ * Client (second terminal):
      * go to client folder: `cd web-app` 
      * install client: `npm install`
      * install angular-cli: `npm install -g @angular/cli`
