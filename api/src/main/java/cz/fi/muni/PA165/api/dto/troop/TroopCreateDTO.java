@@ -4,7 +4,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import java.util.Objects;
 
-
 /**
  * Encapsulates information needed for troop creation
  *

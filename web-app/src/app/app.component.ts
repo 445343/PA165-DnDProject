@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "./services/user/user.service";
+import {TestService} from "./test.service";
 
 @Component({
   selector: 'app-root',
@@ -9,11 +10,11 @@ import {UserService} from "./services/user/user.service";
 export class AppComponent implements OnInit{
   title = 'web-app';
   constructor(
-    private userService: UserService
+    private testService: TestService
   ) { }
 
   ngOnInit(): void {
-    this.userService.insertTestData()
+    this.testService.insertTestData()
       .subscribe(data => {
         console.log(data);
       });

@@ -76,7 +76,9 @@ public interface UserFacade {
      */
     UserDTO getCurrentUser();
 
-    void createTestData();
-
+    /**
+     * Check if current user is admin
+     * @return true if current user is admin
+     */
     boolean isAdmin();
 }

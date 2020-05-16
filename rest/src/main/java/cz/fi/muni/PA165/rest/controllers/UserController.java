@@ -149,16 +149,6 @@ public class UserController {
         }
     }
 
-    @GetMapping("/test")
-    public ResponseEntity<Void> createTestData(){
-        try {
-            userFacade.createTestData();
-            return new ResponseEntity<>(HttpStatus.CREATED);
-        }catch (Exception ex){
-            throw ExceptionSorter.throwException(ex);
-        }
-    }
-
     @GetMapping("/admin")
     public boolean isAdmin(){
         try{
