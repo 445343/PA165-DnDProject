@@ -6,9 +6,9 @@
       <tr>
         <th>ID</th>
         <th>Username</th>
-        <th>isAdmin</th>
-        <th>heroes</th>
-        <th></th>
+        <th>Admin</th>
+        <th>Show Heroes</th>
+        <th>Delete User</th>
       </tr>
       </thead>
       <tbody>
@@ -20,13 +20,13 @@
                         <span class="icon is-small">
                           <i class="fas fa-eye"></i>
                         </span>
-          <span>Show</span>
+          <span>Show Heroes</span>
         </a></td>
-        <td><a class="button is-danger" (click)="deleteUser(user.id)">
+        <td><a *ngIf="!user.admin" class="button is-danger" (click)="deleteUser(user.id)">
                         <span class="icon is-small">
                           <i class="fas fa-trash"></i>
                         </span>
-          <span>Delete user</span>
+          <span>Delete User</span>
         </a></td>
       </tr>
       </tbody>

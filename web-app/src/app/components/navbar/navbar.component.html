@@ -1,4 +1,4 @@
-<nav class="navbar has-shadow is-light">
+<nav class="navbar has-shadow is-light container-fluid">
   <div class="navbar-brand">
     <a class="navbar-item" routerLink="/dashboard">
       D&D
@@ -19,11 +19,13 @@
         <div *ngIf="currUser.id != null">
           <div [class.is-active]="showNav" class="navbar-item has-dropdown">
             <a class="navbar-link" (click)="showNav=!showNav">
-              {{currUser.userName}}
+              <i class="fas fa-user mr-03"></i>
+              <span>{{currUser.userName}}</span>
             </a>
             <div class="navbar-dropdown">
               <a class="navbar-item" (click)="logOut()">
-                Log out
+                <i class="fas fa-sign-out-alt mr-03"></i>
+                <span>Log out</span>
               </a>
             </div>
           </div>

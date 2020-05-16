@@ -32,4 +32,4 @@ Wiki: https://github.com/445343/PA165-DnDProject/wiki
 # Notes:
 * Server is running on port 8080, client on 4200: Ensure that you freed these ports!
 * For client to work, client and server must run simultaneously
-* Ensure that you have `npm` ingit stastalled, if not: [Download it here](https://nodejs.org/en/download/)  
+* Ensure that you have `npm` installed, if not: [Download it here](https://nodejs.org/en/download/)  

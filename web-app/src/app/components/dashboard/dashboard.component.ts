@@ -4,6 +4,7 @@ import { UserService } from '../../services/user/user.service';
 import { UserCreateDTO } from '../../dto/user/UserCreateDTO';
 import { Observable, throwError } from 'rxjs';
 import {UserDTO} from "../../dto/user/UserDTO";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -22,8 +23,8 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private apiService: TestService,
-    private userService: UserService
-
+    private userService: UserService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -48,7 +49,9 @@ export class DashboardComponent implements OnInit {
     this.userService.login(this.userCreateDTO.userName, this.userCreateDTO.password).subscribe(response => {
       this.currUser = response;
       this.showModal = false;
-      location.reload();
+      this.router
+        .navigate(['/heroes'])
+        .then(response => location.reload());
     })
   }
 
