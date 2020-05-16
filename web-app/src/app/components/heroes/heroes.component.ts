@@ -19,6 +19,7 @@ import {TroopService} from "../../services/troop/troop.service";
 export class HeroesComponent implements OnInit {
   heroes: HeroDTO[];
   roles: RoleDTO[];
+  otherRoles: RoleDTO[];
   troops: TroopDTO[];
   tmp;
 
@@ -78,6 +79,13 @@ export class HeroesComponent implements OnInit {
     });
   }
 
+  loadOtherRoles(heroId){
+    this.heroService.listRolesNotInHero(heroId).subscribe(response => {
+      this.tmp = response;
+      this.otherRoles = this.tmp.content;
+    });
+  }
+
   // Crud
 
   createHero() {
@@ -107,6 +115,7 @@ export class HeroesComponent implements OnInit {
   addRole(roleId) {
     this.heroService.addRoleToHero(this.clickedHeroId, roleId).subscribe(response => {
       this.loadHeroes();
+      this.loadOtherRoles(this.clickedHeroId);
     });
   }
 
@@ -132,6 +141,7 @@ export class HeroesComponent implements OnInit {
   // Handle Modals
 
   addRoleModal(heroId) {
+    this.loadOtherRoles(heroId);
     this.clickedHeroId = heroId;
     this.showAddRoleModal = true;
   }

@@ -60,6 +60,13 @@ export class HeroService {
     return this.http.put(`${this.apiURL}/${heroId}/troops/remove`, null).pipe(catchError(error => {
       return this.handleError(error)}))
   }
+
+  listRolesNotInHero(heroId):Observable<any>{
+    return this.http.get(`${this.apiURL}/${heroId}/roles/other`).pipe(catchError(err => {
+      return this.handleError(err)
+    }))
+  }
+
   handleError(error):Observable<never> {
     let errorMessage = '';
     if(error.error instanceof ErrorEvent) {
