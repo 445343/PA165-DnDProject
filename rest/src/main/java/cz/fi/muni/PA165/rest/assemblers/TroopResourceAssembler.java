@@ -8,6 +8,10 @@ import org.springframework.stereotype.Component;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
+/**
+ * Troop resource assembler
+ * @author Jan Valka
+ */
 @Component
 public class TroopResourceAssembler implements ResourceAssembler<TroopDTO, Resource<TroopDTO>> {
 

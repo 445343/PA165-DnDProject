@@ -108,19 +108,6 @@ public class HeroFacadeTest {
         then(heroService).should().updateHero(hero);
     }
 
-//    @Test
-//    public void findAllHeroes(){
-//        Hero newHero = new Hero();
-//        newHero.setId(2L);
-//        newHero.setLevel(1);
-//        newHero.setName("Another hero");
-//
-//        given(heroService.findAllHeroes()).willReturn(List.of(hero, newHero));
-//        heroFacade.findAllHeroes();
-//        then(heroService).should().findAllHeroes();
-//        then(beanMapper).should().mapTo(List.of(hero, newHero), HeroDTO.class);
-//    }
-
     @Test
     public void addRole(){
         heroFacade.addRole(hero.getId(), role.getId());

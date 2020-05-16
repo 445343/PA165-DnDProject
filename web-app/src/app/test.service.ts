@@ -7,7 +7,7 @@ import { Observable, throwError } from 'rxjs';
 })
 export class TestService {
 
-  apiURL = 'http://localhost:8080/pa165/hello';
+  apiURL = 'http://localhost:8080/pa165/rest/test';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -15,7 +15,11 @@ export class TestService {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })
-  } 
+  }
+
+  insertTestData(): Observable<any>{
+    return this.httpClient.post(`${this.apiURL}`, null);
+  }
 
   public getNews(){
     return this.httpClient.get<string>(`${this.apiURL}`)

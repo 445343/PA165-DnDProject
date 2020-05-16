@@ -1,7 +1,6 @@
 package cz.fi.muni.PA165.persistence.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;

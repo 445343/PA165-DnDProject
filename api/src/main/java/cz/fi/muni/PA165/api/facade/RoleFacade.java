@@ -1,6 +1,5 @@
 package cz.fi.muni.PA165.api.facade;
 
-import cz.fi.muni.PA165.api.dto.hero.HeroDTO;
 import cz.fi.muni.PA165.api.dto.role.RoleCreateDTO;
 import cz.fi.muni.PA165.api.dto.role.RoleDTO;
 import cz.fi.muni.PA165.api.dto.role.RoleUpdateDTO;
