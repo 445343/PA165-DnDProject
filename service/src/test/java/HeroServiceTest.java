@@ -88,6 +88,7 @@ public class HeroServiceTest {
 
     @Test
     public void createHero(){
+        mockSecurityContext();
         heroService.createHero(hero);
         then(heroDao).should().create(hero);
     }
