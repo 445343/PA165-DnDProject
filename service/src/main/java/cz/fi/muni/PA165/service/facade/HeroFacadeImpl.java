@@ -38,8 +38,10 @@ public class HeroFacadeImpl implements HeroFacade {
     public HeroDTO findById(Long id) {
         Hero hero = heroService.findById(id);
         HeroDTO heroDTO = beanMapper.mapTo(hero, HeroDTO.class);
-        if (hero.getTroop() != null)
+        if (hero.getTroop() != null){
             heroDTO.setTroopId(hero.getTroop().getId());
+            heroDTO.setTroopName(hero.getTroop().getName());
+        }
         return beanMapper.mapTo(hero, HeroDTO.class);
     }
 
@@ -67,6 +69,7 @@ public class HeroFacadeImpl implements HeroFacade {
         heroes.forEach(hero -> {
             HeroDTO heroDTO = beanMapper.mapTo(hero, HeroDTO.class);
             if (hero.getTroop() != null){
+                heroDTO.setTroopName(hero.getTroop().getName());
                 heroDTO.setTroopId(hero.getTroop().getId());
             }
             heroDTOS.add(heroDTO);

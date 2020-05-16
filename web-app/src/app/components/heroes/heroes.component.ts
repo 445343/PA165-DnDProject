@@ -129,6 +129,7 @@ export class HeroesComponent implements OnInit {
   joinTroop(troopID) {
     this.heroService.joinTroop(this.clickedHeroId, troopID).subscribe(response => {
       this.loadHeroes();
+      this.showJoinTroopModal = false;
     });
   }
 

@@ -4,4 +4,5 @@ export class HeroDTO {
   level: number;
   roles: object;
   troopId: number;
+  troopName: string;
 }
