@@ -228,9 +228,9 @@
             <td>{{role.name}}</td>
             <td>{{role.description}}</td>
             <td>
-              <a class="button iss" (click)="createHeroModal()">
+              <a class="button is-danger" (click)="removeRole(role.id)">
                       <span class="icon is-small">
-                        <i class="fas fa-edit"></i>
+                        <i class="fas fa-trash"></i>
                       </span>
                 <span>Remove role</span>
               </a>
