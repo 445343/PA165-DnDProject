@@ -18,19 +18,11 @@
     <div class="level is-mobile">
       <div class="level-left">
         <div class="level-item">
-          <a class="button" (click)="modalPopUp('login')">
+          <a class="button" (click)="showModal=!showModal">
                         <span class="icon is-small">
                           <i class="fas fa-edit"></i>
                         </span>
             <span>Login</span>
-          </a>
-        </div>
-        <div class="level-item">
-          <a class="button" (click)="modalPopUp('register')">
-                        <span class="icon is-small">
-                          <i class="fas fa-edit"></i>
-                        </span>
-            <span>Register</span>
           </a>
         </div>
         <div class="level-item">
@@ -52,12 +44,10 @@
   <div class="modal-content">
     <div class="box">
       <div class="content">
-        <!-- register -->
-        <div *ngIf="mode == 'register'">
           <p class="title is-5">
-            Register
+            Login
           </p>
-          <form (ngSubmit)="register()">
+          <form (ngSubmit)="login()">
             <div class="field">
               <label class="label">Username</label>
               <div class="control has-icons-left has-icons-right">
@@ -73,49 +63,6 @@
                 <input class="input" name="password" type="password" placeholder="****" id="password" required [(ngModel)]="userCreateDTO.password" >
               </div>
             </div>
-            <div class="field">
-              <label class="label">Admin</label>
-              <div class="control">
-                <div class="select">
-                  <select required [(ngModel)]="userCreateDTO.isAdmin" name="admin">
-                    <option *ngFor="let opt of options" [value]="opt">{{opt}}</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <nav class="level is-mobile">
-              <div class="level-left">
-                <div class="level-item">
-                  <button type="submit" class="button is-success">Register</button>
-                </div>
-                <div class="level-item">
-                  <button class="button" (click)="showModal=!showModal">Back</button>
-                </div>
-              </div>
-            </nav>
-          </form>
-    </div>
-        <!-- login -->
-        <div *ngIf="mode == 'login'">
-          <p class="title is-5">
-            Login
-          </p>
-          <form (ngSubmit)="login()">
-            <div class="field">
-              <label class="label">Username</label>
-              <div class="control has-icons-left has-icons-right">
-                <input class="input" name="username" type="text" placeholder="Text input" id="userName1" required [(ngModel)]="userCreateDTO.userName" >
-                <span class="icon is-small is-left">
-          <i class="fas fa-user"></i>
-          </span>
-              </div>
-            </div>
-            <div class="field">
-              <label class="label">Password</label>
-              <div class="control">
-                <input class="input" name="password" type="password" placeholder="****" id="password1" required [(ngModel)]="userCreateDTO.password" >
-              </div>
-            </div>
             <nav class="level is-mobile">
               <div class="level-left">
                 <div class="level-item">
@@ -127,7 +74,9 @@
               </div>
             </nav>
           </form>
-        </div>
   </div>
   <button class="modal-close is-large" aria-label="close" (click)="showModal=!showModal"></button>
 </div>
+  </div>
+</div>
+

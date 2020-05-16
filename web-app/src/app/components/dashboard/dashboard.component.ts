@@ -14,14 +14,11 @@ import {UserDTO} from "../../dto/user/UserDTO";
 export class DashboardComponent implements OnInit {
 
   showModal = false;
-  mode; //login or register
 
   userCreateDTO: UserCreateDTO = new UserCreateDTO();
   currUser: UserDTO = new UserDTO();
 
   test;
-
-  options:string[]= ["true","false"];
 
   constructor(
     private apiService: TestService,
@@ -40,11 +37,6 @@ export class DashboardComponent implements OnInit {
     })
 
   }
-  modalPopUp(name){
-    this.showModal = !this.showModal;
-    this.mode = name;
-
-  }
 
   getTest(){
     this.apiService.getNews().subscribe( response => {
@@ -52,13 +44,6 @@ export class DashboardComponent implements OnInit {
     })
   }
 
-  register(){
-    console.log(this.userCreateDTO);
-    this.userService.registerUser(this.userCreateDTO)
-      .subscribe(data => console.log(data));
-    this.userCreateDTO = new UserCreateDTO();
-    this.showModal = false;
-  }
   login(){
     this.userService.login(this.userCreateDTO.userName, this.userCreateDTO.password).subscribe(response => {
       this.currUser = response;

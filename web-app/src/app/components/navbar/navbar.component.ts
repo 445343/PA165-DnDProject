@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from "../../services/user/user.service";
+import {UserDTO} from "../../dto/user/UserDTO";
 
 
 @Component({
@@ -9,9 +10,11 @@ import {UserService} from "../../services/user/user.service";
 })
 export class NavbarComponent implements OnInit {
   showNav = false;
+  currUser: UserDTO = new UserDTO();
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    this.getCurrentUser()
   }
 
   logOut(){
@@ -21,6 +24,13 @@ export class NavbarComponent implements OnInit {
         location.reload();
       }
     );
+
+  }
+  getCurrentUser(){
+    this.userService.getCurrentUser().subscribe( response => {
+      this.currUser = response;
+      console.log(this.currUser);
+    })
 
   }
 }
