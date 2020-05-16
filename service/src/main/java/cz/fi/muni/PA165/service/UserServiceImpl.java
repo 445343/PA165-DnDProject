@@ -181,41 +181,81 @@ public class UserServiceImpl implements UserService{
 
         User user = new User();
         user.setAdmin(false);
-        user.setUserName("user");
-        user.setPasswordHash(hashPassword("user"));
+        user.setUserName("user1");
+        user.setPasswordHash(hashPassword("user1"));
         userDao.create(user);
 
+        User user2 = new User();
+        user2.setAdmin(false);
+        user2.setUserName("user2");
+        user2.setPasswordHash(hashPassword("user2"));
+        userDao.create(user2);
+
         Troop troop1 = new Troop();
-        troop1.setName("Test troop 1");
-        troop1.setMission("Test mission 1");
+        troop1.setName("Dragon slayers");
+        troop1.setMission("Kill dragon residing at nearby mountain");
         troop1.setGold(500);
         troopDao.create(troop1);
 
         Troop troop2 = new Troop();
-        troop2.setName("Test troop 2");
-        troop2.setMission("Test mission 2");
+        troop2.setName("Demon hunters");
+        troop2.setMission("Perform exorcism on possessed priest");
         troop2.setGold(666);
         troopDao.create(troop2);
 
         Hero hero1 = new Hero();
-        hero1.setName("Hero 1");
+        hero1.setName("Igor the Elf");
         hero1.setLevel(9);
         heroDao.create(hero1);
 
         Hero hero2 = new Hero();
-        hero2.setName("Hero 2");
+        hero2.setName("Ugly Berta");
         hero2.setLevel(2);
         heroDao.create(hero2);
 
+        Hero hero3 = new Hero();
+        hero3.setName("Stealing Tom");
+        hero3.setLevel(3);
+        heroDao.create(hero3);
+
+        Hero hero4 = new Hero();
+        hero4.setName("Dominik");
+        hero4.setLevel(6);
+        heroDao.create(hero4);
+
         Role role1 = new Role();
-        role1.setName("Test role 1");
-        role1.setDescription("Test role description 1");
+        role1.setName("Archer");
+        role1.setDescription("Master of bow and arrow");
         roleDao.create(role1);
 
         Role role2 = new Role();
-        role2.setName("Test role 2");
-        role2.setDescription("Test role description 2");
+        role2.setName("Rogue");
+        role2.setDescription("Master of shadows");
         roleDao.create(role2);
+
+        Role role3 = new Role();
+        role3.setName("Brute");
+        role3.setDescription("Master of fist fights");
+        roleDao.create(role3);
+
+        Role role4 = new Role();
+        role4.setName("Dominik");
+        role4.setDescription("Useless human being");
+        roleDao.create(role4);
+
+        hero1.addRole(role1);
+        hero2.addRole(role3);
+        hero3.addRole(role2);
+        hero4.addRole(role4);
+
+        troop1.addHero(hero1);
+        troop1.addHero(hero3);
+        troop2.addHero(hero2);
+
+        user.addHero(hero1);
+        user.addHero(hero2);
+        user2.addHero(hero4);
+        user2.addHero(hero3);
 
         login(admin.getUserName(), "admin");
     }
