@@ -1,9 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HeroService} from "../../services/hero/hero.service";
 import {RoleService} from "../../services/role/role.service";
 import {Observable} from "rxjs";
 import {HeroDTO} from "../../dto/hero/HeroDTO";
 import {RoleDTO} from "../../dto/role/RoleDTO";
+import {RoleCreateDTO} from "../../dto/role/RoleCreateDTO";
+import {RoleUpdateDTO} from "../../dto/role/RoleUpdateDTO";
+import {HeroCreateDTO} from "../../dto/hero/HeroCreateDTO";
+import {HeroUpdateDTO} from "../../dto/hero/HeroUpdateDTO";
+import {TroopDTO} from "../../dto/troop/TroopDTO";
+import {TroopService} from "../../services/troop/troop.service";
 
 @Component({
   selector: 'app-heroes',
@@ -11,54 +17,156 @@ import {RoleDTO} from "../../dto/role/RoleDTO";
   styleUrls: ['./heroes.component.css']
 })
 export class HeroesComponent implements OnInit {
-  heroes: Observable<HeroDTO>;
-  roles: Observable<RoleDTO>;
+  heroes: HeroDTO[];
+  roles: RoleDTO[];
+  troops: TroopDTO[];
   tmp;
-  showModal = false;
+
+  showAddRoleModal = false;
+  showShowRoleModal = false;
+  showCreateHeroModal = false;
+  showUpdateHeroModal = false;
+  showJoinTroopModal = false;
+
   clickedHeroId;
+  clickedHero: HeroDTO;
+
+  heroCreateDTO: HeroCreateDTO;
+  heroUpdateDTO: HeroUpdateDTO;
 
   constructor(private heroService: HeroService,
-              private roleService: RoleService) { }
+              private roleService: RoleService,
+              private troopService: TroopService
+              ) {
+  }
 
   ngOnInit(): void {
     this.loadHeroes();
     this.loadRoles();
+    this.loadTroops();
+    this.heroCreateDTO = new HeroCreateDTO();
+    this.heroUpdateDTO = new HeroUpdateDTO();
   }
 
-  loadHeroes(){
-    this.heroService.getAllHeroes().subscribe(response =>{
+  // Load data
+
+  loadClickedHero() {
+    this.heroService.getHero(this.clickedHeroId).subscribe(response => {
       this.tmp = response;
-      this.heroes = this.tmp.content;
-      console.log(this.heroes);
+      this.clickedHero = this.tmp;
     });
   }
 
-  loadRoles(){
-    this.roleService.getAllRoles().subscribe(response =>{
+  loadHeroes() {
+    this.heroService.getAllHeroes().subscribe(response => {
+      this.tmp = response;
+      this.heroes = this.tmp.content;
+    });
+  }
+
+  loadTroops() {
+    this.troopService.getAllTroops().subscribe(response => {
+      this.tmp = response;
+      this.troops = this.tmp.content;
+    });
+  }
+
+  loadRoles() {
+    this.roleService.getAllRoles().subscribe(response => {
       this.tmp = response;
       this.roles = this.tmp.content;
     });
   }
 
-  deleteHero(id){
-    this.heroService.deleteHero(id).subscribe(response =>{
+  // Crud
+
+  createHero(){
+    this.heroService.createHero(this.heroCreateDTO)
+      .subscribe(data => {this.loadHeroes();
+      });
+    this.heroCreateDTO = new HeroCreateDTO();
+    this.showCreateHeroModal = true;
+  }
+
+  updateHero(){
+    this.heroService.updateHero(this.heroUpdateDTO)
+      .subscribe(data => {
+        this.loadRoles();
+      });
+    this.heroUpdateDTO = new HeroUpdateDTO();
+    this.showUpdateHeroModal = false;
+  }
+
+  deleteHero(id) {
+    this.heroService.deleteHero(id).subscribe(response => {
       this.loadHeroes();
     });
   }
 
-  addRoleModal(heroId){
+  addRole(roleId) {
+    this.heroService.addRoleToHero(this.clickedHeroId, roleId).subscribe(response => {
+      this.loadHeroes();
+    });
+  }
+
+  joinTroop(troopID){
+    this.heroService.joinTroop(this.clickedHeroId, troopID).subscribe(response => {
+      this.loadHeroes();
+    });
+  }
+
+  leaveTroop(troopID){
+    this.heroService.leaveTroop(this.clickedHeroId).subscribe(response => {
+      this.loadHeroes();
+    });
+  }
+
+  // Handle Modals
+
+  addRoleModal(heroId) {
     this.clickedHeroId = heroId;
-    this.showModal = true;
-
+    this.showAddRoleModal = true;
   }
-  closeRoleModal(){
+
+  showRoleModal(heroId) {
+    this.clickedHeroId = heroId;
+    this.loadClickedHero();
+    this.showShowRoleModal = true;
+  }
+
+  closeAddRoleModal() {
     this.clickedHeroId = 0;
-    this.showModal = false;
-  }
-  addRole(roleId){
-    this.heroService.addRoleToHero(this.clickedHeroId, roleId).subscribe(response =>{
-      this.loadHeroes();
-    });
+    this.showAddRoleModal = false;
   }
 
+  closeShowRoleModal() {
+    this.clickedHeroId = 0;
+    this.showShowRoleModal = false;
+  }
+
+  createHeroModal() {
+    this.showCreateHeroModal = true;
+  }
+
+  closeCreateHeroModal() {
+    this.showCreateHeroModal = false;
+  }
+
+  updateHeroModal() {
+    this.showCreateHeroModal = true;
+  }
+
+  closeUpdateHeroModal() {
+    this.showShowRoleModal = false;
+  }
+
+  joinTroopModal(id) {
+    this.clickedHeroId = id;
+    this.showJoinTroopModal = true;
+  }
+
+  closeJoinTroopModal() {
+    this.clickedHeroId = 0;
+    this.showJoinTroopModal = false;
+  }
 }

@@ -12,7 +12,7 @@ import {RoleUpdateDTO} from "../../dto/role/RoleUpdateDTO";
   styleUrls: ['./roles.component.css']
 })
 export class RolesComponent implements OnInit {
-  roles: Observable<RoleDTO>;
+  roles: RoleDTO;
   tmp;
 
   roleCreateDTO: RoleCreateDTO;

@@ -7,20 +7,64 @@
         <th>ID</th>
         <th>Name</th>
         <th>Level</th>
-        <th></th>
+        <th>Show Roles</th>
+        <th>Add Role</th>
+        <th>Troop</th>
+        <th>Leave Troop</th>
+        <th>Delete Hero</th>
       </tr>
       </thead>
       <tbody>
+
       <tr *ngFor="let hero of heroes">
         <td>{{hero.id}}</td>
         <td>{{hero.name}}</td>
         <td>{{hero.level}}</td>
+        <td><a (click)="showRoleModal(hero.id)" class="button is-success">
+                    <span class="icon is-small">
+                       <i class="fas fa-eye"></i>
+                    </span>
+          <span>Show roles</span>
+        </a></td>
         <td><a (click)="addRoleModal(hero.id)" class="button is-success">
                     <span class="icon is-small">
                         <i class="fas fa-plus"></i>
                     </span>
           <span>Add role</span>
         </a></td>
+
+
+        <td>
+          <div *ngIf="hero.troop === null || hero.troop === undefined; then thenBlock else elseBlock"></div>
+          <ng-template #thenBlock>
+            <a class="button is-success" (click)="joinTroopModal(hero.id)">
+            <span class="icon is-small">
+              <i class="fas fa-plus"></i>
+            </span>
+              <span>Join troop</span>
+            </a>
+          </ng-template>
+
+          <ng-template #elseBlock>
+            {{ hero.troop }}
+          </ng-template>
+        </td>
+
+        <td>
+          <div *ngIf="hero.troop !== null && hero.troop !== undefined; else elseBlock; then thenBlock else elseBlock"></div>
+          <ng-template #thenBlock>
+            <a class="button is-danger" (click)="deleteHero(hero.id)">
+              <span class="icon is-small">
+                          <i class="fas fa-trash"></i>
+                        </span>
+              <span>Leave Troop</span>
+            </a>
+          </ng-template>
+
+          <ng-template #elseBlock>
+            No troop to leave...
+          </ng-template>
+
         <td><a class="button is-danger" (click)="deleteHero(hero.id)">
                         <span class="icon is-small">
                           <i class="fas fa-trash"></i>
@@ -33,12 +77,12 @@
   </div>
 </div>
 
-<div [class.is-active]="showModal" class="modal">
-  <div (click)="showModal=!showModal" class="modal-background"></div>
-  <div  class="modal-card">
+<div [class.is-active]="showAddRoleModal" class="modal">
+  <div (click)="showAddRoleModal=!showAddRoleModal" class="modal-background"></div>
+  <div class="modal-card">
     <header class="modal-card-head">
       <p class="modal-card-title">Add unit</p>
-      <button  (click)="showModal=!showModal" class="delete" aria-label="close"></button>
+      <button (click)="showAddRoleModal=!showAddRoleModal" class="delete" aria-label="close"></button>
     </header>
     <section class="modal-card-body">
       <div class="content">
@@ -63,11 +107,146 @@
           </tr>
           </tbody>
         </table>
+      </div>
+    </section>
+    <footer class="modal-card-foot">
+      <button (click)="closeAddRoleModal()" class="button">Close</button>
+    </footer>
+  </div>
+</div>
+
+<div [class.is-active]="showCreateHeroModal" class="modal">
+  <div (click)="closeCreateHeroModal()" class="modal-background"></div>
+  <div class="modal-content">
+    <div class="box">
+      <div class="content">
+        <p class="title is-5">
+          Create new hero
+        </p>
+        <form (ngSubmit)="createHero()">
+          <div class="field">
+            <label class="label" for="name">Name</label>
+            <div class="control">
+              <input class="input" name="name" type="text" placeholder="Enter name" id="name" required
+                     [(ngModel)]="heroCreateDTO.name">
+            </div>
+          </div>
+          <div class="field">
+            <label class="label" for="description">Level</label>
+            <div class="control">
+              <input class="input" name="level" type="number" placeholder="Enter level" id="description" required
+                     [(ngModel)]="heroCreateDTO.level">
+            </div>
+          </div>
+          <nav class="level is-mobile">
+            <div class="level-left">
+              <div class="level-item">
+                <button type="submit" class="button is-success">Create</button>
+              </div>
+              <div class="level-item">
+                <a (click)="closeCreateHeroModal()" class="button">Back</a>
+              </div>
+            </div>
+          </nav>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div [class.is-active]="showJoinTroopModal" class="modal">
+  <div (click)="closeJoinTroopModal()" class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Join troop</p>
+      <button (click)="closeJoinTroopModal()" class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="content">
+        <table class="table is-striped is-narrow is-hoverable is-fullwidth">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Mission</th>
+            <th>Gold</th>
+            <th>Heroes</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let troop of troops">
+            <td>{{troop.id}}</td>
+            <td>{{troop.name}}</td>
+            <td>{{troop.mission}}</td>
+            <td>{{troop.gold}}</td>
+            <td><a (click)="joinTroop(troop.id)" class="button is-primary">
+                    <span class="icon is-small">
+                        <i class="fas fa-eye"></i>
+                    </span>
+              <span>Show Heroes</span></a>
+            </td>
+            <td><a (click)="joinTroop(troop.id)" class="button is-success">
+                    <span class="icon is-small">
+                        <i class="fas fa-plus"></i>
+                    </span>
+              <span>Join Troop</span>
+            </a></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <footer class="modal-card-foot">
+      <button (click)="closeJoinTroopModal()" class="button">Close</button>
+    </footer>
+  </div>
+</div>
+
+<div class="container">
+  <div class="level is-mobile">
+    <div class="level-left">
+      <div class="level-item">
+        <a class="button" (click)="createHeroModal()">
+                      <span class="icon is-small">
+                        <i class="fas fa-edit"></i>
+                      </span>
+          <span>Create new role</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div [class.is-active]="showShowRoleModal" class="modal">
+  <div (click)="closeShowRoleModal()" class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Show roles</p>
+      <button (click)="closeShowRoleModal()" class="delete" aria-label="close"></button>
+    </header>
+    <section *ngIf="clickedHero" class="modal-card-body">
+      <div class="content">
+        <table class="table is-striped is-narrow is-hoverable is-fullwidth">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let role of clickedHero.roles">
+            <td>{{role.name}}</td>
+            <td>{{role.description}}</td>
+          </tr>
+          </tbody>
+        </table>
 
       </div>
     </section>
     <footer class="modal-card-foot">
-      <button (click)="closeRoleModal()" class="button">Close</button>
+      <button (click)="closeShowRoleModal()" class="button">Close</button>
     </footer>
   </div>
 </div>
+

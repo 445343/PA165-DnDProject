@@ -3,4 +3,5 @@ export class HeroDTO {
   name: string;
   level: number;
   roles: object;
+  troop: object;
 }
