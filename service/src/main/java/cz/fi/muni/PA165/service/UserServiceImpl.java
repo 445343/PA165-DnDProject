@@ -133,6 +133,14 @@ public class UserServiceImpl implements UserService{
         return user;
     }
 
+    @Override
+    public boolean isAdmin(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null)
+            return false;
+        return findByName(authentication.getName()).isAdmin();
+    }
+
     private void setSecurityContext(String name, String password, boolean isAdmin){
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));

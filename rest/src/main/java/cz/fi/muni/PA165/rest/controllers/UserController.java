@@ -94,7 +94,7 @@ public class UserController {
     }
 
     @RolesAllowed("ROLE_ADMIN")
-    @PutMapping("{userId}/heroes/{heroId}/add")
+    @PutMapping("/{userId}/heroes/{heroId}/add")
     public ResponseEntity<Void> addHeroToUser(@PathVariable Long userId,
                                               @PathVariable Long heroId){
         try{
@@ -106,7 +106,7 @@ public class UserController {
     }
 
     @RolesAllowed("ROLE_ADMIN")
-    @PutMapping("{userId}/heroes/{heroId}/remove")
+    @PutMapping("/{userId}/heroes/{heroId}/remove")
     public ResponseEntity<Void> removeHeroFromUser(@PathVariable Long userId,
                                                    @PathVariable Long heroId){
         try{
@@ -154,6 +154,15 @@ public class UserController {
         try {
             userFacade.createTestData();
             return new ResponseEntity<>(HttpStatus.CREATED);
+        }catch (Exception ex){
+            throw ExceptionSorter.throwException(ex);
+        }
+    }
+
+    @GetMapping("/admin")
+    public boolean isAdmin(){
+        try{
+            return userFacade.isAdmin();
         }catch (Exception ex){
             throw ExceptionSorter.throwException(ex);
         }

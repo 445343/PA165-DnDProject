@@ -91,5 +91,10 @@ public class UserFacadeImpl implements UserFacade {
     public void createTestData() {
         userService.createTestData();
     }
+
+    @Override
+    public boolean isAdmin(){
+        return userService.isAdmin();
+    }
 }
 

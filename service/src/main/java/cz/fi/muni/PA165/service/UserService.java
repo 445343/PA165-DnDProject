@@ -79,5 +79,7 @@ public interface UserService {
      */
     User login(String name, String password);
 
+    boolean isAdmin();
+
     void createTestData();
 }

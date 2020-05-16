@@ -77,4 +77,6 @@ public interface UserFacade {
     UserDTO getCurrentUser();
 
     void createTestData();
+
+    boolean isAdmin();
 }
