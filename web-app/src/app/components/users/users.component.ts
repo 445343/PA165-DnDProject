@@ -17,13 +17,11 @@ export class UsersComponent implements OnInit {
   users: UserDTO[];
   tmp;
 
-  userUpdateDTO: UserUpdateDTO;
 
   clickedUserId: number;
   clickedUser: UserDTO;
 
   showHeroesModal = false;
-  showUpdateUserModal = false;
 
   constructor(private userService: UserService) {
   }
@@ -31,7 +29,6 @@ export class UsersComponent implements OnInit {
   ngOnInit(): void {
     this.getAdminStatus();
     this.loadUsers();
-    this.userUpdateDTO = new UserUpdateDTO();
   }
   getAdminStatus(){
     this.userService.isAdmin().subscribe( response => {
@@ -54,15 +51,6 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  updateUser() {
-    this.userService.updateUser(this.userUpdateDTO)
-      .subscribe(data => {
-        this.loadUsers();
-      });
-    this.userUpdateDTO = new UserUpdateDTO();
-    this.closeUpdateUserModal();
-  }
-
   loadClickedUser() {
     this.clickedUser = this.users.find(({id}) => this.clickedUserId == id);
   }
@@ -78,15 +66,4 @@ export class UsersComponent implements OnInit {
     this.showHeroesModal = false;
   }
 
-  updateUserModal(id,username,isAdmin) {
-    this.userUpdateDTO.id = id;
-    this.userUpdateDTO.username = username;
-    this.userUpdateDTO.isAdmin = isAdmin;
-    this.showUpdateUserModal = true;
-  }
-
-  closeUpdateUserModal() {
-    this.clickedUserId = 0;
-    this.showUpdateUserModal = false;
-  }
 }

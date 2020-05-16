@@ -12,19 +12,21 @@
 
   </div>
 
-  <div [class.is-active]="showNav" class="navbar-menu">
-    <div class="navbar-end">
 
-      <div [class.is-active]="showNav" class="navbar-item has-dropdown">
-        <a class="navbar-link" (click)="showNav=!showNav">
-          Account
-        </a>
+    <div [class.is-active]="showNav" class="navbar-menu">
 
-        <div class="navbar-dropdown">
-          <a class="navbar-item" (click)="logOut()">
-            Log out
-          </a>
-        </div>
+      <div class="navbar-end">
+        <div *ngIf="currUser.id != null">
+          <div [class.is-active]="showNav" class="navbar-item has-dropdown">
+            <a class="navbar-link" (click)="showNav=!showNav">
+              User
+            </a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item" (click)="logOut()">
+                Log out
+              </a>
+            </div>
+          </div>
       </div>
     </div>
   </div>
