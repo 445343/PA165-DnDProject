@@ -18,7 +18,12 @@
         <td>{{user.id}}</td>
         <td>{{user.userName}}</td>
         <td>{{user.admin}}</td>
-        <td>{{user.heroes}}</td>
+        <td><a class="button is-success" (click)="heroesModal(user.id)">
+                        <span class="icon is-small">
+                          <i class="fas fa-eye"></i>
+                        </span>
+          <span>Show users</span>
+        </a></td>
         <td><a class="button is-danger" (click)="deleteUser(user.id)">
                         <span class="icon is-small">
                           <i class="fas fa-trash"></i>
@@ -28,5 +33,44 @@
       </tr>
       </tbody>
     </table>
+  </div>
+</div>
+
+<div [class.is-active]="showHeroesModal" class="modal">
+  <div (click)="closeHeroesModal()" class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Show heroes</p>
+      <button (click)="closeHeroesModal()" class="delete" aria-label="close"></button>
+    </header>
+    <section *ngIf="clickedUser" class="modal-card-body">
+      <div class="content">
+        <table class="table is-striped is-narrow is-hoverable is-fullwidth">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Level</th>
+            <th>Roles</th>
+            <th>Troop</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let hero of clickedUser.heroes">
+            <td>{{hero.id}}</td>
+            <td>{{hero.name}}</td>
+            <td>{{hero.level}}</td>
+            <td>roles</td>
+            <td>
+              troops
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <footer class="modal-card-foot">
+      <button (click)="closeHeroesModal()" class="button">Close</button>
+    </footer>
   </div>
 </div>

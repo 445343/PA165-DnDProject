@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
 import {TroopDTO} from "../../dto/troop/TroopDTO";
 import {TroopService} from "../../services/troop/troop.service";
@@ -18,9 +18,14 @@ export class TroopsComponent implements OnInit {
   troopUpdateDTO: TroopUpdateDTO;
 
   showModal = false;
+  showShowHeroModal = false;
   mode;
 
-  constructor(private troopService: TroopService) { }
+  clickedTroopId: number;
+  clickedTroop: TroopDTO;
+
+  constructor(private troopService: TroopService) {
+  }
 
   ngOnInit(): void {
     this.loadTroops();
@@ -28,19 +33,26 @@ export class TroopsComponent implements OnInit {
     this.troopUpdateDTO = new TroopUpdateDTO();
   }
 
-  loadTroops(){
-    this.troopService.getAllTroops().subscribe(response =>{
+  loadTroops() {
+    this.troopService.getAllTroops().subscribe(response => {
       this.tmp = response;
       this.troops = this.tmp.content;
     });
   }
 
-  modalPopUp(name){
+  loadClickedTroop() {
+    this.troopService.getTroop(this.clickedTroopId).subscribe(response => {
+      this.tmp = response;
+      this.clickedTroop = this.tmp;
+    });
+  }
+
+  modalPopUp(name) {
     this.showModal = !this.showModal;
     this.mode = name;
   }
 
-  modalPopUpUpdate(id, name, mission, gold){
+  modalPopUpUpdate(id, name, mission, gold) {
     this.showModal = !this.showModal;
     this.mode = 'update';
     this.troopUpdateDTO.id = id;
@@ -49,27 +61,39 @@ export class TroopsComponent implements OnInit {
     this.troopUpdateDTO.gold = gold;
   }
 
-  createTroop(){
+  createTroop() {
     this.troopService.createTroop(this.troopCreateDTO)
-      .subscribe(data => {this.loadTroops();
+      .subscribe(data => {
+        this.loadTroops();
       });
     this.troopCreateDTO = new TroopCreateDTO();
     this.showModal = false;
   }
 
-  deleteTroop(id){
-    this.troopService.deleteTroop(id).subscribe(response =>{
+  deleteTroop(id) {
+    this.troopService.deleteTroop(id).subscribe(response => {
       this.loadTroops();
     });
   }
 
-  updateTroop(){
+  updateTroop() {
     this.troopService.updateTroop(this.troopUpdateDTO)
       .subscribe(data => {
         this.loadTroops();
       });
     this.troopUpdateDTO = new TroopUpdateDTO();
     this.showModal = false;
+  }
+
+  showHeroModal(troopId) {
+    this.clickedTroopId = troopId;
+    this.loadClickedTroop();
+    this.showShowHeroModal = true;
+  }
+
+  closeShowHeroModal() {
+    this.clickedTroopId = 0;
+    this.showShowHeroModal = false;
   }
 
 }

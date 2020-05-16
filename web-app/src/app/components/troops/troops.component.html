@@ -8,7 +8,7 @@
         <th>Name</th>
         <th>Mission</th>
         <th>Gold</th>
-        <th></th>
+        <th>Heroes</th>
       </tr>
       </thead>
       <tbody>
@@ -17,6 +17,50 @@
         <td>{{troop.name}}</td>
         <td>{{troop.mission}}</td>
         <td>{{troop.gold}}</td>
+        <td><a (click)="showHeroModal(troop.id)" class="button is-success">
+                    <span class="icon is-small">
+                       <i class="fas fa-eye"></i>
+                    </span>
+          <span>Show Heroes</span>
+        </a></td>
+
+        <div [class.is-active]="showShowHeroModal" class="modal">
+          <div (click)="closeShowHeroModal()" class="modal-background"></div>
+          <div class="modal-card">
+            <header class="modal-card-head">
+              <p class="modal-card-title">Show Heroes</p>
+              <button (click)="closeShowHeroModal()" class="delete" aria-label="close"></button>
+            </header>
+            <section *ngIf="clickedTroop" class="modal-card-body">
+              <div class="content">
+                <table class="table is-striped is-narrow is-hoverable is-fullwidth">
+                  <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Level</th>
+                    <th>Roles</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let hero of clickedTroop.heroes">
+                    <td>{{hero.id}}</td>
+                    <td>{{hero.name}}</td>
+                    <td>{{hero.level}}</td>
+                    <td>{{hero.roles}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+
+              </div>
+            </section>
+            <footer class="modal-card-foot">
+              <button (click)="closeShowHeroModal()" class="button">Close</button>
+            </footer>
+          </div>
+        </div>
+
+
         <td><a class="button is-danger" (click)="deleteTroop(troop.id)">
                         <span class="icon is-small">
                           <i class="fas fa-trash"></i>

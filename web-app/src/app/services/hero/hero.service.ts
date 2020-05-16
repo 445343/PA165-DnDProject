@@ -36,4 +36,13 @@ export class HeroService {
   addRoleToHero(heroId, roleId):Observable<any>{
     return this.http.put(`${this.apiURL}/${heroId}/roles/${roleId}/add`, null);
   }
+
+  joinTroop(heroId, troopId):Observable<any>{
+    return this.http.put(`${this.apiURL}/${heroId}/troops/${troopId}/add`, null);
+  }
+
+  leaveTroop(heroId):Observable<any>{
+    return this.http.put(`${this.apiURL}/${heroId}/troops/remove`, null);
+  }
+
 }
