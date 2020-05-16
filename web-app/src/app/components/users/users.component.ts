@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../services/user/user.service";
 import {UserDTO} from "../../dto/user/UserDTO";
 import {Observable} from "rxjs";
+import {TroopUpdateDTO} from "../../dto/troop/TroopUpdateDTO";
+import {TroopCreateDTO} from "../../dto/troop/TroopCreateDTO";
+import {UserUpdateDTO} from "../../dto/user/UserUpdateDTO";
 
 @Component({
   selector: 'app-users',
@@ -13,16 +16,20 @@ export class UsersComponent implements OnInit {
   users: UserDTO[];
   tmp;
 
+  userUpdateDTO: UserUpdateDTO;
+
   clickedUserId: number;
   clickedUser: UserDTO;
 
   showHeroesModal = false;
+  showUpdateUserModal = false;
 
   constructor(private userService: UserService) {
   }
 
   ngOnInit(): void {
     this.loadUsers();
+    this.userUpdateDTO = new UserUpdateDTO();
   }
 
   loadUsers() {
@@ -39,6 +46,15 @@ export class UsersComponent implements OnInit {
     });
   }
 
+  updateUser() {
+    this.userService.updateUser(this.userUpdateDTO)
+      .subscribe(data => {
+        this.loadUsers();
+      });
+    this.userUpdateDTO = new UserUpdateDTO();
+    this.closeUpdateUserModal();
+  }
+
   loadClickedUser() {
     this.clickedUser = this.users.find(({id}) => this.clickedUserId == id);
   }
@@ -52,5 +68,17 @@ export class UsersComponent implements OnInit {
   closeHeroesModal() {
     this.clickedUserId = 0;
     this.showHeroesModal = false;
+  }
+
+  updateUserModal(id,username,isAdmin) {
+    this.userUpdateDTO.id = id;
+    this.userUpdateDTO.username = username;
+    this.userUpdateDTO.isAdmin = isAdmin;
+    this.showUpdateUserModal = true;
+  }
+
+  closeUpdateUserModal() {
+    this.clickedUserId = 0;
+    this.showUpdateUserModal = false;
   }
 }
