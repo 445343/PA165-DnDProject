@@ -37,7 +37,7 @@ export class HeroesComponent implements OnInit {
   constructor(private heroService: HeroService,
               private roleService: RoleService,
               private troopService: TroopService
-              ) {
+  ) {
   }
 
   ngOnInit(): void {
@@ -80,15 +80,16 @@ export class HeroesComponent implements OnInit {
 
   // Crud
 
-  createHero(){
+  createHero() {
     this.heroService.createHero(this.heroCreateDTO)
-      .subscribe(data => {this.loadHeroes();
+      .subscribe(data => {
+        this.loadHeroes();
       });
     this.heroCreateDTO = new HeroCreateDTO();
     this.showCreateHeroModal = true;
   }
 
-  updateHero(){
+  updateHero() {
     this.heroService.updateHero(this.heroUpdateDTO)
       .subscribe(data => {
         this.loadRoles();
@@ -109,13 +110,20 @@ export class HeroesComponent implements OnInit {
     });
   }
 
-  joinTroop(troopID){
+  removeRole(roleId) {
+    this.heroService.removeRoleFromHero(this.clickedHeroId, roleId).subscribe(response => {
+      this.loadClickedHero();
+    });
+  }
+
+
+  joinTroop(troopID) {
     this.heroService.joinTroop(this.clickedHeroId, troopID).subscribe(response => {
       this.loadHeroes();
     });
   }
 
-  leaveTroop(troopID){
+  leaveTroop() {
     this.heroService.leaveTroop(this.clickedHeroId).subscribe(response => {
       this.loadHeroes();
     });

@@ -9,6 +9,8 @@
         <th>Mission</th>
         <th>Gold</th>
         <th>Heroes</th>
+        <th>Update troop</th>
+        <th>Disband troop</th>
       </tr>
       </thead>
       <tbody>
@@ -39,7 +41,6 @@
                     <th>ID</th>
                     <th>Name</th>
                     <th>Level</th>
-                    <th>Roles</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -47,7 +48,6 @@
                     <td>{{hero.id}}</td>
                     <td>{{hero.name}}</td>
                     <td>{{hero.level}}</td>
-                    <td>{{hero.roles}}</td>
                   </tr>
                   </tbody>
                 </table>
@@ -61,17 +61,18 @@
         </div>
 
 
+        <td><a class="button is-success" (click)="modalPopUpUpdate(troop.id, troop.name, troop.mission, troop.gold)">
+                        <span class="icon is-small">
+                          <i class="fas fa-edit"></i>
+                        </span>
+          <span>Update</span>
+        </a></td>
+
         <td><a class="button is-danger" (click)="deleteTroop(troop.id)">
                         <span class="icon is-small">
                           <i class="fas fa-trash"></i>
                         </span>
-          <span>Disband troop</span>
-        </a></td>
-        <td><a class="button is-danger" (click)="modalPopUpUpdate(troop.id, troop.name, troop.mission, troop.gold)">
-                        <span class="icon is-small">
-                          <i class="fas fa-edit"></i>
-                        </span>
-          <span>Update troop</span>
+          <span>Disband</span>
         </a></td>
       </tr>
       </tbody>
