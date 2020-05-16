@@ -51,10 +51,8 @@ public class TroopServiceImpl implements TroopService {
     @Override
     public void updateTroop(Troop troop) {
         Set<Hero> original = new HashSet<>(findById(troop.getId()).getHeroes());
-        System.out.println(original);
         troop.setHeroes(original);
         troopDao.update(troop);
-        System.out.println(troop.getHeroes());
     }
 
     @Override
