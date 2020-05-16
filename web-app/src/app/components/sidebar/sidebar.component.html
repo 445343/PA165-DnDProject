@@ -1,16 +1,29 @@
-<aside class="menu ">
-  <p class="menu-label">
-    Simple side menu
+<aside class="menu">
+  <p class="menu-label pr075">
+    Pages
   </p>
   <ul class="menu-list">
-    <li><a routerLink="/dashboard">Dashboard</a></li>
-    <div *ngIf="currUser.id != null">
-      <div *ngIf="isAdmin == true">
-      <li><a routerLink="/users">Users</a></li>
-      </div>
-      <li><a routerLink="/heroes">Heroes</a></li>
-      <li><a routerLink="/roles">Roles</a></li>
-      <li><a routerLink="/troops">Troops</a></li>
+    <li><a routerLink="/dashboard">
+      <i class="fas fa-chart-line icon-alignment"></i>
+      <span>Dashboard</span>
+    </a></li>
+    <div *ngIf="isAdmin == true">
+      <li><a routerLink="/users">
+        <i class="fas fa-users icon-alignment"></i>
+        <span>Users</span>
+      </a></li>
     </div>
+    <li><a routerLink="/heroes">
+      <i class="fab fa-hire-a-helper mr-03 icon-alignment"></i>
+      <span>Heroes</span>
+    </a></li>
+    <li><a routerLink="/roles">
+      <i class="fas fa-user-tag mr-03 icon-alignment"></i>
+      <span>Roles</span>
+    </a></li>
+    <li><a routerLink="/troops">
+      <i class="fas fa-user-friends mr-03 icon-alignment"></i>
+      <span>Troops</span>
+    </a></li>
   </ul>
 </aside>
