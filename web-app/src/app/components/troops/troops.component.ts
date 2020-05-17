@@ -4,6 +4,7 @@ import {TroopDTO} from "../../dto/troop/TroopDTO";
 import {TroopService} from "../../services/troop/troop.service";
 import {TroopCreateDTO} from "../../dto/troop/TroopCreateDTO";
 import {TroopUpdateDTO} from "../../dto/troop/TroopUpdateDTO";
+import {UserService} from "../../services/user/user.service";
 
 @Component({
   selector: 'app-troops',
@@ -24,10 +25,13 @@ export class TroopsComponent implements OnInit {
   clickedTroopId: number;
   clickedTroop: TroopDTO;
 
-  constructor(private troopService: TroopService) {
+  isAdmin = false;
+
+  constructor(private troopService: TroopService,private userService: UserService) {
   }
 
   ngOnInit(): void {
+    this.getAdminStatus();
     this.loadTroops();
     this.troopCreateDTO = new TroopCreateDTO();
     this.troopUpdateDTO = new TroopUpdateDTO();
@@ -94,6 +98,12 @@ export class TroopsComponent implements OnInit {
   closeShowHeroModal() {
     this.clickedTroopId = 0;
     this.showShowHeroModal = false;
+  }
+
+  getAdminStatus(){
+    this.userService.isAdmin().subscribe( response => {
+      this.isAdmin = response;
+    })
   }
 
 }

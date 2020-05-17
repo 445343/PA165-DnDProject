@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {RoleDTO} from "../../dto/role/RoleDTO";
 import {RoleCreateDTO} from "../../dto/role/RoleCreateDTO";
 import {RoleUpdateDTO} from "../../dto/role/RoleUpdateDTO";
+import {UserService} from "../../services/user/user.service";
 
 
 @Component({
@@ -21,9 +22,12 @@ export class RolesComponent implements OnInit {
   showModal = false;
   mode;
 
-  constructor(private roleService: RoleService) { }
+  isAdmin = false;
+
+  constructor(private roleService: RoleService,private userService: UserService) { }
 
   ngOnInit(): void {
+    this.getAdminStatus();
     this.loadRoles();
     this.roleCreateDTO = new RoleCreateDTO();
     this.roleUpdateDTO = new RoleUpdateDTO();
@@ -71,4 +75,11 @@ export class RolesComponent implements OnInit {
     this.roleUpdateDTO = new RoleUpdateDTO();
     this.showModal = false;
   }
+
+  getAdminStatus(){
+    this.userService.isAdmin().subscribe( response => {
+      this.isAdmin = response;
+    })
+  }
+
 }

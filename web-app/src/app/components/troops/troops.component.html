@@ -9,8 +9,8 @@
         <th>Mission</th>
         <th>Gold</th>
         <th>Heroes</th>
-        <th>Update troop</th>
-        <th>Disband troop</th>
+        <th *ngIf="isAdmin">Update troop</th>
+        <th *ngIf="isAdmin">Disband troop</th>
       </tr>
       </thead>
       <tbody>
@@ -25,54 +25,17 @@
                     </span>
           <span>Show Heroes</span>
         </a></td>
-
-        <div [class.is-active]="showShowHeroModal" class="modal">
-          <div (click)="closeShowHeroModal()" class="modal-background"></div>
-          <div class="modal-card">
-            <header class="modal-card-head">
-              <p class="modal-card-title">Show Heroes</p>
-              <button (click)="closeShowHeroModal()" class="delete" aria-label="close"></button>
-            </header>
-            <section *ngIf="clickedTroop" class="modal-card-body">
-              <div class="content">
-                <table class="table is-striped is-narrow is-hoverable is-fullwidth">
-                  <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Level</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr *ngFor="let hero of clickedTroop.heroes">
-                    <td>{{hero.id}}</td>
-                    <td>{{hero.name}}</td>
-                    <td>{{hero.level}}</td>
-                  </tr>
-                  </tbody>
-                </table>
-
-              </div>
-            </section>
-            <footer class="modal-card-foot">
-              <button (click)="closeShowHeroModal()" class="button">Close</button>
-            </footer>
-          </div>
-        </div>
-
-
-        <td><a class="button is-success" (click)="modalPopUpUpdate(troop.id, troop.name, troop.mission, troop.gold)">
+        <td *ngIf="isAdmin"><a class="button is-primary" (click)="modalPopUpUpdate(troop.id, troop.name, troop.mission, troop.gold)">
                         <span class="icon is-small">
                           <i class="fas fa-edit"></i>
                         </span>
-          <span>Update</span>
+          <span>Update troop</span>
         </a></td>
-
-        <td><a class="button is-danger" (click)="deleteTroop(troop.id)">
+        <td *ngIf="isAdmin"><a class="button is-danger" (click)="deleteTroop(troop.id)">
                         <span class="icon is-small">
                           <i class="fas fa-trash"></i>
                         </span>
-          <span>Disband</span>
+          <span>Disband troop</span>
         </a></td>
       </tr>
       </tbody>
@@ -80,7 +43,42 @@
   </div>
 </div>
 
-<div class="container">
+<div [class.is-active]="showShowHeroModal" class="modal">
+  <div (click)="closeShowHeroModal()" class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Show Heroes</p>
+      <button (click)="closeShowHeroModal()" class="delete" aria-label="close"></button>
+    </header>
+    <section *ngIf="clickedTroop" class="modal-card-body">
+      <div class="content">
+        <table class="table is-striped is-narrow is-hoverable is-fullwidth">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Level</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let hero of clickedTroop.heroes">
+            <td>{{hero.id}}</td>
+            <td>{{hero.name}}</td>
+            <td>{{hero.level}}</td>
+          </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </section>
+    <footer class="modal-card-foot">
+      <button (click)="closeShowHeroModal()" class="button">Close</button>
+    </footer>
+  </div>
+</div>
+
+
+<div *ngIf="isAdmin" class="container">
   <div class="level is-mobile">
     <div class="level-left">
       <div class="level-item">

@@ -7,8 +7,8 @@
         <th>ID</th>
         <th>Name</th>
         <th>Description</th>
-        <th></th>
-        <th></th>
+        <th>Update Role</th>
+        <th>Delete Role</th>
       </tr>
       </thead>
       <tbody>
@@ -16,17 +16,18 @@
         <td>{{role.id}}</td>
         <td>{{role.name}}</td>
         <td>{{role.description}}</td>
-        <td><a class="button is-danger" (click)="deleteRole(role.id)">
-                        <span class="icon is-small">
-                          <i class="fas fa-trash"></i>
-                        </span>
-          <span>Delete role</span>
-        </a></td>
-        <td><a class="button is-danger" (click)="modalPopUpUpdate(role.id, role.name, role.description)">
+        <td><a *ngIf="isAdmin" class="button is-primary" (click)="modalPopUpUpdate(role.id, role.name, role.description)">
                         <span class="icon is-small">
                           <i class="fas fa-edit"></i>
                         </span>
           <span>Update role</span>
+        </a></td>
+
+        <td><a *ngIf="isAdmin" class="button is-danger" (click)="deleteRole(role.id)">
+                        <span class="icon is-small">
+                          <i class="fas fa-trash"></i>
+                        </span>
+          <span>Delete role</span>
         </a></td>
       </tr>
       </tbody>
@@ -35,7 +36,7 @@
 </div>
 
 
-<div class="container">
+<div *ngIf="isAdmin" class="container">
   <div class="level is-mobile">
     <div class="level-left">
       <div class="level-item">
