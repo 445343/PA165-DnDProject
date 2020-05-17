@@ -36,25 +36,25 @@
 
 
         <td>
-            <a *ngIf="hero.troopId === null || hero.troopId === undefined"
-               class="button is-success" (click)="joinTroopModal(hero.id)">
+          <a *ngIf="hero.troopId === null || hero.troopId === undefined"
+             class="button is-success" (click)="joinTroopModal(hero.id)">
             <span class="icon is-small">
               <i class="fas fa-plus"></i>
             </span>
-              <span>Join troop</span>
-            </a>
+            <span>Join troop</span>
+          </a>
 
-           <span *ngIf="hero.troopName !== null && hero.troopName !== undefined">{{ hero.troopName }}</span>
+          <span *ngIf="hero.troopName !== null && hero.troopName !== undefined">{{ hero.troopName }}</span>
         </td>
 
         <td>
-            <a *ngIf="hero.troopId !== null && hero.troopId !== undefined"
-               class="button is-danger" (click)="leaveTroop(hero.id)">
+          <a *ngIf="hero.troopId !== null && hero.troopId !== undefined"
+             class="button is-danger" (click)="leaveTroop(hero.id)">
               <span class="icon is-small">
                           <i class="fas fa-trash"></i>
                         </span>
-              <span>Leave Troop</span>
-            </a>
+            <span>Leave Troop</span>
+          </a>
 
           <span *ngIf="hero.troopId === null || hero.troopId === undefined">
             No troop to leave...
@@ -128,22 +128,49 @@
         </p>
         <form (ngSubmit)="createHero()">
           <div class="field">
-            <label class="label" for="name">Name</label>
+            <label class="label" for="name">Name <span class="has-text-danger">*</span></label>
             <div class="control">
               <input class="input" name="name" type="text" placeholder="Enter name" id="name" required
-                     [(ngModel)]="heroCreateDTO.name">
+                     [(ngModel)]="heroCreateDTO.name" #name="ngModel">
+
+              <div *ngIf="name.invalid && (name.dirty || name.touched)"
+                   class="notification is-danger mt-05">
+
+                <div *ngIf="name.errors.required">
+                  Name is required.
+                </div>
+              </div>
+
             </div>
           </div>
           <div class="field">
-            <label class="label" for="description">Level</label>
+            <label class="label" for="description">Level <span class="has-text-danger">*</span></label>
             <div class="control">
-              <input class="input" name="level" type="number" min="1" placeholder="Enter level" id="description" required
-                     [(ngModel)]="heroCreateDTO.level">
+              <input class="input" name="level" type="number" pattern="^[1-9][0-9]*$" [min]="1"
+                     placeholder="Enter level" id="description" required
+                     [(ngModel)]="heroCreateDTO.level" #level="ngModel">
+
+              <div *ngIf="level.invalid && (level.dirty || level.touched)"
+                   class="notification is-danger mt-05">
+
+                <div *ngIf="level.errors.required">
+                  Level is required.
+                </div>
+
+                <div *ngIf="level.errors.min || level.errors.pattern">
+                  Level must be equal or greater than 1.
+                </div>
+              </div>
             </div>
           </div>
+
+          <div class="field">
+            <small>Fields marked with <small class="has-text-danger">*</small> are required</small>
+          </div>
+
           <nav class="level is-mobile">
             <div class="level-left">
-              <div class="level-item">
+              <div *ngIf="!name.invalid && !level.invalid" class="level-item">
                 <button type="submit" class="button is-success">Create</button>
               </div>
               <div class="level-item">
@@ -267,26 +294,53 @@
       <div class="content">
         <form (ngSubmit)="updateHero()">
           <div class="field">
-            <label class="label" for="name">Name</label>
+            <label class="label" for="name">Name  <span class="has-text-danger">*</span></label>
             <div class="control">
               <input class="input" name="name" type="text" placeholder="{{heroUpdateDTO.name}}" id="name" required
-                     [(ngModel)]="heroUpdateDTO.name">
+                     [(ngModel)]="heroUpdateDTO.name" #updateName="ngModel">
+
+              <div *ngIf="updateName.invalid && (updateName.dirty || updateName.touched)"
+                   class="notification is-danger mt-05">
+
+                <div *ngIf="updateName.errors.required">
+                  Name is required.
+                </div>
+              </div>
+
             </div>
           </div>
           <div class="field">
-            <label class="label" for="description">Level</label>
+            <label class="label" for="description">Level <span class="has-text-danger">*</span></label>
             <div class="control">
-              <input class="input" name="level" type="number" min="1" placeholder="{{heroUpdateDTO.level}}" id="level" required
-                     [(ngModel)]="heroUpdateDTO.level">
+              <input class="input" name="level" type="number" pattern="^[1-9][0-9]*$"
+                     [min]="1" placeholder="{{heroUpdateDTO.level}}" id="level"
+                     required [(ngModel)]="heroUpdateDTO.level" #updateLevel="ngModel">
+
+              <div *ngIf="updateLevel.invalid && (updateLevel.dirty || updateLevel.touched)"
+                   class="notification is-danger mt-05">
+
+                <div *ngIf="updateLevel.errors.required">
+                  Level is required.
+                </div>
+
+                <div *ngIf="updateLevel.errors.min || updateLevel.errors.pattern">
+                  Level must be equal or greater than 1.
+                </div>
+              </div>
             </div>
           </div>
+
+          <div class="field">
+            <small>Fields marked with <small class="has-text-danger">*</small> are required</small>
+          </div>
+
           <nav class="level is-mobile">
             <div class="level-left">
-              <div class="level-item">
+              <div *ngIf="!updateName.invalid && !updateLevel.invalid" class="level-item">
                 <button type="submit" class="button is-success">Update</button>
               </div>
               <div class="level-item">
-                <a (click)="closeCreateHeroModal()" class="button">Back</a>
+                <a (click)="closeUpdateHeroModal()" class="button">Back</a>
               </div>
             </div>
           </nav>

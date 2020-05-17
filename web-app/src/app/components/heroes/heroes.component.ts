@@ -183,6 +183,11 @@ export class HeroesComponent implements OnInit {
     this.showCreateHeroModal = false;
   }
 
+  closeUpdateHeroModal() {
+    this.showUpdateHeroModal = false;
+  }
+
+
   joinTroopModal(id) {
     this.clickedHeroId = id;
     this.showJoinTroopModal = true;
