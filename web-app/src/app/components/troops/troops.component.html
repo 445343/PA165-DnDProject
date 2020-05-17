@@ -25,7 +25,8 @@
                     </span>
           <span>Show Heroes</span>
         </a></td>
-        <td *ngIf="isAdmin"><a class="button is-primary" (click)="modalPopUpUpdate(troop.id, troop.name, troop.mission, troop.gold)">
+        <td *ngIf="isAdmin"><a class="button is-primary"
+                               (click)="modalPopUpUpdate(troop.id, troop.name, troop.mission, troop.gold)">
                         <span class="icon is-small">
                           <i class="fas fa-edit"></i>
                         </span>
@@ -108,25 +109,67 @@
             <div class="field">
               <label class="label">Name</label>
               <div class="control">
-                <input class="input" name="name" type="text" placeholder="Text input" id="name" required [(ngModel)]="troopCreateDTO.name" >
+                <input minlength="4" class="input" name="name" type="text" placeholder="Text input"
+                       id="name" required [(ngModel)]="troopCreateDTO.name" #name="ngModel">
+
+                <div *ngIf="name.invalid && (name.dirty || name.touched)"
+                     class="notification is-danger mt-05">
+
+                  <div *ngIf="name.errors.required">
+                    Name is required.
+                  </div>
+                  <div *ngIf="name.errors.minlength">
+                    Name must be at least 4 characters long.
+                  </div>
+                </div>
               </div>
             </div>
             <div class="field">
               <label class="label">Mission</label>
               <div class="control">
-                <input class="input" name="mission" type="text" placeholder="Text input" id="mission" required [(ngModel)]="troopCreateDTO.mission" >
+                <input class="input" minlength="4" name="mission" type="text" placeholder="Text input" id="mission"
+                       required
+                       [(ngModel)]="troopCreateDTO.mission" #mission="ngModel">
+
+                <div *ngIf="mission.invalid && (mission.dirty || mission.touched)"
+                     class="notification is-danger mt-05">
+
+                  <div *ngIf="mission.errors.required">
+                    Mission is required.
+                  </div>
+
+                  <div *ngIf="mission.errors.minlength">
+                    Mission must be at least 4 characters long.
+                  </div>
+                </div>
               </div>
             </div>
+
             <div class="field">
               <label class="label">Gold</label>
               <div class="control">
-                <input class="input" name="gold" type="number" placeholder="Numeric input" id="gold" required [(ngModel)]="troopCreateDTO.gold" >
+                <input class="input" pattern="^\d*$" [min]="0" name="gold" type="number" placeholder="Numeric input"
+                       id="gold" required
+                       [(ngModel)]="troopCreateDTO.gold" #gold="ngModel">
+
+
+                <div *ngIf="gold.invalid && (gold.dirty || gold.touched)"
+                     class="notification is-danger mt-05">
+
+                  <div *ngIf="gold.errors.required">
+                    <p>Gold is required.</p>
+                  </div>
+
+                  <div *ngIf="gold.errors.min || gold.errors.pattern">
+                    <p>Gold must be bigger than 0.</p>
+                  </div>
+                </div>
               </div>
             </div>
             <nav class="level is-mobile">
               <div class="level-left">
                 <div class="level-item">
-                  <button type="submit" class="button is-success">Create</button>
+                  <button *ngIf="!name.invalid && !mission.invalid && !gold.invalid" type="submit" class="button is-success">Create</button>
                 </div>
                 <div class="level-item">
                   <button class="button" (click)="showModal=!showModal">Back</button>
@@ -144,19 +187,22 @@
             <div class="field">
               <label class="label">Name</label>
               <div class="control">
-                <input class="input" name="name" type="text" id="update-name" required [(ngModel)]="troopUpdateDTO.name" >
+                <input class="input" name="name" type="text" id="update-name" required
+                       [(ngModel)]="troopUpdateDTO.name">
               </div>
             </div>
             <div class="field">
               <label class="label">Mission</label>
               <div class="control">
-                <input class="input" name="mission" type="text" id="update-mission" required [(ngModel)]="troopUpdateDTO.mission" >
+                <input class="input" name="mission" type="text" id="update-mission" required
+                       [(ngModel)]="troopUpdateDTO.mission">
               </div>
             </div>
             <div class="field">
               <label class="label">Gold</label>
               <div class="control">
-                <input class="input" name="gold" type="text" id="update-gold" required [(ngModel)]="troopUpdateDTO.gold" >
+                <input class="input" name="gold" type="text" id="update-gold" required
+                       [(ngModel)]="troopUpdateDTO.gold">
               </div>
             </div>
             <nav class="level is-mobile">

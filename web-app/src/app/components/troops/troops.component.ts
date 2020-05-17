@@ -5,6 +5,7 @@ import {TroopService} from "../../services/troop/troop.service";
 import {TroopCreateDTO} from "../../dto/troop/TroopCreateDTO";
 import {TroopUpdateDTO} from "../../dto/troop/TroopUpdateDTO";
 import {UserService} from "../../services/user/user.service";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-troops',
@@ -27,7 +28,9 @@ export class TroopsComponent implements OnInit {
 
   isAdmin = false;
 
-  constructor(private troopService: TroopService,private userService: UserService) {
+  troopCreateForm: FormGroup;
+
+  constructor(private troopService: TroopService, private userService: UserService) {
   }
 
   ngOnInit(): void {
@@ -35,7 +38,7 @@ export class TroopsComponent implements OnInit {
     this.loadTroops();
     this.troopCreateDTO = new TroopCreateDTO();
     this.troopUpdateDTO = new TroopUpdateDTO();
-  }
+   }
 
   loadTroops() {
     this.troopService.getAllTroops().subscribe(response => {
@@ -100,8 +103,8 @@ export class TroopsComponent implements OnInit {
     this.showShowHeroModal = false;
   }
 
-  getAdminStatus(){
-    this.userService.isAdmin().subscribe( response => {
+  getAdminStatus() {
+    this.userService.isAdmin().subscribe(response => {
       this.isAdmin = response;
     })
   }
