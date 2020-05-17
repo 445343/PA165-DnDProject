@@ -7,8 +7,8 @@
         <th>ID</th>
         <th>Name</th>
         <th>Description</th>
-        <th>Update Role</th>
-        <th>Delete Role</th>
+        <th><span *ngIf="isAdmin">Update Role</span></th>
+        <th><span *ngIf="isAdmin">Delete Role</span></th>
       </tr>
       </thead>
       <tbody>
@@ -64,20 +64,35 @@
         </p>
         <form (ngSubmit)="createRole()">
           <div class="field">
-            <label class="label">Name</label>
+            <label class="label">Name <span class="has-text-danger">*</span></label>
             <div class="control">
-              <input class="input" name="name" type="text" placeholder="Text input" id="name" required [(ngModel)]="roleCreateDTO.name" >
+              <input class="input" name="name" type="text" placeholder="Text input" id="name"
+                     required [(ngModel)]="roleCreateDTO.name" #name="ngModel">
             </div>
+
+            <div *ngIf="name.invalid && (name.dirty || name.touched)"
+                 class="notification is-danger mt-05">
+
+              <div *ngIf="name.errors.required">
+                Name is required.
+              </div>
+            </div>
+
           </div>
           <div class="field">
             <label class="label">Description</label>
             <div class="control">
-              <input class="input" name="description" type="text" placeholder="Text input" id="description" required [(ngModel)]="roleCreateDTO.description" >
+              <input class="input" name="description" type="text" placeholder="Text input" id="description" [(ngModel)]="roleCreateDTO.description" >
             </div>
           </div>
+
+          <div class="field">
+            <small>Fields marked with <small class="has-text-danger">*</small> are required</small>
+          </div>
+
           <nav class="level is-mobile">
             <div class="level-left">
-              <div class="level-item">
+              <div *ngIf="!name.invalid" class="level-item">
                 <button type="submit" class="button is-success">Create</button>
               </div>
               <div class="level-item">
@@ -94,9 +109,18 @@
           </p>
           <form (ngSubmit)="updateRole()">
             <div class="field">
-              <label class="label">Name</label>
+              <label class="label">Name <span class="has-text-danger">*</span></label>
               <div class="control">
-                <input class="input" name="name" type="text" id="update-name" required [(ngModel)]="roleUpdateDTO.name" >
+                <input class="input" name="name" type="text" id="update-name"
+                       required [(ngModel)]="roleUpdateDTO.name" #name="ngModel">
+
+                <div *ngIf="name.invalid && (name.dirty || name.touched)"
+                     class="notification is-danger mt-05">
+
+                  <div *ngIf="name.errors.required">
+                    Name is required.
+                  </div>
+                </div>
               </div>
             </div>
             <div class="field">
@@ -105,10 +129,15 @@
                 <input class="input" name="description" type="text" id="update-description" required [(ngModel)]="roleUpdateDTO.description" >
               </div>
             </div>
+
+            <div class="field">
+              <small>Fields marked with <small class="has-text-danger">*</small> are required</small>
+            </div>
+
             <nav class="level is-mobile">
               <div class="level-left">
                 <div class="level-item">
-                  <button type="submit" class="button is-success">Update</button>
+                  <button *ngIf="!name.invalid" type="submit" class="button is-success">Update</button>
                 </div>
                 <div class="level-item">
                   <button class="button" (click)="showModal=!showModal">Back</button>

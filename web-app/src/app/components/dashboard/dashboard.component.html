@@ -1,16 +1,15 @@
-
-  <section class="hero">
-    <div class="hero-body">
-      <div class="container">
-        <h1 class="title">
-          DnD project
-        </h1>
-        <h2 class="subtitle">
-          PA165
-        </h2>
-      </div>
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        DnD project
+      </h1>
+      <h2 class="subtitle">
+        PA165
+      </h2>
     </div>
-  </section>
+  </div>
+</section>
 <div *ngIf="currUser.id == null">
   <div class="container">
     <div class="level is-mobile">
@@ -34,39 +33,64 @@
   <div class="modal-content">
     <div class="box">
       <div class="content">
-          <p class="title is-5">
-            Login
-          </p>
-          <form (ngSubmit)="login()">
-            <div class="field">
-              <label class="label">Username</label>
-              <div class="control has-icons-left has-icons-right">
-                <input class="input" name="username" type="text" placeholder="Text input" id="userName"  [(ngModel)]="userCreateDTO.userName" required>
-                <span class="icon is-small is-left">
-          <i class="fas fa-user"></i>
-          </span>
-              </div>
-            </div>
-            <div class="field">
-              <label class="label">Password</label>
-              <div class="control">
-                <input class="input" name="password" type="password" placeholder="****" id="password"  [(ngModel)]="userCreateDTO.password" required>
-              </div>
-            </div>
-            <nav class="level is-mobile">
-              <div class="level-left">
-                <div class="level-item">
-                  <button type="submit" class="button is-success">Login</button>
-                </div>
-                <div class="level-item">
-                  <button class="button" (click)="showModal=!showModal">Back</button>
+        <p class="title is-5">
+          Login
+        </p>
+        <form (ngSubmit)="login()">
+          <div class="field">
+            <label class="label">Username <span class="has-text-danger">*</span></label>
+            <div class="control has-icons-left has-icons-right">
+              <input class="input" name="username" type="text" placeholder="Text input"
+                     id="userName" [(ngModel)]="userCreateDTO.userName" required #name="ngModel">
+              <span class="icon is-small is-left">
+                  <i class="fas fa-user"></i>
+                </span>
+
+              <div *ngIf="name.invalid && (name.dirty || name.touched)"
+                   class="notification is-danger mt-05">
+
+                <div *ngIf="name.errors.required">
+                  Name is required.
                 </div>
               </div>
-            </nav>
-          </form>
-  </div>
-  <button class="modal-close is-large" aria-label="close" (click)="showModal=!showModal"></button>
-</div>
+
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Password <span class="has-text-danger">*</span></label>
+            <div class="control">
+              <input class="input" name="password" type="password" placeholder="****" id="password"
+                     [(ngModel)]="userCreateDTO.password" required #password="ngModel">
+
+              <div *ngIf="password.invalid && (password.dirty || password.touched)"
+                   class="notification is-danger mt-05">
+
+                <div *ngIf="password.errors.required">
+                  Password is required.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <small>Fields marked with <small class="has-text-danger">*</small> are required</small>
+          </div>
+
+          <nav class="level is-mobile">
+            <div class="level-left">
+              <div class="level-item">
+                <button *ngIf="!name.invalid && !password.invalid" type="submit" class="button is-success">Login
+                </button>
+              </div>
+              <div class="level-item">
+                <button class="button" (click)="showModal=!showModal">Back</button>
+              </div>
+            </div>
+          </nav>
+        </form>
+      </div>
+      <button class="modal-close is-large" aria-label="close" (click)="showModal=!showModal"></button>
+    </div>
   </div>
 </div>
 
