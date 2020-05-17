@@ -27,7 +27,31 @@ Wiki: https://github.com/445343/PA165-DnDProject/wiki
      * run client: `ng serve --open` 
 
 # Prepopulating data
-* In dashboard view, click on button to prepopulate data
+* Client fetches dummy data from server automatically from start of app
+
+# Login Credentials 
+* Admin account 
+    * Username: admin
+    * Password: admin
+
+* Regular account 1
+    * Username: user1
+    * Password: user1
+    
+* Regular account 2
+    * Username: user2
+    * Password: user2 
+
+# Permissions
+* Admin
+    * Can do everything except delete other admins
+    
+* Regular user
+    * See dashboard
+    * Create and manage his heroes
+    * See roles (can't modify)
+    * See troops with related heroes (can't modify)
+    * Logout
 
 # Notes:
 * Server is running on port 8080, client on 4200: Ensure that you freed these ports!
