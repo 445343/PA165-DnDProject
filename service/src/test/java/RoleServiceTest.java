@@ -1,5 +1,7 @@
 import cz.fi.muni.PA165.api.exceptions.DnDServiceException;
+import cz.fi.muni.PA165.persistence.dao.HeroDao;
 import cz.fi.muni.PA165.persistence.dao.RoleDao;
+import cz.fi.muni.PA165.persistence.model.Hero;
 import cz.fi.muni.PA165.persistence.model.Role;
 import cz.fi.muni.PA165.service.RoleService;
 import cz.fi.muni.PA165.service.RoleServiceImpl;
@@ -8,6 +10,7 @@ import org.mockito.MockitoAnnotations;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -27,12 +30,15 @@ public class RoleServiceTest {
     @Mock
     private RoleDao roleDao;
 
+    @Mock
+    private HeroDao heroDao;
+
     private Role role1;
 
     @BeforeMethod
     public void init(){
         MockitoAnnotations.initMocks(this);
-        roleService = new RoleServiceImpl(roleDao);
+        roleService = new RoleServiceImpl(roleDao, heroDao);
 
         role1 = new Role();
         role1.setId(1L);
@@ -63,6 +69,7 @@ public class RoleServiceTest {
     @Test
     public void deleteRole(){
         given(roleDao.findById(role1.getId())).willReturn(role1);
+        given(heroDao.findAll()).willReturn(new ArrayList<Hero>());
         roleService.deleteRole(role1.getId());
         then(roleDao).should().delete(role1);
     }
