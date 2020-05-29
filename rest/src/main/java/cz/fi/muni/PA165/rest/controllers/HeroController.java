@@ -44,6 +44,11 @@ public class HeroController {
     }
 
 
+    /**
+     * Get list of Heroes
+     *
+     * @return resource with list of heroes
+     */
     @RolesAllowed("ROLE_USER")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Resources<Resource<HeroDTO>>> getAll(){
@@ -61,6 +66,12 @@ public class HeroController {
         }
     }
 
+    /**
+     * Get list of roles that given hero does not have
+     *
+     * @param id identifier of hero
+     * @return resource with list of roles
+     */
     @RolesAllowed("ROLE_USER")
     @GetMapping(value = "/{id}/roles/other")
     public ResponseEntity<Resources<Resource<RoleDTO>>> listRolesNotInHero(@PathVariable Long id){
@@ -78,6 +89,12 @@ public class HeroController {
         }
     }
 
+    /**
+     * Get hero by identifier id
+     *
+     * @param id identifier of user
+     * @return Resource<HeroDTO>
+     */
     @RolesAllowed("ROLE_USER")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Resource<HeroDTO>> getById(@PathVariable Long id){
@@ -88,6 +105,12 @@ public class HeroController {
         }
     }
 
+    /**
+     * Create a new hero by POST method
+     *
+     * @param heroCreateDTO HeroCreateDTO with required fields for creation
+     * @return id of registered hero
+     */
     @RolesAllowed("ROLE_USER")
     @PostMapping
     public ResponseEntity<Long> createHero(@RequestBody @Valid HeroCreateDTO heroCreateDTO){
@@ -98,6 +121,11 @@ public class HeroController {
         }
     }
 
+    /**
+     * Delete hero by identifier
+     *
+     * @param id identifier of hero
+     */
     @RolesAllowed("ROLE_USER")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deleteHero(@PathVariable Long id){
@@ -109,6 +137,11 @@ public class HeroController {
         }
     }
 
+    /**
+     * Updates given hero
+     *
+     * @param heroUpdateDTO HeroUpdateDTO with updated values
+     */
     @RolesAllowed("ROLE_USER")
     @PutMapping
     public ResponseEntity<Void> updateRole(@RequestBody @Valid HeroUpdateDTO heroUpdateDTO){
@@ -120,6 +153,12 @@ public class HeroController {
         }
     }
 
+    /**
+     * Adds given role to given hero
+     *
+     * @param heroId identifier of hero
+     * @param roleId identifier of role
+     */
     @RolesAllowed("ROLE_USER")
     @PutMapping(value = "{heroId}/roles/{roleId}/add")
     public ResponseEntity<Void> addRoleToHero(@PathVariable Long heroId, @PathVariable Long roleId){
@@ -131,6 +170,12 @@ public class HeroController {
         }
     }
 
+    /**
+     * Removes given role from given hero
+     *
+     * @param heroId identifier of hero
+     * @param roleId identifier of role
+     */
     @RolesAllowed("ROLE_USER")
     @PutMapping(value = "{heroId}/roles/{roleId}/remove")
     public ResponseEntity<Void> removeRoleFromHero(@PathVariable Long heroId, @PathVariable Long roleId){
@@ -142,6 +187,12 @@ public class HeroController {
         }
     }
 
+    /**
+     * Adds given hero to given troop
+     *
+     * @param heroId identifier of hero
+     * @param troopId identifier of troop
+     */
     @RolesAllowed("ROLE_USER")
     @PutMapping(value = "{heroId}/troops/{troopId}/add")
     public ResponseEntity<Void> joinTroop(@PathVariable Long heroId, @PathVariable Long troopId){
@@ -153,6 +204,11 @@ public class HeroController {
         }
     }
 
+    /**
+     * Removes troop from given hero
+     *
+     * @param heroId identifier of hero
+     */
     @RolesAllowed("ROLE_USER")
     @PutMapping(value = "{heroId}/troops/remove")
     public ResponseEntity<Void> leaveTroop(@PathVariable Long heroId){

@@ -43,8 +43,7 @@ public class TroopController {
     }
 
     /**
-     * Get list of Troops curl -i -X GET
-     * http://localhost:8080/pa165/rest/troops
+     * Get list of Troops
      *
      * @return resource with list of troops
      */
@@ -66,9 +65,7 @@ public class TroopController {
     }
 
     /**
-     *
-     * Get Troop by identifier id curl -i -X GET
-     * http://localhost:8080/pa165/rest/troops/1
+     * Get troop by identifier id
      *
      * @param id identifier of troop
      * @return Resource<TroopDTO>
@@ -85,11 +82,9 @@ public class TroopController {
 
     /**
      * Create a new troop by POST method
-     * curl -i -X POST -H "Content-Type: application/json" --data
-     * '{"name":"test","mission":"test","gold":"50"}'
-     * http://localhost:8080/pa165/rest/troops/create
      *
      * @param troopCreateDTO TroopCreateDTO with required fields for creation
+     * @return id of created troop
      */
     @RolesAllowed("ROLE_ADMIN")
     @PostMapping()
@@ -103,9 +98,6 @@ public class TroopController {
 
     /**
      * Update troop by PUT method
-     * curl -i -X PUT -H "Content-Type: application/json" --data
-     * '{"id":"1","name":"newName","gold":"1000","mission":"newMission"}'
-     * http://localhost:8080/pa165/rest/troops/update
      *
      * @param troopUpdateDTO troop to be updated
      */
@@ -121,8 +113,7 @@ public class TroopController {
     }
 
     /**
-     * Disband troop by id curl -i -X DELETE
-     * http://localhost:8080/pa165/rest/troops/1/delete
+     * Disband troop by id
      *
      * @param id identifier of troop
      */
