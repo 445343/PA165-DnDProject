@@ -40,6 +40,11 @@ public class RoleController {
         this.roleResourceAssembler = roleResourceAssembler;
     }
 
+    /**
+     * Get list of Roles
+     *
+     * @return resource with list of roles
+     */
     @RolesAllowed("ROLE_USER")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Resources<Resource<RoleDTO>>> getAll(){
@@ -57,6 +62,12 @@ public class RoleController {
         }
     }
 
+    /**
+     * Get role by identifier id
+     *
+     * @param id identifier of role
+     * @return Resource<RoleDTO>
+     */
     @RolesAllowed("ROLE_USER")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Resource<RoleDTO>> getById(@PathVariable Long id){
@@ -67,6 +78,12 @@ public class RoleController {
         }
     }
 
+    /**
+     * Create a new role by POST method
+     *
+     * @param roleCreateDTO RoleCreateDTO with required fields for creation
+     * @return id of created role
+     */
     @RolesAllowed("ROLE_ADMIN")
     @PostMapping
     public ResponseEntity<Long> createRole(@RequestBody @Valid RoleCreateDTO roleCreateDTO){
@@ -77,6 +94,11 @@ public class RoleController {
         }
     }
 
+    /**
+     * Delete role by identifier
+     *
+     * @param id identifier of role
+     */
     @RolesAllowed("ROLE_ADMIN")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deleteRole(@PathVariable Long id){
@@ -88,6 +110,11 @@ public class RoleController {
         }
     }
 
+    /**
+     * Updates given role
+     *
+     * @param roleUpdateDTO RoleUpdateDTO with updated values
+     */
     @RolesAllowed("ROLE_ADMIN")
     @PutMapping
     public ResponseEntity<Void> updateRole(@RequestBody @Valid RoleUpdateDTO roleUpdateDTO){

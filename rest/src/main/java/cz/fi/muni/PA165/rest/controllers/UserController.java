@@ -40,6 +40,11 @@ public class UserController {
         this.userResourceAssembler = userResourceAssembler;
     }
 
+    /**
+     * Get list of users
+     *
+     * @return resource with list of users
+     */
     @RolesAllowed("ROLE_ADMIN")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Resources<Resource<UserDTO>>> getAll(){
@@ -57,6 +62,12 @@ public class UserController {
        }
     }
 
+    /**
+     * Get user by identifier id
+     *
+     * @param id identifier of user
+     * @return Resource<UserDTO>
+     */
     @RolesAllowed("ROLE_ADMIN")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Resource<UserDTO>> getById(@PathVariable Long id){
@@ -67,6 +78,12 @@ public class UserController {
         }
     }
 
+    /**
+     * Registers new user by POST method
+     *
+     * @param userCreateDTO UserCreateDTO with required fields for registration
+     * @return id of registered user
+     */
     @PostMapping
     public ResponseEntity<Long> registerNewUser(@RequestBody @Valid UserCreateDTO userCreateDTO){
         try{
@@ -76,6 +93,11 @@ public class UserController {
         }
     }
 
+    /**
+     * Delete user by identifier id
+     *
+     * @param id identifier of user
+     */
     @RolesAllowed("ROLE_ADMIN")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id){
@@ -86,6 +108,12 @@ public class UserController {
             throw ExceptionSorter.throwException(ex);
         }
     }
+
+    /**
+     * Updates given user
+     *
+     * @param userUpdateDTO UserUpdateDTO with updated values
+     */
     @RolesAllowed("ROLE_ADMIN")
     @PutMapping
     public ResponseEntity<Void> updateUser(@RequestBody @Valid UserUpdateDTO userUpdateDTO){
@@ -97,6 +125,12 @@ public class UserController {
         }
     }
 
+    /**
+     * Adds given hero to given user
+     *
+     * @param userId identifier of user
+     * @param heroId identifier of hero
+     */
     @RolesAllowed("ROLE_ADMIN")
     @PutMapping("/{userId}/heroes/{heroId}/add")
     public ResponseEntity<Void> addHeroToUser(@PathVariable Long userId,
@@ -109,6 +143,12 @@ public class UserController {
         }
     }
 
+    /**
+     * Removes given hero to given user
+     *
+     * @param userId identifier of user
+     * @param heroId identifier of hero
+     */
     @RolesAllowed("ROLE_ADMIN")
     @PutMapping("/{userId}/heroes/{heroId}/remove")
     public ResponseEntity<Void> removeHeroFromUser(@PathVariable Long userId,
@@ -121,6 +161,13 @@ public class UserController {
         }
     }
 
+    /**
+     * User login
+     *
+     * @param name username of user
+     * @param pass password of hero
+     * @return Resource<UserDTO>
+     */
     @GetMapping("/login/{name}/password/{pass}")
     public ResponseEntity<Resource<UserDTO>> login(@PathVariable String name, @PathVariable String pass){
         try {
@@ -131,6 +178,9 @@ public class UserController {
         }
     }
 
+    /**
+     * User logout
+     */
     @RolesAllowed("ROLE_USER")
     @GetMapping("/logout")
     public ResponseEntity<Void> logout(){
@@ -142,6 +192,11 @@ public class UserController {
         }
     }
 
+    /**
+     * Gets current logged in user
+     *
+     * @return Resource<UserDTO>
+     */
     @RolesAllowed("ROLE_USER")
     @GetMapping("/current")
     public ResponseEntity<Resource<UserDTO>> getCurrentUser(){
@@ -153,6 +208,11 @@ public class UserController {
         }
     }
 
+    /**
+     * Checks whether current is usr is admin or not
+     *
+     * @return bool true if admin
+     */
     @GetMapping("/admin")
     public boolean isAdmin(){
         try{

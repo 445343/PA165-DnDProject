@@ -23,6 +23,9 @@ public class TestController {
         return "works";
     }
 
+    /**
+     * Creates test data and logs as admin
+     */
     @PostMapping
     public void createTestData() {
         testDataFacade.createTestData();
