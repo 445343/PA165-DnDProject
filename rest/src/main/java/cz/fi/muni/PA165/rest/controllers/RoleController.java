@@ -3,7 +3,6 @@ package cz.fi.muni.PA165.rest.controllers;
 import cz.fi.muni.PA165.api.dto.role.RoleCreateDTO;
 import cz.fi.muni.PA165.api.dto.role.RoleDTO;
 import cz.fi.muni.PA165.api.dto.role.RoleUpdateDTO;
-import cz.fi.muni.PA165.api.exceptions.DnDServiceException;
 import cz.fi.muni.PA165.api.facade.RoleFacade;
 import cz.fi.muni.PA165.rest.assemblers.RoleResourceAssembler;
 import cz.fi.muni.PA165.rest.exceptions.ExceptionSorter;
@@ -85,7 +84,7 @@ public class RoleController {
      * @return id of created role
      */
     @RolesAllowed("ROLE_ADMIN")
-    @PostMapping
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Long> createRole(@RequestBody @Valid RoleCreateDTO roleCreateDTO){
         try{
             return new ResponseEntity<>(roleFacade.createRole(roleCreateDTO), HttpStatus.CREATED);
@@ -116,7 +115,7 @@ public class RoleController {
      * @param roleUpdateDTO RoleUpdateDTO with updated values
      */
     @RolesAllowed("ROLE_ADMIN")
-    @PutMapping
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> updateRole(@RequestBody @Valid RoleUpdateDTO roleUpdateDTO){
         try {
             roleFacade.updateRole(roleUpdateDTO);

@@ -87,7 +87,7 @@ public class TroopController {
      * @return id of created troop
      */
     @RolesAllowed("ROLE_ADMIN")
-    @PostMapping()
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Long> createTroop(@RequestBody @Valid TroopCreateDTO troopCreateDTO){
         try{
             return new ResponseEntity<>(troopFacade.createTroop(troopCreateDTO), HttpStatus.CREATED);
@@ -102,7 +102,7 @@ public class TroopController {
      * @param troopUpdateDTO troop to be updated
      */
     @RolesAllowed("ROLE_ADMIN")
-    @PutMapping()
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> updateTroop(@RequestBody @Valid TroopUpdateDTO troopUpdateDTO){
         try{
             troopFacade.updateTroop(troopUpdateDTO);

@@ -3,7 +3,6 @@ package cz.fi.muni.PA165.rest.controllers;
 import cz.fi.muni.PA165.api.dto.user.UserCreateDTO;
 import cz.fi.muni.PA165.api.dto.user.UserDTO;
 import cz.fi.muni.PA165.api.dto.user.UserUpdateDTO;
-import cz.fi.muni.PA165.api.exceptions.DnDServiceException;
 import cz.fi.muni.PA165.api.facade.UserFacade;
 import cz.fi.muni.PA165.rest.assemblers.UserResourceAssembler;
 import cz.fi.muni.PA165.rest.exceptions.ExceptionSorter;
@@ -84,7 +83,7 @@ public class UserController {
      * @param userCreateDTO UserCreateDTO with required fields for registration
      * @return id of registered user
      */
-    @PostMapping
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Long> registerNewUser(@RequestBody @Valid UserCreateDTO userCreateDTO){
         try{
             return new ResponseEntity<>(userFacade.createUser(userCreateDTO), HttpStatus.CREATED);
@@ -115,7 +114,7 @@ public class UserController {
      * @param userUpdateDTO UserUpdateDTO with updated values
      */
     @RolesAllowed("ROLE_ADMIN")
-    @PutMapping
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> updateUser(@RequestBody @Valid UserUpdateDTO userUpdateDTO){
         try{
             userFacade.updateUser(userUpdateDTO);
@@ -198,7 +197,7 @@ public class UserController {
      * @return Resource<UserDTO>
      */
     @RolesAllowed("ROLE_USER")
-    @GetMapping("/current")
+    @GetMapping(value = "/current", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Resource<UserDTO>> getCurrentUser(){
         try{
             UserDTO userDTO = userFacade.getCurrentUser();

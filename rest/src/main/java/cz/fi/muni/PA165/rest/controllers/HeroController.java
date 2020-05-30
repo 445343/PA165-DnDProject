@@ -73,7 +73,7 @@ public class HeroController {
      * @return resource with list of roles
      */
     @RolesAllowed("ROLE_USER")
-    @GetMapping(value = "/{id}/roles/other")
+    @GetMapping(value = "/{id}/roles/other", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Resources<Resource<RoleDTO>>> listRolesNotInHero(@PathVariable Long id){
         try{
             List<RoleDTO> roles = heroFacade.listAllRolesNotInHero(id);
@@ -112,7 +112,7 @@ public class HeroController {
      * @return id of registered hero
      */
     @RolesAllowed("ROLE_USER")
-    @PostMapping
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Long> createHero(@RequestBody @Valid HeroCreateDTO heroCreateDTO){
         try{
             return new ResponseEntity<>(heroFacade.createHero(heroCreateDTO), HttpStatus.CREATED);
@@ -143,7 +143,7 @@ public class HeroController {
      * @param heroUpdateDTO HeroUpdateDTO with updated values
      */
     @RolesAllowed("ROLE_USER")
-    @PutMapping
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> updateRole(@RequestBody @Valid HeroUpdateDTO heroUpdateDTO){
         try {
             heroFacade.updateHero(heroUpdateDTO);
