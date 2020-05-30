@@ -131,7 +131,7 @@ public class UserController {
      * @param heroId identifier of hero
      */
     @RolesAllowed("ROLE_ADMIN")
-    @PutMapping("/{userId}/heroes/{heroId}/add")
+    @PostMapping("/{userId}/heroes/{heroId}")
     public ResponseEntity<Void> addHeroToUser(@PathVariable Long userId,
                                               @PathVariable Long heroId){
         try{
@@ -149,7 +149,7 @@ public class UserController {
      * @param heroId identifier of hero
      */
     @RolesAllowed("ROLE_ADMIN")
-    @PutMapping("/{userId}/heroes/{heroId}/remove")
+    @DeleteMapping("/{userId}/heroes/{heroId}")
     public ResponseEntity<Void> removeHeroFromUser(@PathVariable Long userId,
                                                    @PathVariable Long heroId){
         try{

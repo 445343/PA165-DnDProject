@@ -160,7 +160,7 @@ public class HeroController {
      * @param roleId identifier of role
      */
     @RolesAllowed("ROLE_USER")
-    @PutMapping(value = "{heroId}/roles/{roleId}/add")
+    @PostMapping(value = "{heroId}/roles/{roleId}")
     public ResponseEntity<Void> addRoleToHero(@PathVariable Long heroId, @PathVariable Long roleId){
         try {
             heroFacade.addRole(heroId, roleId);
@@ -177,7 +177,7 @@ public class HeroController {
      * @param roleId identifier of role
      */
     @RolesAllowed("ROLE_USER")
-    @PutMapping(value = "{heroId}/roles/{roleId}/remove")
+    @PutMapping(value = "{heroId}/roles/{roleId}")
     public ResponseEntity<Void> removeRoleFromHero(@PathVariable Long heroId, @PathVariable Long roleId){
         try {
             heroFacade.removeRole(heroId, roleId);
@@ -194,7 +194,7 @@ public class HeroController {
      * @param troopId identifier of troop
      */
     @RolesAllowed("ROLE_USER")
-    @PutMapping(value = "{heroId}/troops/{troopId}/add")
+    @PostMapping(value = "{heroId}/troops/{troopId}")
     public ResponseEntity<Void> joinTroop(@PathVariable Long heroId, @PathVariable Long troopId){
         try {
             heroFacade.joinTroop(heroId, troopId);
@@ -210,7 +210,7 @@ public class HeroController {
      * @param heroId identifier of hero
      */
     @RolesAllowed("ROLE_USER")
-    @PutMapping(value = "{heroId}/troops/remove")
+    @PutMapping(value = "{heroId}/troops")
     public ResponseEntity<Void> leaveTroop(@PathVariable Long heroId){
         try {
             heroFacade.leaveTroop(heroId);

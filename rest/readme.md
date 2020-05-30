@@ -13,10 +13,10 @@ REST API for D&D Troops. In order to test this API, first you need to insert tes
 `curl -i -X GET http://localhost:8080/pa165/rest/users/1`
 
 ## Add this user new hero
-`curl -i -X PUT  http://localhost:8080/pa165/rest/users/1/heroes/1/add`
+`curl -i -X POST  http://localhost:8080/pa165/rest/users/1/heroes/1`
 
 ## Add this hero new role
-`curl -i -X PUT  http://localhost:8080/pa165/rest/heroes/1/roles/2/add`
+`curl -i -X POST  http://localhost:8080/pa165/rest/heroes/1/roles/2`
 
 ## Check that previous operations went correctly
 `curl -i -X GET http://localhost:8080/pa165/rest/users/1`

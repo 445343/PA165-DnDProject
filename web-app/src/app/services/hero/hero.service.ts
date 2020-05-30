@@ -42,22 +42,22 @@ export class HeroService {
       return this.handleError(error)}))
   }
   addRoleToHero(heroId, roleId):Observable<any>{
-    return this.http.put(`${this.apiURL}/${heroId}/roles/${roleId}/add`, null).pipe(catchError(error => {
+    return this.http.post(`${this.apiURL}/${heroId}/roles/${roleId}`, null).pipe(catchError(error => {
       return this.handleError(error)}))
   }
 
   removeRoleFromHero(heroId, roleId):Observable<any>{
-    return this.http.put(`${this.apiURL}/${heroId}/roles/${roleId}/remove`, null).pipe(catchError(error => {
+    return this.http.put(`${this.apiURL}/${heroId}/roles/${roleId}`, null).pipe(catchError(error => {
       return this.handleError(error)}))
   }
 
   joinTroop(heroId, troopId):Observable<any>{
-    return this.http.put(`${this.apiURL}/${heroId}/troops/${troopId}/add`, null).pipe(catchError(error => {
+    return this.http.post(`${this.apiURL}/${heroId}/troops/${troopId}`, null).pipe(catchError(error => {
       return this.handleError(error)}))
   }
 
   leaveTroop(heroId):Observable<any>{
-    return this.http.put(`${this.apiURL}/${heroId}/troops/remove`, null).pipe(catchError(error => {
+    return this.http.put(`${this.apiURL}/${heroId}/troops`, null).pipe(catchError(error => {
       return this.handleError(error)}))
   }
 
